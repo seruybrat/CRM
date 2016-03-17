@@ -70,10 +70,11 @@
 			</div><!--End header -->
 
 			<div class="pagination"><!--pagination -->
+			<p >По запросу найдено <span id="total_count"></span> человек</p>
 				<div class="pag-wrap">
-					<div class="prev">
-						<span></span>
-						<span></span>
+					<!--<div class="prev">
+						<span class="double_arrow"></span>
+						<span class="arrow"></span>
 					</div>
 							<ul class="pag">
 								<li class="active">1</li>
@@ -81,17 +82,21 @@
 								<li>3</li>
 								<li>4</li>
 								<li>5</li>
-								<li>6</li>
+								<li>6</li> 
 							</ul>
 					<div class="next">
-						<span></span>
-						<span></span>
+
+						<span class="arrow"></span>
+						<span class="double_arrow"></span>
 					</div>
+					-->
 				</div>
 			</div><!--End pagination -->
 			
 			<div class="table-wrap"><!--Table -->
-				<table >
+
+				<!--<table class="tab1">
+
 					<thead><tr>
 						<th>Фамилия</th>
 						<th>Имя</th>
@@ -169,14 +174,14 @@
 						
 					</tbody>
 
-				</table>
+				</table> -->
 			</div><!--End Table -->
 
 			<div class="pagination"><!--pagination -->
 				<div class="pag-wrap">
-					<div class="prev">
-						<span></span>
-						<span></span>
+					<!--<div class="prev">
+						<span class="double_arrow"></span>
+						<span class="arrow"></span>
 					</div>
 							<ul class="pag">
 								<li class="active">1</li>
@@ -184,12 +189,12 @@
 								<li>3</li>
 								<li>4</li>
 								<li>5</li>
-								<li>6</li>
+								<li>6</li> 
 							</ul>
 					<div class="next">
-						<span></span>
-						<span></span>
-					</div>
+						<span class="arrow"></span>
+						<span class="double_arrow"></span>
+					</div> -->
 				</div>
 			</div><!--End pagination -->
 
@@ -277,11 +282,19 @@
 
 							</div>
 						</div><!--End table-sorting -->
+
 	</div><!--End page-width -->
 
 
-	
+			<div class="popap" id='popup_div'>
+                <div class="pop_cont">
+                  <p id='popup_text'></p>
+                  <span onclick='hidePopup()' class="close">x</span>
+                </div>
+    </div>
+
 <script src="libs/jquery-1.12.1.min.js"></script>
+<script src="js/lib.js"></script>
 <script src="js/main.js"></script>
 <script src="js/database_users.js"></script>
 </body>
