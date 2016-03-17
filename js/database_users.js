@@ -65,11 +65,16 @@ function createUserInfoBySearch(data, search) {
     html += '<th></th><th></th></thead>';
 
     //paginations
-   // var paginations = '<li>Найдено ' + count + ' пользователей</li>';
-    var paginations = '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">';
     var pages = Math.ceil(count / config.pagination_count);
+    var paginations = ''
+
+    if(  page > 1 ){
+         paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+    }
+
 
     if (pages > 1) {
+        paginations += '<ul class="pag">'
         for (var j = 1; j < pages + 1; j++) {
             if (j == page) {
                 paginations += '<li class="active">' + j + '</li>'
@@ -78,8 +83,12 @@ function createUserInfoBySearch(data, search) {
             }
 
         }
+        paginations += '</ul>'
     }
-    paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+
+    if( page < pages ){
+        paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+    }
 
 	document.getElementById('total_count').innerHTML = count;
 
