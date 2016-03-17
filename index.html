@@ -62,7 +62,7 @@
 					  <ul class="top-buttons"><!-- top-buttons -->
 					  	<li><button>Добавить пользователя</button></li>
 					  	<li><button>Экспортировать</button></li>
-					  	<li><button>Изменить таблицу</button></li>
+					  	<li><button id="sort-on">Изменить таблицу</button></li>
 					  	
 					  </ul><!--top-buttons -->
 
@@ -70,19 +70,18 @@
 			</div><!--End header -->
 
 			<div class="pagination"><!--pagination -->
-			<p >По запросу найдено <span id="total_count"></span> человек</p>
 				<div class="pag-wrap">
 					<div class="prev">
 						<span></span>
 						<span></span>
 					</div>
 							<ul class="pag">
-								<!--<li class="active">1</li>
+								<li class="active">1</li>
 								<li>2</li>
 								<li>3</li>
 								<li>4</li>
 								<li>5</li>
-								<li>6</li>-->
+								<li>6</li>
 							</ul>
 					<div class="next">
 						<span></span>
@@ -92,7 +91,7 @@
 			</div><!--End pagination -->
 			
 			<div class="table-wrap"><!--Table -->
-				<!--<table class="tab1">
+				<table class="tab1">
 					<thead><tr>
 						<th>Фамилия</th>
 						<th>Имя</th>
@@ -170,7 +169,7 @@
 						
 					</tbody>
 
-				</table>-->
+				</table>
 			</div><!--End Table -->
 
 			<div class="pagination"><!--pagination -->
@@ -180,12 +179,12 @@
 						<span></span>
 					</div>
 							<ul class="pag">
-								<!--<li class="active">1</li>
+								<li class="active">1</li>
 								<li>2</li>
 								<li>3</li>
 								<li>4</li>
 								<li>5</li>
-								<li>6</li>-->
+								<li>6</li>
 							</ul>
 					<div class="next">
 						<span></span>
@@ -267,12 +266,22 @@
 									</ul>
 								</div>
 								<div class="dropbox-wrap">
-									
+									<span>Показывать</span>
+									<select name="" id="">
+										<option value="">15</option>
+										<option value="">30</option>
+										<option value="">45</option>
+									</select>
+									<span>строк</span>
 								</div>
+								<div class="butt-wrap">
+									<button id="sort-off">Отменить</button>
+									<button>Сохранить</button>
+								</div>
+
 							</div>
 						</div><!--End table-sorting -->
 <script src="libs/jquery-1.12.1.min.js"></script>
-<script src="js/lib.js"></script>
 <script src="js/main.js"></script>
 <script src="js/database_users.js"></script>
 </body>
