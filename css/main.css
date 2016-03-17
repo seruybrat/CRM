@@ -336,7 +336,7 @@ height: 48px;
 .pag-wrap * {
 	display: inline-block;
 } 
-#pag li {
+.pag li {
 	color: #656d78;
 	font-family: "UbuntuBold", sans-serif;
 	font-size: 1.2em;
@@ -347,7 +347,7 @@ height: 48px;
 	cursor: pointer;
 	border: 4px solid #fff;
 }
-#pag li.active {
+.pag li.active {
 	background: #3caeda;
   border-radius: 50%;
   color: #fff;
