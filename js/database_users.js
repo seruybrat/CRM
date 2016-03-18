@@ -24,7 +24,7 @@ function createUserInfoBySearch(data, search) {
     var data = data.results;
     var tbody = '';
 
-    var page = search.page || 1;
+    var page = parseInt(search.page) || 1;
   // var full = search.my_sub_list ? 'notfullsearch' : ''
    var full = ''
  
@@ -72,7 +72,7 @@ function createUserInfoBySearch(data, search) {
          paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
     }
 
-
+/*
     if (pages > 1) {
         paginations += '<ul class="pag">'
         for (var j = 1; j < pages + 1; j++) {
@@ -80,6 +80,24 @@ function createUserInfoBySearch(data, search) {
                 paginations += '<li class="active">' + j + '</li>'
             } else {
                 paginations += '<li>' + j + '</li>'
+            }
+
+        }
+        paginations += '</ul>'
+    }
+*/
+
+    if (pages > 1) {
+        paginations += '<ul class="pag">'
+        for (var j = page -5 ; j < page + 5; j++) {
+            //console.log('iteration' + j);
+            if (j == page) {
+                paginations += '<li class="active">' + j + '</li>'
+            } else {
+                if(  j > 0  && j < pages + 1  ){
+                     paginations += '<li>' + j + '</li>'
+                }
+               
             }
 
         }
