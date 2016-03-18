@@ -1,5 +1,5 @@
 var config = {
-   //    'DOCUMENT_ROOT':'http://vocrm.org/',
+    //'DOCUMENT_ROOT':'http://vocrm.org/',
     'DOCUMENT_ROOT': 'http://5.101.119.32:8008/',
     'pagination_count': 50, //Количество записей при пагинации
     'pagination_mini_count': 10

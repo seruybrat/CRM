@@ -24,7 +24,7 @@ function createUserInfoBySearch(data, search) {
     var data = data.results;
     var tbody = '';
 
-    var page = search.page || 1;
+    var page = parseInt(search.page) || 1;
   // var full = search.my_sub_list ? 'notfullsearch' : ''
    var full = ''
  
@@ -35,7 +35,7 @@ function createUserInfoBySearch(data, search) {
         showPopup('По данному запросу не найдено участников')
         document.querySelector(".table-wrap .table").innerHTML = 'по запросу не найдено участников';
         document.getElementById('total_count').innerHTML = count;
-        [].forEach.call(document.querySelectorAll(".pagination"), function(el) {
+        Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'none'
          })
        // document.querySelector(".lineTabs").innerHTML = '';
@@ -65,11 +65,16 @@ function createUserInfoBySearch(data, search) {
     html += '<th></th><th></th></thead>';
 
     //paginations
-   // var paginations = '<li>Найдено ' + count + ' пользователей</li>';
-    var paginations = '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">';
     var pages = Math.ceil(count / config.pagination_count);
+    var paginations = ''
 
+    if(  page > 1 ){
+         paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+    }
+
+/*
     if (pages > 1) {
+        paginations += '<ul class="pag">'
         for (var j = 1; j < pages + 1; j++) {
             if (j == page) {
                 paginations += '<li class="active">' + j + '</li>'
@@ -78,13 +83,35 @@ function createUserInfoBySearch(data, search) {
             }
 
         }
+        paginations += '</ul>'
     }
-    paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+*/
+
+    if (pages > 1) {
+        paginations += '<ul class="pag">'
+        for (var j = page -5 ; j < page + 5; j++) {
+            //console.log('iteration' + j);
+            if (j == page) {
+                paginations += '<li class="active">' + j + '</li>'
+            } else {
+                if(  j > 0  && j < pages + 1  ){
+                     paginations += '<li>' + j + '</li>'
+                }
+               
+            }
+
+        }
+        paginations += '</ul>'
+    }
+
+    if( page < pages ){
+        paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+    }
 
 	document.getElementById('total_count').innerHTML = count;
 
    // document.getElementById("pag").innerHTML = paginations;
-    [].forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
     	el.innerHTML = paginations
     })
 
@@ -122,7 +149,7 @@ function createUserInfoBySearch(data, search) {
     document.querySelector(".table-wrap .table tbody").innerHTML = tbody;
 
 
-    [].forEach.call(document.querySelectorAll(" .pag li"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
         el.addEventListener('click', function() {
 
             var data = search;
@@ -135,13 +162,13 @@ function createUserInfoBySearch(data, search) {
    
 
 
-    [].forEach.call(document.querySelectorAll(".subordinate"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".subordinate"), function(el) {
         el.addEventListener('click', getsubordinates);
     });
 
 /* Navigation*/
 
-    [].forEach.call(document.querySelectorAll(".arrow"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".arrow"), function(el) {
         el.addEventListener('click', function() {
         	var page 
         	var data = search;
@@ -159,7 +186,7 @@ function createUserInfoBySearch(data, search) {
         })
     });
 
-    [].forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
         el.addEventListener('click', function() {
         	var data = search;
             if(  this.parentElement.classList.contains('prev')  ){
@@ -178,7 +205,7 @@ function createUserInfoBySearch(data, search) {
     //Переробить сортировку
 
 
-    [].forEach.call(document.querySelectorAll(".table-wrap   th"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".table-wrap   th"), function(el) {
         el.addEventListener('click', function() {
             var data_order = this.getAttribute('data-order');
             //  var status = ordering[data_order] = ordering[data_order] ? false : true
