@@ -6,7 +6,6 @@ var config = {
 }
 
 $("#nav-sidebar li ").click(function(e) {
-  e.preventDefault();
   $("#nav-sidebar li").removeClass('active');
   $(this).addClass('active');
 });
@@ -35,3 +34,14 @@ $("#sort-off").click(function () {
  });
 
 
+
+$('.tabs .tabs-nav li a').click(function(e) {
+	e.preventDefault();
+	$('.tabs .tabs-nav li.current').removeClass('current');
+	$(this).parent().addClass('current');
+	$('.tab-content .tab-toggle:not(:hidden)').hide();
+	$(this.hash).show();
+	
+});
+
+$(".tabs-nav li a:first").click();

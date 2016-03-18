@@ -33,7 +33,7 @@ function createUserInfoBySearch(data, search) {
     if (data.length == 0) {
 
         showPopup('По данному запросу не найдено участников')
-        document.querySelector(".table-wrap").innerHTML = 'по запросу не найдено участников';
+        document.querySelector(".table-wrap .table").innerHTML = 'по запросу не найдено участников';
         document.getElementById('total_count').innerHTML = count;
         [].forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'none'
@@ -118,8 +118,8 @@ function createUserInfoBySearch(data, search) {
     html += '</tbody>'
     html += '</table>';
 
-    document.querySelector(".table-wrap").innerHTML = html;
-    document.querySelector(".table-wrap tbody").innerHTML = tbody;
+    document.querySelector(".table-wrap .table").innerHTML = html;
+    document.querySelector(".table-wrap .table tbody").innerHTML = tbody;
 
 
     [].forEach.call(document.querySelectorAll(" .pag li"), function(el) {

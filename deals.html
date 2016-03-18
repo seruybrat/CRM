@@ -8,7 +8,7 @@
 
 	<meta charset="UTF-8">
 
-	<title>CRM</title>
+	<title>Deals</title>
 	<meta name="description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,10 +30,10 @@
 				</div>
 				
 				<ul id="nav-sidebar">
-					<li class="active"><a href="index.html">База данных</a></li>
+					<li><a href="index.html">База данных</a></li>
 					<li><a href="#">Все отчеты</a></li>
 					<li><a href="#">События</a></li>
-					<li><a href="deals.html">Партнёрство</a></li>
+					<li class="active"><a href="deals.html">Партнёрство</a></li>
 					<li><a href="#">Саммиты</a></li>
 					<li id="move-sidebar"><a href="#">Свернуть</a></li>
 				</ul>
@@ -46,7 +46,7 @@
 				  <ul class="top"><!-- Top -->
 				  	<li>
 				  		<div class="top-text">
-								<h1>База данных</h1>
+								<h1>Партнёрство</h1>
 			    		</div>
 				  	</li>
 				    <li>
@@ -58,19 +58,34 @@
 				    <li><img src="img/layer-1.jpg" alt="userphoto"></li>
 				  </ul><!--End Top -->
 					
-					<div class="top-buttons-wrap">
-					  <ul class="top-buttons"><!-- top-buttons -->
-					  	<li><button>Добавить пользователя</button></li>
-					  	<li><button>Экспортировать</button></li>
-					  	<li><button id="sort-on">Изменить таблицу</button></li>
-					  	
-					  </ul><!--top-buttons -->
+					<div class="top-panel">
+						<div class="tabs">
+							<ul class="tabs-nav">
+								<li><a href="#sdelki" >Сделки</a></li>
+								<li><a href="#spisok" >Список партнёров</a></li>
+							</ul>
+						</div>
 
-				  </div>
+						<div class="top-buttons-wrap">
+						  <ul class="top-buttons">
+						  	<li><button>Экспортировать</button></li>	
+						  </ul>
+
+					  </div>
+					</div>
 			</div><!--End header -->
 
-			<div class="pagination"><!--pagination -->
-			<p >По запросу найдено <span id="total_count"></span> человек</p>
+
+			
+		<div class="tab-content">
+			<div id="sdelki" class="tab-toggle">
+				ss
+			</div><!--End sdelki -->
+
+
+			<div id="spisok" class="tab-toggle">
+				<div class="pagination"><!--pagination -->
+					<p >По запросу найдено <span id="total_count"></span> человек</p>
 				<div class="pag-wrap">
 					<!--<div class="prev">
 						<span class="double_arrow"></span>
@@ -198,105 +213,16 @@
 					</div> -->
 				</div>
 			</div><!--End pagination -->
+			</div><!--End spisok -->
+		</div><!-- End tab-content-->
 
+ </div><!--End page-width -->
 
-		</div><!--End main-wrap -->
-
-		<div class="table-sorting"><!--table-sorting -->
-							<div class="form-wrap">
-								<div class="top-text">
-									<h2>Вы можете добавить столбцы и изменить их порядок</h2>
-								</div>
-								<div class="input-wrap">
-									<ul id="sort-form">
-										<li>
-											<input id="name" type="checkbox">
-											<label for="name">Фио</label>
-										</li>
-										<li>
-											<input id="mail" type="checkbox">
-											<label for="mail">E-mail</label>
-										</li>
-										<li>
-											<input id="born" type="checkbox">
-											<label for="born">Дата рождения</label>
-										</li>
-										<li>
-											<input id="phone" type="checkbox">
-											<label for="phone">Телефон</label>
-										</li>
-										<li>
-											<input id="country" type="checkbox">
-											<label for="country">Страна</label>
-										</li>
-										<li>
-											<input id="area" type="checkbox">
-											<label for="area">Область</label>
-										</li>
-										<li>
-											<input id="region" type="checkbox">
-											<label for="region">Район</label>
-										</li>
-										<li>
-											<input id="adress" type="checkbox">
-											<label for="adress">Адрес</label>
-										</li>
-										<li>
-											<input id="division" type="checkbox">
-											<label for="division">Отдел</label>
-										</li>
-										<li>
-											<input id="skype" type="checkbox">
-											<label for="skype">Skype</label>
-										</li>
-										<li>
-											<input id="socnet" type="checkbox">
-											<label for="socnet">Социальные сети</label>
-										</li>
-										<li>
-											<input id="respons" type="checkbox">
-											<label for="respons">Ответственный</label>
-										</li>
-										<li>
-											<input id="status" type="checkbox">
-											<label for="status">Статус пользователя</label>
-										</li>
-										<li>
-											<input id="depart" type="checkbox">
-											<label for="depart">Департамент</label>
-										</li>
-									</ul>
-								</div>
-								<div class="dropbox-wrap">
-									<span>Показывать</span>
-									<select name="" id="">
-										<option value="">15</option>
-										<option value="">30</option>
-										<option value="">45</option>
-									</select>
-									<span>строк</span>
-								</div>
-								<div class="butt-wrap">
-									<button id="sort-off">Отменить</button>
-									<button>Сохранить</button>
-								</div>
-
-							</div>
-						</div><!--End table-sorting -->
-
-	</div><!--End page-width -->
-
-
-			<div class="popap" id='popup_div'>
-                <div class="pop_cont">
-                  <p id='popup_text'></p>
-                  <span onclick='hidePopup()' class="close">x</span>
-                </div>
-    </div>
+			
 
 <script src="libs/jquery-1.12.1.min.js"></script>
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
-
+<script src="js/database_users.js"></script>
 </body>
 </html>
