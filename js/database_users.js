@@ -35,7 +35,7 @@ function createUserInfoBySearch(data, search) {
         showPopup('По данному запросу не найдено участников')
         document.querySelector(".table-wrap").innerHTML = 'по запросу не найдено участников';
         document.getElementById('total_count').innerHTML = count;
-        [].forEach.call(document.querySelectorAll(".pagination"), function(el) {
+        Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'none'
          })
        // document.querySelector(".lineTabs").innerHTML = '';
@@ -93,7 +93,7 @@ function createUserInfoBySearch(data, search) {
 	document.getElementById('total_count').innerHTML = count;
 
    // document.getElementById("pag").innerHTML = paginations;
-    [].forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
     	el.innerHTML = paginations
     })
 
@@ -131,7 +131,7 @@ function createUserInfoBySearch(data, search) {
     document.querySelector(".table-wrap tbody").innerHTML = tbody;
 
 
-    [].forEach.call(document.querySelectorAll(" .pag li"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
         el.addEventListener('click', function() {
 
             var data = search;
@@ -144,13 +144,13 @@ function createUserInfoBySearch(data, search) {
    
 
 
-    [].forEach.call(document.querySelectorAll(".subordinate"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".subordinate"), function(el) {
         el.addEventListener('click', getsubordinates);
     });
 
 /* Navigation*/
 
-    [].forEach.call(document.querySelectorAll(".arrow"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".arrow"), function(el) {
         el.addEventListener('click', function() {
         	var page 
         	var data = search;
@@ -168,7 +168,7 @@ function createUserInfoBySearch(data, search) {
         })
     });
 
-    [].forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
         el.addEventListener('click', function() {
         	var data = search;
             if(  this.parentElement.classList.contains('prev')  ){
@@ -187,7 +187,7 @@ function createUserInfoBySearch(data, search) {
     //Переробить сортировку
 
 
-    [].forEach.call(document.querySelectorAll(".table-wrap   th"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".table-wrap   th"), function(el) {
         el.addEventListener('click', function() {
             var data_order = this.getAttribute('data-order');
             //  var status = ordering[data_order] = ordering[data_order] ? false : true

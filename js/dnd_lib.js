@@ -33,8 +33,6 @@ function handleDrop(e) {
   var html = e.currentTarget.innerHTML;
   e.currentTarget.innerHTML = dragSrcEl.innerHTML;
   dragSrcEl.innerHTML = html
-  //console.log(e.currentTarget.innerHTML);
-  //console.log(dragSrcEl.innerHTML)
   // See the section on the DataTransfer object.
 
   return false;
@@ -43,7 +41,7 @@ function handleDrop(e) {
 function handleDragEnd(e) {
   // this/e.target is the source node.
 
-  [].forEach.call(cols, function (col) {
+ Array.prototype.forEach.call(cols, function (col) {
     col.classList.remove('over');
   });
 
@@ -51,7 +49,7 @@ function handleDragEnd(e) {
 
 
 var cols = document.querySelectorAll('[draggable]');
-[].forEach.call(cols, function(col) {
+Array.prototype.forEach.call(cols, function(col) {
 
 
     col.addEventListener('drop', handleDrop, false);

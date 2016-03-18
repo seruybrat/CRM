@@ -58,50 +58,7 @@
           headers: headers 
       });
   }
-
-
-  function ajaxRequest__(url, data, callback, method, withCredentials, headers, statusCode) {
-      var withCredentials = withCredentials === false ? false : true;
-      var method = method || 'GET';
-      var data = data || {};
-      var headers = headers || {};
-      var statusCode = statusCode || 200;
-      var xmlhttp = new XMLHttpRequest();
-      var url = url;
-/*
-      if( method == 'GET' ){
-        for( var j in  data){
-          if (!data.hasOwnProperty(j)) continue
-            url += j + '=' + data[j] + '&';
-        }
-      }  
-*/
-      xmlhttp.withCredentials = withCredentials
-      xmlhttp.open(method, url, true);
-
-      //headers;
-      for (var head in headers) {
-          xmlhttp.setRequestHeader(head, headers[head])
-      }
-
-      xmlhttp.onreadystatechange = function() {
-          if (xmlhttp.readyState == 4) {
-              if (xmlhttp.status == statusCode) {
-                  callback(JSON.parse(xmlhttp.responseText))
-
-              }
-          }
-      };
-      xmlhttp.send(data);
-  }
-
-  function arrClassName(data, answer) {
-      for (var i = 0; i < data.length; i++) {
-          document.getElementsByClassName(data[i].className)[data[i].index].innerHTML = answer[data[i].dataAtrr];
-      }
-  }
-
-
+  /*Popups*/
   function showPopup(text) {
       document.getElementById('popup_text').innerHTML = text
       document.getElementById('popup_div').style.display = 'block'
