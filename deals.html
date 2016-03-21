@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="css/normalize.min.css">
 	<link rel="stylesheet" href="css/fonts.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
 </head>
 <body>
 
@@ -97,7 +98,7 @@
 				</div>
 
 				<div class="period">
-					<p>Период с <input type="date"> по <input type="date"></p>
+					<p>Период с <input type="text" id="datepicker_from"> по <input type="text" id="datepicker_to"></p>
 				</div>
 				<div class="pagination"><!--pagination -->
 					<div class="pag-wrap">
@@ -122,7 +123,7 @@
 					</div><!--End pagination -->
 				</div>
 				
-			<div id="incomplete">
+			<div id="incomplete" class="tabs-cont">
 				<div class="rows-wrap">
 					<div class="rows">
 						<div class="col">
@@ -171,7 +172,7 @@
 				</div><!--End pagination -->
 			</div>
 
-			<div id="overdue">
+			<div id="overdue" class="tabs-cont">
 				<div class="rows-wrap">
 					<div class="rows">
 						<div class="col">
@@ -220,7 +221,7 @@
 				</div><!--End pagination -->
 			</div>
 
-			<div id="completed">
+			<div id="completed" class="tabs-cont">
 				<div class="rows-wrap">
 					<div class="rows">
 						<div class="col">
@@ -409,8 +410,10 @@
 			
 
 <script src="libs/jquery-1.12.1.min.js"></script>
+<script src="libs/jquery-ui.min.js"></script>
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
+<script src="js/deals.js"></script>
 
 </body>
 </html>
