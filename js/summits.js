@@ -95,7 +95,7 @@ function show_summits(data, search){
 	        	}else{
 	        		
 	        		page = parseInt( document.querySelector(".pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".pag li.active").innerHTML )  + 1 : pages
-	        		  data['page'] = page;
+	        		data['page'] = page;
 	        	createSummits(data);
 	        	}
 
