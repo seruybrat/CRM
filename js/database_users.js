@@ -37,7 +37,8 @@ function createUserInfoBySearch(data, search) {
     if (data.length == 0) {
 
         showPopup('По данному запросу не найдено участников')
-        document.querySelector(".table-wrap .table").innerHTML = 'по запросу не найдено участников';
+        document.querySelector(".table-wrap .table").innerHTML=''
+        document.querySelector(".query-none p").innerHTML = 'По запросу не найдено участников';
         document.getElementById('total_count').innerHTML = count;
         Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'none'
@@ -138,7 +139,7 @@ function createUserInfoBySearch(data, search) {
 
     document.querySelector(".table-wrap .table").innerHTML = html;
     document.querySelector(".table-wrap .table tbody").innerHTML = tbody;
-
+    ocument.querySelector(".query-none p").innerHTML=''
 
     Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
         el.addEventListener('click', function() {
