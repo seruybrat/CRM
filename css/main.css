@@ -647,6 +647,18 @@ table tr:first-child td {
 	color: #656d78;
 	position: relative;
 }
+
+#summit_buttons, #summit_table p {
+	font-family: "UbuntuLight" , sans-serif;
+    font-size: 1.4em;
+    margin-left:10px;
+    cursor:pointer;
+}
+
+#summit_buttons p {
+	font-size: 1.8em;
+}
+
 /*popup*/
 .pop_cont{
 	font-size: 150%;
@@ -701,4 +713,5 @@ table tr:first-child td {
 .over{
   background: green
 }
+
 
