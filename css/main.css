@@ -1,8 +1,9 @@
 body {
 	font-family: "Ubuntu",sans-serif;
 	font-size: 75%;
-  height:100%;
-  color: #656d78;
+  	height:100%;
+  	color: #656d78;
+
 }
 a:-webkit-any-link,
 a:visited {
@@ -632,10 +633,15 @@ th::after {
   background-position: -121px 43px;
   cursor: pointer;
 }
-th.down::after {
+th.down::after,th.up::after {
 	background-position: -119px 35px;
 }
-td {
+
+th.up::after {
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+}
+td ,.pagination p{
 	font-family:"UbuntuMedium", sans-serif;
 	border-left: 1px solid #E2E2E2;
   color: #656d78;
@@ -761,6 +767,14 @@ table tr:first-child td {
 	margin-left: 4px;
 }
 
+.table{
+	font-family: "UbuntuBold",sans-serif;
+	font-size: 1.15em;
+	padding: 5px 25px;
+
+	color: #656d78;
+	position: relative;
+}
 
 #summit_buttons, #summit_table p {
 	font-family: "UbuntuLight" , sans-serif;
@@ -775,6 +789,7 @@ table tr:first-child td {
 
 /*popup*/
 .pop_cont{
+	font-size: 150%;
   position: fixed;
   max-width: 700px;
   width: 300px;
