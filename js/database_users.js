@@ -1,16 +1,23 @@
 $(function(){
-	//createUser({'master':user_id}) ;
-	createUser() ;
+    //createUser({'master':user_id}) ;
+    createUser() ;
 
-	 $('input[name="fullsearch"]').keyup(function() {
+     $('input[name="fullsearch"]').keyup(function() {
 
         delay(function() {
             createUser()
-        }, 2500);
+        }, 1500);
 
 
 
     });
+
+     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
+           el.addEventListener('click', function(){
+                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+           });
+         })
+
 });
 
 
@@ -23,13 +30,10 @@ function createUserInfoBySearch(data, search) {
     var count = data.count;
     var data = data.results;
     var tbody = '';
-
     var page = parseInt(search.page) || 1;
-  // var full = search.my_sub_list ? 'notfullsearch' : ''
-   var full = ''
- 
     var list = data;
-    var html = '<table class="tab1 search ' + full + '" id="userinfo">';
+    
+    var html = '<table id="userinfo">';
     if (data.length == 0) {
 
         showPopup('По данному запросу не найдено участников')
@@ -43,26 +47,28 @@ function createUserInfoBySearch(data, search) {
     }
 
     //нагавнячив
-    [].forEach.call(document.querySelectorAll(".pagination"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'block'
          })
 
+
+    html += '<thead>';
     var titles = Object.keys(data[0].fields);
     var common_ = list[0]['common']
     var common = Object.keys(list[0]['common']);
-    html += '<thead>';
-
     for (var k = 0; k < titles.length; k++) {
         if (common.indexOf(titles[k]) === -1) continue
 
         if (ordering[common_[titles[k]]]) {
-            html += '<th data-order="' + common_[titles[k]] + '" class="low"><span>' + titles[k] + '</span></th>';
+            html += '<th data-order="' + common_[titles[k]] + '" class="down"><span>' + titles[k] + '</span></th>';
         } else {
-            html += '<th data-order="' + common_[titles[k]] + '"><span>' + titles[k] + '</span></th>';
+            html += '<th data-order="' + common_[titles[k]] + '"    class="up"><span>' + titles[k] + '</span></th>';
         }
 
     }
     html += '<th></th><th></th></thead>';
+
+
 
     //paginations
     var pages = Math.ceil(count / config.pagination_count);
@@ -71,21 +77,6 @@ function createUserInfoBySearch(data, search) {
     if(  page > 1 ){
          paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
     }
-
-/*
-    if (pages > 1) {
-        paginations += '<ul class="pag">'
-        for (var j = 1; j < pages + 1; j++) {
-            if (j == page) {
-                paginations += '<li class="active">' + j + '</li>'
-            } else {
-                paginations += '<li>' + j + '</li>'
-            }
-
-        }
-        paginations += '</ul>'
-    }
-*/
 
     if (pages > 1) {
         paginations += '<ul class="pag">'
@@ -108,11 +99,11 @@ function createUserInfoBySearch(data, search) {
         paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
     }
 
-	document.getElementById('total_count').innerHTML = count;
+    document.getElementById('total_count').innerHTML = count;
 
    // document.getElementById("pag").innerHTML = paginations;
     Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
-    	el.innerHTML = paginations
+        el.innerHTML = paginations
     })
 
 
@@ -166,29 +157,31 @@ function createUserInfoBySearch(data, search) {
         el.addEventListener('click', getsubordinates);
     });
 
-/* Navigation*/
+    
+
+    /* Navigation*/
 
     Array.prototype.forEach.call(document.querySelectorAll(".arrow"), function(el) {
         el.addEventListener('click', function() {
-        	var page 
-        	var data = search;
-        	if(  this.parentElement.classList.contains('prev')  ){
-        	page = parseInt( document.querySelector(".pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".pag li.active").innerHTML ) -1 : 1
-        	data['page'] = page
-        	createUser(data);
-        	}else{
-        		
-        		page = parseInt( document.querySelector(".pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".pag li.active").innerHTML )  + 1 : pages
-        		  data['page'] = page
-        	createUser(data);
-        	}
+            var page 
+            var data = search;
+            if(  this.parentElement.classList.contains('prev')  ){
+            page = parseInt( document.querySelector(".pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".pag li.active").innerHTML ) -1 : 1
+            data['page'] = page
+            createUser(data);
+            }else{
+                
+                page = parseInt( document.querySelector(".pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".pag li.active").innerHTML )  + 1 : pages
+                  data['page'] = page
+            createUser(data);
+            }
 
         })
     });
 
     Array.prototype.forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
         el.addEventListener('click', function() {
-        	var data = search;
+            var data = search;
             if(  this.parentElement.classList.contains('prev')  ){
             
             data['page'] = 1
@@ -202,7 +195,8 @@ function createUserInfoBySearch(data, search) {
 
         })
     });
-    //Переробить сортировку
+
+    //Cортировка
 
 
     Array.prototype.forEach.call(document.querySelectorAll(".table-wrap   th"), function(el) {
@@ -248,11 +242,9 @@ function createUser(data){
     })
 }
 
-
+//Получение подчиненных
 function getsubordinates(e) {
     e.preventDefault();
-    //Добавить очистку dropbox
-
     document.getElementsByName('fullsearch')[0].value = ''
     var id = this.getAttribute('data-id');
     createUser({
