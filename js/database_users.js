@@ -24,17 +24,28 @@ function createUserInfoBySearch(data, search) {
     var data = data.results;
     var tbody = '';
 
-    var page = search.page || 1;
+    var page = parseInt(search.page) || 1;
   // var full = search.my_sub_list ? 'notfullsearch' : ''
    var full = ''
  
     var list = data;
     var html = '<table class="tab1 search ' + full + '" id="userinfo">';
     if (data.length == 0) {
-        document.querySelector(".table-wrap").innerHTML = 'по запросу не найдено участников';
+
+        showPopup('По данному запросу не найдено участников')
+        document.querySelector(".table-wrap .table").innerHTML = 'по запросу не найдено участников';
+        document.getElementById('total_count').innerHTML = count;
+        Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
+            el.style.display = 'none'
+         })
        // document.querySelector(".lineTabs").innerHTML = '';
         return;
     }
+
+    //нагавнячив
+    [].forEach.call(document.querySelectorAll(".pagination"), function(el) {
+            el.style.display = 'block'
+         })
 
     var titles = Object.keys(data[0].fields);
     var common_ = list[0]['common']
@@ -54,11 +65,16 @@ function createUserInfoBySearch(data, search) {
     html += '<th></th><th></th></thead>';
 
     //paginations
-   // var paginations = '<li>Найдено ' + count + ' пользователей</li>';
-   var paginations = ''
     var pages = Math.ceil(count / config.pagination_count);
+    var paginations = ''
 
+    if(  page > 1 ){
+         paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+    }
+
+/*
     if (pages > 1) {
+        paginations += '<ul class="pag">'
         for (var j = 1; j < pages + 1; j++) {
             if (j == page) {
                 paginations += '<li class="active">' + j + '</li>'
@@ -67,13 +83,35 @@ function createUserInfoBySearch(data, search) {
             }
 
         }
+        paginations += '</ul>'
+    }
+*/
+
+    if (pages > 1) {
+        paginations += '<ul class="pag">'
+        for (var j = page -5 ; j < page + 5; j++) {
+            //console.log('iteration' + j);
+            if (j == page) {
+                paginations += '<li class="active">' + j + '</li>'
+            } else {
+                if(  j > 0  && j < pages + 1  ){
+                     paginations += '<li>' + j + '</li>'
+                }
+               
+            }
+
+        }
+        paginations += '</ul>'
     }
 
+    if( page < pages ){
+        paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+    }
 
 	document.getElementById('total_count').innerHTML = count;
 
    // document.getElementById("pag").innerHTML = paginations;
-    [].forEach.call(document.querySelectorAll(" .pag"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
     	el.innerHTML = paginations
     })
 
@@ -107,11 +145,11 @@ function createUserInfoBySearch(data, search) {
     html += '</tbody>'
     html += '</table>';
 
-    document.querySelector(".table-wrap").innerHTML = html;
-    document.querySelector(".table-wrap tbody").innerHTML = tbody;
+    document.querySelector(".table-wrap .table").innerHTML = html;
+    document.querySelector(".table-wrap .table tbody").innerHTML = tbody;
 
 
-    [].forEach.call(document.querySelectorAll(" .pag li"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
         el.addEventListener('click', function() {
 
             var data = search;
@@ -124,17 +162,50 @@ function createUserInfoBySearch(data, search) {
    
 
 
-    [].forEach.call(document.querySelectorAll(".subordinate"), function(el) {
+    Array.prototype.forEach.call(document.querySelectorAll(".subordinate"), function(el) {
         el.addEventListener('click', getsubordinates);
     });
 
+/* Navigation*/
+
+    Array.prototype.forEach.call(document.querySelectorAll(".arrow"), function(el) {
+        el.addEventListener('click', function() {
+        	var page 
+        	var data = search;
+        	if(  this.parentElement.classList.contains('prev')  ){
+        	page = parseInt( document.querySelector(".pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".pag li.active").innerHTML ) -1 : 1
+        	data['page'] = page
+        	createUser(data);
+        	}else{
+        		
+        		page = parseInt( document.querySelector(".pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".pag li.active").innerHTML )  + 1 : pages
+        		  data['page'] = page
+        	createUser(data);
+        	}
+
+        })
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
+        el.addEventListener('click', function() {
+        	var data = search;
+            if(  this.parentElement.classList.contains('prev')  ){
+            
+            data['page'] = 1
+            createUser(data);
+            }else{
+                
+            data['page'] = pages
+            createUser(data);
+            }
 
 
-
+        })
+    });
     //Переробить сортировку
-/*
 
-    [].forEach.call(document.querySelectorAll(".tab_content   th"), function(el) {
+
+    Array.prototype.forEach.call(document.querySelectorAll(".table-wrap   th"), function(el) {
         el.addEventListener('click', function() {
             var data_order = this.getAttribute('data-order');
             //  var status = ordering[data_order] = ordering[data_order] ? false : true
@@ -148,7 +219,7 @@ function createUserInfoBySearch(data, search) {
             ordering[data_order] = status
 
             data_order = status ? data_order : '-' + data_order;
-            var  page = document.querySelector("span.page.active")  ? parseInt(document.querySelector("span.page.active").innerHTML) : 1
+            var  page = document.querySelector(".pag li.active")  ? parseInt( document.querySelector(".pag li.active").innerHTML ) : 1
 
             var data = {
 
@@ -160,7 +231,7 @@ function createUserInfoBySearch(data, search) {
             createUser(data)
         });
     })
-*/
+
  
 }
 
