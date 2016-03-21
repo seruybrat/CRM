@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="css/normalize.min.css">
 	<link rel="stylesheet" href="css/fonts.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
 </head>
 <body>
 
@@ -97,7 +97,7 @@
 					</ul>
 				</div>
 
-				<div class="period" style="display:block">
+				<div class="period">
 					<p>Период с <input type="text" id="datepicker_from"> по <input type="text" id="datepicker_to"></p>
 				</div>
 				<div class="pagination"><!--pagination -->
@@ -123,7 +123,7 @@
 					</div><!--End pagination -->
 				</div>
 				
-			<div id="incomplete">
+			<div id="incomplete" class="tabs-cont">
 				<div class="rows-wrap">
 					<div class="rows">
 						<div class="col">
@@ -172,7 +172,7 @@
 				</div><!--End pagination -->
 			</div>
 
-			<div id="overdue">
+			<div id="overdue" class="tabs-cont">
 				<div class="rows-wrap">
 					<div class="rows">
 						<div class="col">
@@ -221,7 +221,7 @@
 				</div><!--End pagination -->
 			</div>
 
-			<div id="completed">
+			<div id="completed" class="tabs-cont">
 				<div class="rows-wrap">
 					<div class="rows">
 						<div class="col">
@@ -410,7 +410,7 @@
 			
 
 <script src="libs/jquery-1.12.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="libs/jquery-ui.min.js"></script>
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
 <script src="js/deals.js"></script>
