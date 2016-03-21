@@ -76,8 +76,8 @@ select::-ms-expand {
 	position: fixed;
 	top:0;
 	bottom: 0;
-	-webkit-transition: width .3s linear;
-	transition: width .3s linear;
+	-webkit-transition: width 1s ease;
+	transition: width 1s ease;
 	overflow: hidden;
 	z-index: 9;
 }
@@ -85,6 +85,7 @@ select::-ms-expand {
 	height: 68px;
 	padding-top: 10px ;
 	text-align: center;
+	position: relative;
 }
 .logo div {
 	cursor: pointer;
@@ -204,8 +205,8 @@ select::-ms-expand {
 	bottom:0;
 	background-color: #444b56;
 	width: 240px;
-	-webkit-transition: width .3s linear;
-	transition: width .3s linear;
+	-webkit-transition: width 1s ease;
+	transition: width 1s ease;
 	overflow: hidden;
 }
 
@@ -218,6 +219,7 @@ select::-ms-expand {
 }
 #sidebar.toggle-sidebar li:last-child a:before {
 	top:17px;
+	-webkit-transform:rotate(180deg);
 	transform:rotate(180deg);
 }
 #sidebar.toggle-sidebar li:last-child {
@@ -231,8 +233,8 @@ select::-ms-expand {
 
 .main-wrap {
 	padding-left: 240px;
-	-webkit-transition: all .3s linear;
-	transition: all .3s linear;
+	-webkit-transition: all 1s ease;
+	transition: all 1s ease;
 }
 .top,
 .top-buttons-wrap {
@@ -528,7 +530,7 @@ height: 48px;
 	background-position: -3px -63px;
 }
 #completed .rows {
-	width: 100%;
+	width: 98%;
 }
 
 /* ------------------Pagination------------------------------ */
