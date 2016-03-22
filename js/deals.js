@@ -126,14 +126,14 @@ function getUndoneDeals() {
                     html += '<div class="rows-wrap"><div class="rows"><div class="col"><p><span>'+fields[names[1]].value +'</span></p></div><div class="col"><p>Последняя сделка:<span> ' + fields[names[3]].value + '</span></p><p>Ответственный:<span> '+ fields[names[2]].value +'</span></p><p>Сумма:<span> ' + fields[names[4]].value + ' ₴</span></p></div></div><button data-id=' + fields[names[0]].value + '>Завершить</button></div>';
                 document.getElementById('incomplete').innerHTML = html;
             }
-            var but = document.querySelectorAll(".rows-wrap button");
+            /*var but = document.querySelectorAll(".rows-wrap button");
             for (var j = 0; j < but.length; j++) {
                 but[j].addEventListener('click', function(){
                     var attr = this.getAttribute('data-id');
                     console.log(attr)
                     updateDeals(attr);
                 })
-            }
+            }*/
         }); 
 }
 

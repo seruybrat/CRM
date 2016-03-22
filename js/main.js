@@ -12,13 +12,17 @@ $("#nav-sidebar li ").click(function(e) {
 });
 
 
-$(".rows-wrap button").click(function(e) {
+/*$(".rows-wrap button").click(function(e) {
   $('.pop-up-splash').show()
-});
+});*/
 
 $(".splash-bauttons button:first").click(function(e) {
   $('.pop-up-splash').hide()
 });
+
+$('body').on('click', '.rows-wrap button', function(){
+  $('.pop-up-splash').show();
+})
 
 
 
