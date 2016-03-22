@@ -5,6 +5,16 @@ body {
   	color: #656d78;
 
 }
+.clearfix:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+.clearfix{
+	clear:both;
+}
 a:-webkit-any-link,
 a:visited {
 	color: #656d78;
@@ -1023,6 +1033,7 @@ table tr:first-child td {
 .table-opacity {
 	opacity: 0.4;
 }
+
 /*********************Events**********************/
 .events-wrap {
 	width: 95%;
@@ -1092,4 +1103,18 @@ table tr:first-child td {
 	padding-left: 20px;
 	margin-top: 40px
 }
+.period a {
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: 130px;
+    background: #3caeda;
+    color: #fff;
+    margin-left: 10px;
+}
 
+.period a:hover {
+    background: #44c1f2;
+}

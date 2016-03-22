@@ -46,12 +46,3 @@ function handleDragEnd(e) {
   });
 
 }
-var cols = document.querySelectorAll('[draggable]');
-Array.prototype.forEach.call(cols, function(col) {
-  col.addEventListener('drop', handleDrop, false);
-  col.addEventListener('dragstart', handleDragStart, false);
-  col.addEventListener('dragenter', handleDragEnter, false);
-  col.addEventListener('dragover', handleDragOver, false);
-  col.addEventListener('dragleave', handleDragLeave, false);
-  
-});

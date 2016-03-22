@@ -1,7 +1,7 @@
 $(function(){
     //createUser({'master':user_id}) ;
-    createUser() ;
-
+    //createUser() ;
+    //getCurrentSetting();
      $('input[name="fullsearch"]').keyup(function() {
 
         delay(function() {
@@ -12,12 +12,10 @@ $(function(){
 
     });
 
-     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
-           el.addEventListener('click', function(){
-                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
-           });
-         })
-
+     document.getElementById('sort_save').addEventListener('click',function(){
+        createUser()
+        updateSettings();
+     })
 });
 
 
@@ -40,6 +38,7 @@ function createUserInfoBySearch(data, search) {
         document.querySelector(".table-wrap .table").innerHTML=''
         document.querySelector(".query-none p").innerHTML = 'По запросу не найдено участников';
         document.getElementById('total_count').innerHTML = count;
+         document.getElementsByClassName('preloader')[0].style.display = 'none'
         Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'none'
          })
@@ -55,19 +54,25 @@ function createUserInfoBySearch(data, search) {
 
     html += '<thead>';
     var titles = Object.keys(data[0].fields);
-    var common_ = list[0]['common']
-    var common = Object.keys(list[0]['common']);
-    for (var k = 0; k < titles.length; k++) {
-        if (common.indexOf(titles[k]) === -1) continue
+   // var common_ = list[0]['common']
+   // var common = Object.keys(list[0]['common']);
+        var common_  = config['column_table']
+        var common = Object.keys( common_ );
 
-        if (ordering[common_[titles[k]]]) {
-            html += '<th data-order="' + common_[titles[k]] + '" class="down"><span>' + titles[k] + '</span></th>';
+    for (var k = 0; k < titles.length; k++) {
+        if (common.indexOf(titles[k]) === -1  ||  ( !common_[titles[k]]['active'] && common_[titles[k]]['editable'] )  )  continue
+            //console.log(  titles[k]  )//Отдел
+        if (ordering[common_[titles[k]]['title']]) {
+            html += '<th data-order="' + common_[titles[k]]['title'] + '" class="down"><span>' + titles[k] + '</span></th>';
         } else {
-            html += '<th data-order="' + common_[titles[k]] + '"    class="up"><span>' + titles[k] + '</span></th>';
+            html += '<th data-order="' + common_[titles[k]]['title'] + '"    class="up"><span>' + titles[k] + '</span></th>';
         }
 
     }
-    html += '<th></th><th></th></thead>';
+
+
+
+    html += '<th>Подчиненные</th><th>Анкета</th></thead>';
 
 
 
@@ -126,7 +131,7 @@ function createUserInfoBySearch(data, search) {
 
             }
             if (!list_fields.hasOwnProperty(prop) || prop == 'id' || prop == 'Facebook') continue
-            if (common.indexOf(prop) === -1) continue
+            if (common.indexOf(prop) === -1   || ( !common_[prop]['active'] && common_[prop]['editable'] ) ) continue
             tbody += '<td  data-model="' + prop + '" data-type="' + list_fields[prop]['id'] + '">' + list_fields[prop]['value'] + '</td>';
 
         }
@@ -139,8 +144,8 @@ function createUserInfoBySearch(data, search) {
 
     document.querySelector(".table-wrap .table").innerHTML = html;
     document.querySelector(".table-wrap .table tbody").innerHTML = tbody;
-    ocument.querySelector(".query-none p").innerHTML=''
-
+    document.querySelector(".query-none p").innerHTML=''
+    document.getElementsByClassName('preloader')[0].style.display = 'none'
     Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
         el.addEventListener('click', function() {
 
@@ -238,7 +243,9 @@ function createUser(data){
     if(search && !data['sub']){
         data['search'] = search;
     }
+    document.getElementsByClassName('preloader')[0].style.display = 'block'
     ajaxRequest(path, data, function(answer) {
+      //  document.getElementsByClassName('preloader')[0].style.display = 'block'
         createUserInfoBySearch(answer, data)
     })
 }
@@ -252,5 +259,78 @@ function getsubordinates(e) {
         'master': id
     });
     window.parent_id = id;
+
+}
+
+
+function getCurrentSetting(){
+     var titles = config['column_table']
+     var html = ''
+     for(var p in titles){
+         if (!titles.hasOwnProperty(p)) continue;
+        var ischeck = titles[p]['active'] ? 'check' : ''
+        html += '<li draggable>'+
+           '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
+         '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
+         '</li>'
+     }
+
+
+     document.getElementById('sort-form').innerHTML = html;
+    
+    var cols = document.querySelectorAll('[draggable]');
+    Array.prototype.forEach.call(cols, function(col) {
+    
+      col.addEventListener('drop', handleDrop, false);
+      col.addEventListener('dragstart', handleDragStart, false);
+      col.addEventListener('dragenter', handleDragEnter, false);
+      col.addEventListener('dragover', handleDragOver, false);
+      col.addEventListener('dragleave', handleDragLeave, false);
+ });
+      
+     /* 
+      live('drop', '[draggable]' ,handleDrop );
+      live('dragstart', '[draggable]' ,handleDragStart )
+      live('dragenter', '[draggable]' ,handleDragEnter )
+      live('dragover', '[draggable]' ,handleDragOver )
+      live('dragleave', '[draggable]' ,handleDragLeave )
+   */
+
+
+     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
+        //Баг кліка
+           el.addEventListener('click', function(){
+                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+           });
+         })
+
+}
+
+function  updateSettings(){
+   // var xhr = new XMLHttpRequest();
+
+var data = [];
+var iteration = 1 
+Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
+     var item = {}
+     item['id'] = el.getAttribute('id');
+     item['number'] = iteration++;
+     item['active'] = el.classList.contains('check') ? true : false
+     data.push(item)
+})
+
+
+
+var json = JSON.stringify(data);
+console.log(json)
+
+ ajaxRequest(config.DOCUMENT_ROOT + 'api/update_columns', json, function(JSONobj) {
+        //init(); 
+
+        createUser()
+                    }, 'POST', true, {
+        'Content-Type': 'application/json'
+        });
+        
 
 }

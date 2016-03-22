@@ -2,7 +2,8 @@ var config = {
     //'DOCUMENT_ROOT':'http://vocrm.org/',
     'DOCUMENT_ROOT': 'http://5.101.119.32:8008/',
     'pagination_count': 50, //Количество записей при пагинации
-    'pagination_mini_count': 10
+    'pagination_mini_count': 10,
+    'column_table' : null
 }
 
 $("#nav-sidebar li ").click(function(e) {
@@ -54,6 +55,24 @@ $('.tabs .tabs-nav li a').click(function(e) {
 
 $(".tabs-nav li a:first").click();
 
+
+
+$(function() {
+    
+        ajaxRequest(config.DOCUMENT_ROOT + 'api/users/current', null, function(data) {
+            var user_id = data.id;
+            config.column_table =  data.column_table;
+            
+
+            if(document.getElementById('database_users')){
+                createUser();
+                getCurrentSetting();
+            }
+
+
+          })
+  })
+
 jQuery(function($) {
     if($.datepicker){
             $.datepicker.regional['ru'] = {
@@ -68,3 +87,4 @@ jQuery(function($) {
     }
     
 });
+

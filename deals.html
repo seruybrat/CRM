@@ -83,7 +83,7 @@
 			 <div class="top-pag">
 
 				<div class="tab-status">
-					<ul>
+					<ul id="tabs">
 						<li>
 							<a href="#incomplete" >Незавершённые (<span id="incomplete-count"></span>)</a>
 						</li>
@@ -97,8 +97,13 @@
 					</ul>
 				</div>
 
-				<div class="period">
-					<p>Период с <input type="text" id="datepicker_from"> по <input type="text" id="datepicker_to"></p>
+				<div id="period_expired" class="period">
+					<p>Период с <input type="text" id="expired_datepicker_from"> по <input type="text" id="expired_datepicker_to"><a id="show-all-expired" href="javascript:void(0);">Показать все</a></p>
+					
+				</div>
+				<div id="period_done" class=" period">
+					<p>Период с <input type="text" id="done_datepicker_from"> по <input type="text" id="done_datepicker_to"><a id="show-all-done" href="javascript:void(0);">Показать все</a></p>
+
 				</div>
 				<div class="pagination"><!--pagination -->
 					<div class="pag-wrap">
