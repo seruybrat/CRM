@@ -54,9 +54,14 @@ $(function() {
         ajaxRequest(config.DOCUMENT_ROOT + 'api/users/current', null, function(data) {
             var user_id = data.id;
             config.column_table =  data.column_table;
-             
-           // currentUser(data);
-           getCurrentSetting();
+            
+
+            if(document.getElementById('database_users')){
+                createUser();
+                getCurrentSetting();
+            }
+
+
           })
   })
 

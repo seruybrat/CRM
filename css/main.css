@@ -5,6 +5,16 @@ body {
   	color: #656d78;
 
 }
+.clearfix:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+.clearfix{
+	clear:both;
+}
 a:-webkit-any-link,
 a:visited {
 	color: #656d78;
