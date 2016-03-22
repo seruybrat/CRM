@@ -422,7 +422,7 @@
 			</div><!--End spisok -->
 		</div><!-- End tab-content-->
 		
-		<div class="pop-up-splash">
+		<div id="popup" class="pop-up-splash">
 			<div class="splash-screen">
 				<div class="top-text">
 					<h3>Завершить сделку</h3>
@@ -434,21 +434,21 @@
 						<p>Ответственный:</p>
 					</div>
 					<div class="right-side">
-						<p>Завершить сделку</p>
-						<p>15.02.2015</p>
-						<p>Каравашкин Вадим</p>
+						<p id="client-name">Завершить сделку</p>
+						<p id="deal-date">15.02.2015</p>
+						<p id="responsible-name">Каравашкин Вадим</p>
 					</div>
 				</div>
 				<div class="summa-wrap">
 					<div class="summa">
 						<p>Сумма:</p>
-						<span>500 ₴</span>
+						<span id="deal-value">500 ₴</span>
 					</div>
 				</div>
 				<textarea name="" id="">Добавить коментарий</textarea>
 				<div class="splash-bauttons">
-					<button>Отменить</button>
-					<button>Завершить</button>
+					<button id="close">Отменить</button>
+					<button id="complete">Завершить</button>
 				</div>
 			</div>
 		</div><!--End Pop-up-splash-->
