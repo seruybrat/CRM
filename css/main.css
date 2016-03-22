@@ -22,6 +22,10 @@ h2 {
 	color: #ccd0d9;
 	line-height: 1.4;
 }
+h3 {
+	font-family: "UbuntuLight" , sans-serif;
+	font-size:1.8em ;
+}
 input,select, textarea, button, button:active, button:focus {
   outline: none;
 }
@@ -444,7 +448,7 @@ height: 48px;
 	float: left;
 	padding: 6px;
 	border-left:1px solid #cdd0d4;
-	margin-top: 20px;
+	margin-top: 24px;
 }
 .period p {
 	color: #656d78;
@@ -521,7 +525,8 @@ height: 48px;
 .rows-wrap button:hover {
 	background-color: #44c1f2;
 }
-.rows-wrap button::before {
+.rows-wrap button::before,
+.splash-battons button:last-child::before{
 	display: block;
 	content: '';
 	position: absolute;
@@ -885,6 +890,89 @@ table tr:first-child td {
   right: 10px;
   cursor: pointer;
 }
+.pop-up-splash {
+	display: none;
+	position: fixed;
+	top:0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.8);
+	z-index: 99;
+}
+.splash-screen {
+	width: 35%;
+	margin: 15% auto;
+	background-color: #fff;
+	border-radius: 3px;
+}
+.pop-up-splash .top-text {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom: 1px solid #cdd0d4;
+	padding: 20px;
+	background-color: #e6e9ee;
+}
+.user-info {
+	margin-top: 15px;
+	overflow: hidden;
+}
+.left-side,
+.right-side {
+	float: left;
+}
+.left-side {
+	width: 30%;
+	text-align: right;
+	padding-right: 10px;
+}
+.right-side {
+	width: 65%;
+}
+.pop-up-splash p {
+	font-family:"Ubuntu", sans-serif;
+	font-size: 1.2em;
+	padding-bottom: 15px;
+}
+.right-side p{
+	font-family:"UbuntuMedium", sans-serif;
+}
+.summa-wrap {
+	overflow: hidden;
+	border-top: 1px solid #cdd0d4;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.summa-wrap .summa {
+	float: right;
+	padding: 20px;
+}
+.summa p {
+	display: inline-block;
+}
+.summa span{
+	display: inline-block;
+	padding: 5px;
+	border: 1px solid #cdd0d4;
+	border-radius: 3px;
+	background-color: #f2f5fa;
+}
+.pop-up-splash textarea {
+	display: block;
+	width: 88%;
+	height: 80px;
+	margin:0 auto;
+	resize: none;
+	font-style: italic;
+}
+.splash-bauttons {
+	padding: 30px;
+	text-align: right;
+}
+.splash-bauttons button:first-child {
+	padding-left: 25px;
+	margin-right: 10px;
+}
 
 /*drag drop*/
 
@@ -935,3 +1023,73 @@ table tr:first-child td {
 .table-opacity {
 	opacity: 0.4;
 }
+/*********************Events**********************/
+.events-wrap {
+	width: 95%;
+	margin: 0 auto;
+}
+.events-wrap > div {
+	display: inline-block;
+	width: 32%;
+	height: 250px;
+	background-color: gray;
+	margin-top: 25px;
+	position: relative;
+}
+.events-wrap > div:hover .event-hover{
+	opacity: 1;
+}
+.events-wrap > div:hover > span {
+	opacity: 0;
+}
+.events-wrap > div:not(.event-1) {
+	margin-left: 1.7%;
+}
+.events-wrap > div > span {
+	display: block;
+	position: absolute;
+	background-color: rgba(0,0,0,0.7);
+	color: #fff;
+	font-size: 1.8em;
+	bottom: 0;
+	left:0;
+	right: 0;
+	text-align: center;
+	padding: 15px;
+	opacity: 1;
+	-webkit-transition:all .5s ease;
+	transition:all .5s ease;
+}
+.event-hover {
+	position: absolute;
+	top:0;
+	left:0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.7);
+	padding: 10px;
+	opacity: 0;
+	-webkit-transition:all .5s ease;
+	transition:all .5s ease;
+	text-align: center;
+}
+.event-hover h3{
+	display: block;
+	color: lightblue;
+	border-bottom: 2px solid gray;
+	font-size: 1.8em;
+	padding: 15px;
+}
+.event-hover p {
+	padding-top: 30px;
+	color:#fff;
+	font-size: 1.2em;
+}
+.event-hover span {
+	font-family:"UbuntuBold", sans-serif;
+}
+.event-hover button {
+	padding-left: 20px;
+	margin-top: 40px
+}
+

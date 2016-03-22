@@ -11,13 +11,21 @@ $("#nav-sidebar li ").click(function(e) {
 });
 
 
+$(".rows-wrap button").click(function(e) {
+  $('.pop-up-splash').show()
+});
+
+$(".splash-bauttons button:first").click(function(e) {
+  $('.pop-up-splash').hide()
+});
+
+
 
 $("#pag li ").click(function(e) {
   e.preventDefault();
   $("#pag li").removeClass('active');
   $(this).addClass('active');
 });
-
 
 
 $("#move-sidebar").click(function(){
