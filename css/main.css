@@ -933,3 +933,19 @@ table tr:first-child td {
 .table-opacity {
 	opacity: 0.4;
 }
+
+.period a {
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: 130px;
+    background: #3caeda;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.period a:hover {
+    background: #44c1f2;
+}
