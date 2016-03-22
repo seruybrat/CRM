@@ -12,12 +12,9 @@ $(function(){
 
     });
 
-     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
-           el.addEventListener('click', function(){
-                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
-           });
-         })
+     document.getElementById('sort_save').addEventListener('click',function(){
 
+     })
 });
 
 
@@ -54,18 +51,24 @@ function createUserInfoBySearch(data, search) {
 
     html += '<thead>';
     var titles = Object.keys(data[0].fields);
-    var common_ = list[0]['common']
-    var common = Object.keys(list[0]['common']);
-    for (var k = 0; k < titles.length; k++) {
-        if (common.indexOf(titles[k]) === -1) continue
+   // var common_ = list[0]['common']
+   // var common = Object.keys(list[0]['common']);
+        var common_  = config['column_table']
+        var common = Object.keys( common_ );
 
-        if (ordering[common_[titles[k]]]) {
-            html += '<th data-order="' + common_[titles[k]] + '" class="down"><span>' + titles[k] + '</span></th>';
+    for (var k = 0; k < titles.length; k++) {
+        if (common.indexOf(titles[k]) === -1  ||  !common_[titles[k]]['active'] ) continue
+            //console.log(  titles[k]  )//Отдел
+        if (ordering[common_[titles[k]]['title']]) {
+            html += '<th data-order="' + common_[titles[k]]['title'] + '" class="down"><span>' + titles[k] + '</span></th>';
         } else {
-            html += '<th data-order="' + common_[titles[k]] + '"    class="up"><span>' + titles[k] + '</span></th>';
+            html += '<th data-order="' + common_[titles[k]]['title'] + '"    class="up"><span>' + titles[k] + '</span></th>';
         }
 
     }
+
+
+
     html += '<th></th><th></th></thead>';
 
 
@@ -251,5 +254,41 @@ function getsubordinates(e) {
         'master': id
     });
     window.parent_id = id;
+
+}
+
+
+function getCurrentSetting(){
+     var titles = config['column_table']
+     var html = ''
+     for(var p in titles){
+         if (!titles.hasOwnProperty(p)) continue;
+        var ischeck = titles[p]['active'] ? 'check' : ''
+        html += '<li draggable>'+
+           '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
+         '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
+         '</li>'
+     }
+
+
+     document.getElementById('sort-form').innerHTML = html;
+
+     var cols = document.querySelectorAll('[draggable]');
+Array.prototype.forEach.call(cols, function(col) {
+  col.addEventListener('drop', handleDrop, false);
+  col.addEventListener('dragstart', handleDragStart, false);
+  col.addEventListener('dragenter', handleDragEnter, false);
+  col.addEventListener('dragover', handleDragOver, false);
+  col.addEventListener('dragleave', handleDragLeave, false);
+  
+});
+
+
+     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
+        //Баг кліка
+           el.addEventListener('click', function(){
+                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+           });
+         })
 
 }
