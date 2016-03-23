@@ -18,6 +18,12 @@ $("#pag li ").click(function(e) {
   $(this).addClass('active');
 });
 
+$("body").on('click', '#pag li', function(e) {
+  e.preventDefault();
+  $("#pag li").removeClass('active');
+  $(this).addClass('active');
+});
+
 
 $("#move-sidebar").click(function(){
   $("#sidebar").toggleClass("toggle-sidebar");

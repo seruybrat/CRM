@@ -1121,3 +1121,7 @@ table tr:first-child td {
 .period a:hover {
     background: #44c1f2;
 }
+
+.tabs-cont .pagination:first-child .element-select {
+	display:none;
+}
