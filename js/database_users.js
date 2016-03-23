@@ -76,12 +76,11 @@ function createUserInfoBySearch(data, search) {
  var common  = config['column_table']
  for(var title in config['column_table']){
      if(  !config['column_table'][title]['active'] && config['column_table'][title]['editable']    ) continue
-        
-     //console.log(title)
+
     if (ordering[config['column_table'][title]]) {
-            html += '<th data-order="' + config['column_table'][title] + '" class="down"><span>' + title + '</span></th>';
+            html += '<th data-order="' + config['column_table'][title]['title'] + '" class="down"><span>' + title + '</span></th>';
         } else {
-            html += '<th data-order="' + config['column_table'][title] + '"    class="up"><span>' + title + '</span></th>';
+            html += '<th data-order="' + config['column_table'][title]['title'] + '"    class="up"><span>' + title + '</span></th>';
         }
     }
 
@@ -146,7 +145,7 @@ function createUserInfoBySearch(data, search) {
 
 
 
-            if (prop == 'Facebook'  &&  config['column_table']['facebook'] && config['column_table']['facebook']['active']   ) {
+            if (prop == 'Facebook'  &&  config['column_table']['Facebook'] && config['column_table']['Facebook']['active']   ) {
                 if (list_fields[prop]['value']) {
                     tbody += '<td><a class="facebook" href="' + list_fields[prop]['value'] + '">facebook</a></td>'
                 } else {
