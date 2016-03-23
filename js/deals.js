@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+    //partnerlist 
+    getPartnersList();
+
+
+
+
     $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
 
 	$("#done_datepicker_from").datepicker({
@@ -330,4 +336,41 @@ function makeTabs () {
                 expired.style.display = '';
             }
         }
+}
+
+
+
+
+function getPartnersList(){
+     var path = config.DOCUMENT_ROOT + '/api/partnerships/'
+   
+    ajaxRequest(path, null, function(data) {
+
+        var results = data.results;
+        var common_fields = data.common_table;
+        var html = '<table><tr><td>Партнер</td><td>Ответственный</td><td>Сумма сделки</td><td>К-тво завершенных сделок</td><td>К-тво просроченных сделок</td></tr>'
+        html = ''
+        var thead = '<table><thead>'
+        for(var i = 0;i<results.length;i++){
+            html += '<tr>'
+            
+            var field = results[i].fields;
+                for(var j in field){
+
+                    if(  !common_fields[j] && (!config['column_table'][j] || !config['column_table'][j]['active'] )  ) continue 
+
+                    if(!i){
+                       thead += '<th>'+j+'</th>'
+                    }    
+                    html += '<td data-model="'+ j  +'">' + field[j].value  +'</td>'
+                
+                }
+            html += '</tr>'
+            thead += '</thead><tbody></tbody></table' 
+        }
+       // html += '<table>'
+        document.getElementById('partnersips_list').innerHTML = thead
+
+        document.querySelector("#partnersips_list tbody").innerHTML = html;
+    })
 }

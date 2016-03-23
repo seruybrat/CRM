@@ -1,7 +1,5 @@
 $(function(){
     //createUser({'master':user_id}) ;
-    //createUser() ;
-    //getCurrentSetting();
      $('input[name="fullsearch"]').keyup(function() {
 
         delay(function() {
@@ -13,7 +11,6 @@ $(function(){
     });
 
      document.getElementById('sort_save').addEventListener('click',function(){
-        //createUser()
         updateSettings();
      })
 });
@@ -42,7 +39,6 @@ function createUserInfoBySearch(data, search) {
         Array.prototype.forEach.call(document.querySelectorAll(".pagination"), function(el) {
             el.style.display = 'none'
          })
-       // document.querySelector(".lineTabs").innerHTML = '';
         return;
     }
 
@@ -55,33 +51,15 @@ function createUserInfoBySearch(data, search) {
     html += '<thead>';
 
 
-    /*
-    var titles = Object.keys(data[0].fields);
-   // var common_ = list[0]['common']
-   // var common = Object.keys(list[0]['common']);
-        var common_  = config['column_table']
-        var common = Object.keys( common_ );
 
-    for (var k = 0; k < titles.length; k++) {
-        if (common.indexOf(titles[k]) === -1  ||  ( !common_[titles[k]]['active'] && common_[titles[k]]['editable'] )  )  continue
-            //console.log(  titles[k]  )//Отдел
-        if (ordering[common_[titles[k]]['title']]) {
-            html += '<th data-order="' + common_[titles[k]]['title'] + '" class="down"><span>' + titles[k] + '</span></th>';
-        } else {
-            html += '<th data-order="' + common_[titles[k]]['title'] + '"    class="up"><span>' + titles[k] + '</span></th>';
-        }
-
-    }
-*/
  var common  = config['column_table']
  for(var title in config['column_table']){
      if(  !config['column_table'][title]['active'] && config['column_table'][title]['editable']    ) continue
-        
-     //console.log(title)
+
     if (ordering[config['column_table'][title]]) {
-            html += '<th data-order="' + config['column_table'][title] + '" class="down"><span>' + title + '</span></th>';
+            html += '<th data-order="' + config['column_table'][title]['title'] + '" class="down"><span>' + title + '</span></th>';
         } else {
-            html += '<th data-order="' + config['column_table'][title] + '"    class="up"><span>' + title + '</span></th>';
+            html += '<th data-order="' + config['column_table'][title]['title'] + '"    class="up"><span>' + title + '</span></th>';
         }
     }
 
@@ -104,7 +82,6 @@ function createUserInfoBySearch(data, search) {
     if (pages > 1) {
         paginations += '<ul class="pag">'
         for (var j = page -5 ; j < page + 5; j++) {
-            //console.log('iteration' + j);
             if (j == page) {
                 paginations += '<li class="active">' + j + '</li>'
             } else {
@@ -136,6 +113,11 @@ function createUserInfoBySearch(data, search) {
         var list_fields = list[i].fields;
 
 
+        if(!list_fields) continue
+
+      if(   typeof list_fields === 'undefined') {
+          console.log('Нету fields для  ID:  ' + id_parent_subordinate)
+        }
 
         tbody += '<tr>';
 
@@ -146,7 +128,7 @@ function createUserInfoBySearch(data, search) {
 
 
 
-            if (prop == 'Facebook'  &&  config['column_table']['facebook'] && config['column_table']['facebook']['active']   ) {
+            if (prop == 'Facebook'  &&  config['column_table']['Facebook'] && config['column_table']['Facebook']['active']   ) {
                 if (list_fields[prop]['value']) {
                     tbody += '<td><a class="facebook" href="' + list_fields[prop]['value'] + '">facebook</a></td>'
                 } else {
@@ -160,25 +142,7 @@ function createUserInfoBySearch(data, search) {
             }
         }
 
-        /*
-        for (var prop in list_fields) {
-
-
-            if (prop == 'Facebook'  &&  common_[prop]['active']   ) {
-                if (list_fields[prop]['value']) {
-                    tbody += '<td><a class="facebook" href="' + list_fields[prop]['value'] + '">facebook</a></td>'
-                } else {
-                    tbody += '<td data-model="' + prop + '">&nbsp;</td>'
-                }
-
-            }
-            if (!list_fields.hasOwnProperty(prop) || prop == 'id' || prop == 'Facebook') continue
-            if (common.indexOf(prop) === -1   || ( !common_[prop]['active'] && common_[prop]['editable'] ) ) continue
-            tbody += '<td  data-model="' + prop + '" data-type="' + list_fields[prop]['id'] + '">' + list_fields[prop]['value'] + '</td>';
-
-        }
-  */
-
+    
 
         tbody += '<td><a href="#" class="subordinate" data-id="' + id_parent_subordinate + '">подчиненные</a></td>';
         tbody += '<td><a href="' + config.DOCUMENT_ROOT + '/account/' + id_parent_subordinate + '" class="questionnaire" data-id="' + id_parent_subordinate + '">анкета</a></td>'
@@ -315,7 +279,6 @@ function getCurrentSetting(){
          if (!titles.hasOwnProperty(p)) continue;
         var ischeck = titles[p]['active'] ? 'check' : ''
        var isdraggable = titles[p]['editable'] ? 'draggable' : 'disable'
-       //var isdraggable = 'draggable'
         html += '<li '+ isdraggable  + ' >'+
            '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
          '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
@@ -335,13 +298,7 @@ function getCurrentSetting(){
       col.addEventListener('dragleave', handleDragLeave, false);
  });
       
-     /* 
-      live('drop', '[draggable]' ,handleDrop );
-      live('dragstart', '[draggable]' ,handleDragStart )
-      live('dragenter', '[draggable]' ,handleDragEnter )
-      live('dragover', '[draggable]' ,handleDragOver )
-      live('dragleave', '[draggable]' ,handleDragLeave )
-   */
+
 
 
      Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
@@ -359,7 +316,7 @@ function getCurrentSetting(){
 }
 
 function  updateSettings(){
-   // var xhr = new XMLHttpRequest();
+
 
 var data = [];
 var iteration = 1 
@@ -374,13 +331,12 @@ Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), func
 
 
 var json = JSON.stringify(data);
-//console.log(json)
+
 
  ajaxRequest(config.DOCUMENT_ROOT + 'api/update_columns', json, function(JSONobj) {
 
-     //   console.log(JSON.stringify(data))
         config['column_table'] = JSONobj['column_table'];
-     //   console.log(JSON.stringify(config['column_table']))
+
         createUser();
                     }, 'POST', true, {
         'Content-Type': 'application/json'
