@@ -72,6 +72,9 @@ function getExpiredDeals(time) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?expired=2', json, function(data) {
             var count = data.count,
                 data = data.results,
+                pagination = '<div class="element-select"><p>Показано <span>'+ data.length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">',
+                page = 1,                
+                pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
                 document.getElementById('overdue').innerHTML = 'Сделок нет';
@@ -79,6 +82,63 @@ function getExpiredDeals(time) {
                 return;
             } 
             document.getElementById('overdue-count').innerHTML = count;
+            if (pages > 1) {
+                for (var k = 1; k <= pages; k++) {
+                    if (k == page) {
+                        pagination += '<li class="active">' + k + '</li>'
+                    } else {
+                        pagination += '<li>' + k + '</li>'
+                    }
+                }
+            } else {
+                pagination += '<li class="active">' + 1 + '</li>';
+            }
+        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination"), function(el) {
+            el.innerHTML = pagination;
+            el.style.display = 'block';
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination .pag li"), function(el) {
+        el.addEventListener('click', function() {
+                setClickToPagination(this);
+            });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination .arrow"), function(el) {
+            el.addEventListener('click', function() {
+                var page;
+                var data = {};
+                if(  this.parentElement.classList.contains('prev')  ){
+                    page = parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML ) -1 : 1
+                    data['page'] = page;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                } else {                    
+                    page = parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML )  + 1 : pages
+                    data['page'] = page;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                }
+
+            })
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination .double_arrow"), function(el) {
+            el.addEventListener('click', function() {
+                var data = {};
+                if(  this.parentElement.classList.contains('prev')  ) {                
+                    data['page'] = 1;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                } else {                    
+                    data['page'] = pages;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                }
+            })
+        });
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -88,9 +148,7 @@ function getExpiredDeals(time) {
             var but = document.querySelectorAll(".rows-wrap button");
             for (var j = 0; j < but.length; j++) {
                 but[j].addEventListener('click', function(){
-                    var attr = this.getAttribute('data-id');
-                    console.log(attr)
-                    updateDeals(attr);
+                    getDataForPopup(this.getAttribute('data-id'),this.getAttribute('data-name'),this.getAttribute('data-date'),this.getAttribute('data-responsible'),this.getAttribute('data-value') + ' ₴')                    
                 })
             }    
         }); 
@@ -101,6 +159,9 @@ function getDoneDeals(time) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=2', json, function(data) {
             var count = data.count,
                 data = data.results,
+                pagination = '<div class="element-select"><p>Показано <span>'+ data.length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">',
+                page = time['page'] || 1,                
+                pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
                 document.getElementById('completed').innerHTML = 'Сделок нету';
@@ -108,6 +169,64 @@ function getDoneDeals(time) {
                 return;
             }
             document.getElementById('completed-count').innerHTML = count;
+            if (pages > 1) {
+                for (var k = 1; k <= pages; k++) {
+                    if (k == page) {
+                        pagination += '<li class="active">' + k + '</li>'
+                    } else {
+                        pagination += '<li>' + k + '</li>'
+                    }
+                }
+            } else {
+                pagination += '<li class="active">' + 1 + '</li>';
+            }
+        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination"), function(el) {
+            el.innerHTML = pagination;
+            el.style.display = 'block';
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination .pag li"), function(el) {
+        el.addEventListener('click', function() {
+                setClickToPagination(this);
+            });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination .arrow"), function(el) {
+            el.addEventListener('click', function() {
+                console.log(this)
+                var page;
+                var data = {};
+                if(  this.parentElement.classList.contains('prev')  ){
+                    page = parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML ) -1 : 1
+                    data['page'] = page;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                } else {                    
+                    page = parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML )  + 1 : pages
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    data['page'] = page;
+                    getDoneDeals(data);
+                }
+
+            })
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination .double_arrow"), function(el) {
+            el.addEventListener('click', function() {
+                var data = {};
+                if(  this.parentElement.classList.contains('prev')  ) {                
+                    data['page'] = 1;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                } else {                    
+                    data['page'] = pages;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                }
+            })
+        });
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -118,10 +237,14 @@ function getDoneDeals(time) {
         }); 
 }
 
-function getUndoneDeals() {
-    ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=3', null, function(data) {
+function getUndoneDeals(data) {
+    var json = data || null;
+    ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=3', json, function(data) {
             var count = data.count,
                 data = data.results,
+                pagination = '<div class="element-select"><p>Показано <span>'+ data.length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">',
+                page = data['page'] || 1,                
+                pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
                 document.getElementById('incomplete').innerHTML = 'Сделок нету';
@@ -129,6 +252,64 @@ function getUndoneDeals() {
                 return;
             }
             document.getElementById('incomplete-count').innerHTML = count;
+            if (pages > 1) {
+                for (var k = 1; k <= pages; k++) {
+                    if (k == page) {
+                        pagination += '<li class="active">' + k + '</li>'
+                    } else {
+                        pagination += '<li>' + k + '</li>';
+                    }
+                }
+            } else {
+                pagination += '<li class="active">' + 1 + '</li>';
+            }
+        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination"), function(el) {
+            el.innerHTML = pagination;
+            el.style.display = 'block';
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination .pag li"), function(el) {
+        el.addEventListener('click', function() {
+                setClickToPagination(this);
+            });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination .arrow"), function(el) {
+            el.addEventListener('click', function() {
+                var page;
+                var data = {};
+                if(  this.parentElement.classList.contains('prev')  ){
+                    page = parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML ) -1 : 1
+                    data['page'] = page;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                } else {                    
+                    page = parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML )  + 1 : pages
+                    data['page'] = page;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                }
+
+            })
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination .double_arrow"), function(el) {
+            el.addEventListener('click', function() {
+                var data = {};
+                if(  this.parentElement.classList.contains('prev')  ) {                
+                    data['page'] = 1;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                } else {                    
+                    data['page'] = pages;
+                    data["to_date"] = done_to_date;
+                    data["from_date"] = done_from_date;
+                    getDoneDeals(data);
+                }
+            })
+        });
+
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -138,21 +319,31 @@ function getUndoneDeals() {
             var but = document.querySelectorAll(".rows-wrap button");
             for (var j = 0; j < but.length; j++) {
                 but[j].addEventListener('click', function(){
-                    document.getElementById('complete').setAttribute('data-id',this.getAttribute('data-id'));
-                    document.getElementById('client-name').innerHTML = this.getAttribute('data-name');
-                    document.getElementById('deal-date').innerHTML = this.getAttribute('data-date');
-                    document.getElementById('responsible-name').innerHTML = this.getAttribute('data-responsible');
-                    document.getElementById('deal-value').innerHTML = this.getAttribute('data-value') + ' ₴';
-                    document.getElementById('popup').style.display = 'block';                    
+                    getDataForPopup(this.getAttribute('data-id'),this.getAttribute('data-name'),this.getAttribute('data-date'),this.getAttribute('data-responsible'),this.getAttribute('data-value') + ' ₴')                    
                 })
             }
         }); 
 }
 
+function setClickToPagination(target) {
+    var data = {};
+    data['page'] = target.innerHTML;
+    getDoneDeals(data);
+}
+
+function getDataForPopup(id,name,date,responsible,value) {
+    document.getElementById('complete').setAttribute('data-id',id);
+    document.getElementById('client-name').innerHTML = name;
+    document.getElementById('deal-date').innerHTML = date;
+    document.getElementById('responsible-name').innerHTML = responsible;
+    document.getElementById('deal-value').innerHTML = value;
+    document.getElementById('popup').style.display = 'block';
+}
+
 function init() {
-    getExpiredDeals();
-    getDoneDeals();
-    getUndoneDeals();
+    getExpiredDeals({'page' : "1"});
+    getDoneDeals({'page' : "1"});
+    getUndoneDeals({'page' : "1"});
 }
 
 function updateDeals(deal) {
@@ -208,15 +399,17 @@ function makeTabs () {
             }
             tabsContent[i].style.display = 'block';
             tabs.children[i].classList.add('current');
+            var done = document.getElementById('period_done'),
+                expired = document.getElementById('period_expired');
             if (document.querySelectorAll('a[href="#overdue"]')[0].parentElement.classList.contains('current')) {
-                //document.getElementById('period_done').style.display = 'none';
-                document.getElementById('period_expired').style.display = 'block';
+                done.style.display = 'none';
+                expired.style.display = 'block';
             } else if (document.querySelectorAll('a[href="#completed"]')[0].parentElement.classList.contains('current')) {
-                document.getElementById('period_done').style.display = 'block';
-                document.getElementById('period_expired').style.display = '';
+                done.style.display = 'block';
+                expired.style.display = '';
             } else {
-                document.getElementById('period_done').style.display = '';
-                document.getElementById('period_expired').style.display = '';
+                done.style.display = '';
+                expired.style.display = '';
             }
         }
 }
