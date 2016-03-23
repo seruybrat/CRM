@@ -72,7 +72,6 @@ function getExpiredDeals(time) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?expired=2', json, function(data) {
             var count = data.count,
                 data = data.results,
-                pagination = '<div class="element-select"><p>Показано <span>'+ data.length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">',
                 page = 1,                
                 pages = Math.ceil(count / config.pagination_count),
                 html = '';
@@ -82,63 +81,14 @@ function getExpiredDeals(time) {
                 return;
             } 
             document.getElementById('overdue-count').innerHTML = count;
-            if (pages > 1) {
-                for (var k = 1; k <= pages; k++) {
-                    if (k == page) {
-                        pagination += '<li class="active">' + k + '</li>'
-                    } else {
-                        pagination += '<li>' + k + '</li>'
-                    }
-                }
-            } else {
-                pagination += '<li class="active">' + 1 + '</li>';
-            }
-        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
-        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination"), function(el) {
-            el.innerHTML = pagination;
-            el.style.display = 'block';
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination .pag li"), function(el) {
-        el.addEventListener('click', function() {
-                setClickToPagination(this);
-            });
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination .arrow"), function(el) {
-            el.addEventListener('click', function() {
-                var page;
-                var data = {};
-                if(  this.parentElement.classList.contains('prev')  ){
-                    page = parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML ) -1 : 1
-                    data['page'] = page;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                } else {                    
-                    page = parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".expired-pagination .pag li.active").innerHTML )  + 1 : pages
-                    data['page'] = page;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                }
+        var container = ".expired-pagination",
+            target = ".expired-pagination .pag li",
+            arrow = ".expired-pagination .arrow",
+            active = ".expired-pagination .pag li.active",
+            dblArrow = ".expired-pagination .double_arrow";
+        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
 
-            })
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".expired-pagination .double_arrow"), function(el) {
-            el.addEventListener('click', function() {
-                var data = {};
-                if(  this.parentElement.classList.contains('prev')  ) {                
-                    data['page'] = 1;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                } else {                    
-                    data['page'] = pages;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                }
-            })
-        });
+
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -157,9 +107,9 @@ function getExpiredDeals(time) {
 function getDoneDeals(time) {
     var json = time || null;
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=2', json, function(data) {
+            config.pagination_count = 2;
             var count = data.count,
-                data = data.results,
-                pagination = '<div class="element-select"><p>Показано <span>'+ data.length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">',
+                data = data.results,                
                 page = time['page'] || 1,                
                 pages = Math.ceil(count / config.pagination_count),
                 html = '';
@@ -169,64 +119,13 @@ function getDoneDeals(time) {
                 return;
             }
             document.getElementById('completed-count').innerHTML = count;
-            if (pages > 1) {
-                for (var k = 1; k <= pages; k++) {
-                    if (k == page) {
-                        pagination += '<li class="active">' + k + '</li>'
-                    } else {
-                        pagination += '<li>' + k + '</li>'
-                    }
-                }
-            } else {
-                pagination += '<li class="active">' + 1 + '</li>';
-            }
-        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
-        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination"), function(el) {
-            el.innerHTML = pagination;
-            el.style.display = 'block';
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination .pag li"), function(el) {
-        el.addEventListener('click', function() {
-                setClickToPagination(this);
-            });
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination .arrow"), function(el) {
-            el.addEventListener('click', function() {
-                console.log(this)
-                var page;
-                var data = {};
-                if(  this.parentElement.classList.contains('prev')  ){
-                    page = parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML ) -1 : 1
-                    data['page'] = page;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                } else {                    
-                    page = parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".done-pagination .pag li.active").innerHTML )  + 1 : pages
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    data['page'] = page;
-                    getDoneDeals(data);
-                }
-
-            })
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".done-pagination .double_arrow"), function(el) {
-            el.addEventListener('click', function() {
-                var data = {};
-                if(  this.parentElement.classList.contains('prev')  ) {                
-                    data['page'] = 1;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                } else {                    
-                    data['page'] = pages;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                }
-            })
-        });
+            
+        var container = ".done-pagination",
+            target = ".done-pagination .pag li",
+            arrow = ".done-pagination .arrow",
+            active = ".done-pagination .pag li.active",
+            dblArrow = ".done-pagination .double_arrow";
+            makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -242,7 +141,6 @@ function getUndoneDeals(data) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=3', json, function(data) {
             var count = data.count,
                 data = data.results,
-                pagination = '<div class="element-select"><p>Показано <span>'+ data.length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">',
                 page = data['page'] || 1,                
                 pages = Math.ceil(count / config.pagination_count),
                 html = '';
@@ -252,63 +150,12 @@ function getUndoneDeals(data) {
                 return;
             }
             document.getElementById('incomplete-count').innerHTML = count;
-            if (pages > 1) {
-                for (var k = 1; k <= pages; k++) {
-                    if (k == page) {
-                        pagination += '<li class="active">' + k + '</li>'
-                    } else {
-                        pagination += '<li>' + k + '</li>';
-                    }
-                }
-            } else {
-                pagination += '<li class="active">' + 1 + '</li>';
-            }
-        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
-        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination"), function(el) {
-            el.innerHTML = pagination;
-            el.style.display = 'block';
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination .pag li"), function(el) {
-        el.addEventListener('click', function() {
-                setClickToPagination(this);
-            });
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination .arrow"), function(el) {
-            el.addEventListener('click', function() {
-                var page;
-                var data = {};
-                if(  this.parentElement.classList.contains('prev')  ){
-                    page = parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML ) -1 : 1
-                    data['page'] = page;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                } else {                    
-                    page = parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".undone-pagination .pag li.active").innerHTML )  + 1 : pages
-                    data['page'] = page;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                }
-
-            })
-        });
-        Array.prototype.forEach.call(document.querySelectorAll(".undone-pagination .double_arrow"), function(el) {
-            el.addEventListener('click', function() {
-                var data = {};
-                if(  this.parentElement.classList.contains('prev')  ) {                
-                    data['page'] = 1;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                } else {                    
-                    data['page'] = pages;
-                    data["to_date"] = done_to_date;
-                    data["from_date"] = done_from_date;
-                    getDoneDeals(data);
-                }
-            })
-        });
+        var container = ".undone-pagination",
+            target = ".undone-pagination .pag li",
+            arrow = ".undone-pagination .arrow",
+            active = ".undone-pagination .pag li.active",
+            dblArrow = ".undone-pagination .double_arrow";
+        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
 
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
@@ -323,6 +170,75 @@ function getUndoneDeals(data) {
                 })
             }
         }); 
+}
+
+function makePagination(page,container,target,arrow,active,dblArrow,pages,length,count) {
+            var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">';
+            if (pages > 1) {
+                    for (var k = 1; k <= pages; k++) {
+                        if (k == page) {
+                            pagination += '<li class="active">' + k + '</li>'
+                        } else {
+                            pagination += '<li>' + k + '</li>'
+                        }
+                    }
+                } else {
+                    pagination += '<li class="active">' + 1 + '</li>';
+                }
+        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+    Array.prototype.forEach.call(document.querySelectorAll(container), function(el) {
+            el.innerHTML = pagination;
+            el.style.display = 'block';
+        });
+        
+        Array.prototype.forEach.call(document.querySelectorAll(target), function(el) {
+        el.addEventListener('click', function() {
+                setClickToPagination(this);
+            });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(arrow), function(el) {
+            el.addEventListener('click', function() {                
+                arrowClick(this,active,pages);                
+            })
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(dblArrow), function(el) {
+            el.addEventListener('click', function() {
+                dblArrowClick(this,pages);
+            })
+        });
+}
+
+function dblArrowClick(parent,pages) {
+    var data = {};
+    if(  parent.parentElement.classList.contains('prev')  ) {                
+        data['page'] = 1;
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        getDoneDeals(data);
+    } else {                    
+        data['page'] = pages;
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        getDoneDeals(data);
+    }
+}
+
+function arrowClick(parent,target,pages) {
+    var page;
+    var data = {};
+    if(  parent.parentElement.classList.contains('prev')  ){
+        page = parseInt( document.querySelector(target).innerHTML ) > 1 ? parseInt( document.querySelector(target).innerHTML ) -1 : 1
+        data['page'] = page;
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        getDoneDeals(data);
+    } else {                    
+        page = parseInt( document.querySelector(target).innerHTML ) !=  pages ? parseInt( document.querySelector(target).innerHTML )  + 1 : pages
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        data['page'] = page;
+        getDoneDeals(data);
+    }
 }
 
 function setClickToPagination(target) {
@@ -341,9 +257,11 @@ function getDataForPopup(id,name,date,responsible,value) {
 }
 
 function init() {
-    getExpiredDeals({'page' : "1"});
-    getDoneDeals({'page' : "1"});
-    getUndoneDeals({'page' : "1"});
+    var json = {};
+    json["page"] = '1';
+    getExpiredDeals(json);
+    getDoneDeals(json);
+    getUndoneDeals(json);
 }
 
 function updateDeals(deal) {
