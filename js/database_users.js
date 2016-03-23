@@ -13,7 +13,7 @@ $(function(){
     });
 
      document.getElementById('sort_save').addEventListener('click',function(){
-        createUser()
+        //createUser()
         updateSettings();
      })
 });
@@ -53,6 +53,9 @@ function createUserInfoBySearch(data, search) {
 
 
     html += '<thead>';
+
+
+    /*
     var titles = Object.keys(data[0].fields);
    // var common_ = list[0]['common']
    // var common = Object.keys(list[0]['common']);
@@ -69,6 +72,20 @@ function createUserInfoBySearch(data, search) {
         }
 
     }
+*/
+ var common  = config['column_table']
+ for(var title in config['column_table']){
+     if(  !config['column_table'][title]['active'] && config['column_table'][title]['editable']    ) continue
+        
+     //console.log(title)
+    if (ordering[config['column_table'][title]]) {
+            html += '<th data-order="' + config['column_table'][title] + '" class="down"><span>' + title + '</span></th>';
+        } else {
+            html += '<th data-order="' + config['column_table'][title] + '"    class="up"><span>' + title + '</span></th>';
+        }
+    }
+
+
 
 
 
@@ -118,15 +135,40 @@ function createUserInfoBySearch(data, search) {
         var id_parent_subordinate = list[i]['id'];
         var list_fields = list[i].fields;
 
+
+
         tbody += '<tr>';
-        for (var prop in list_fields) {
 
 
-            if (prop == 'Facebook') {
+
+        for(  var prop in config['column_table']  ){
+            if( prop in list_fields) {
+
+
+
+            if (prop == 'Facebook'  &&  config['column_table']['facebook'] && config['column_table']['facebook']['active']   ) {
                 if (list_fields[prop]['value']) {
                     tbody += '<td><a class="facebook" href="' + list_fields[prop]['value'] + '">facebook</a></td>'
                 } else {
-                    tbody += '<td>&nbsp;</td>'
+                    tbody += '<td data-model="' + prop + '">&nbsp;</td>'
+                }
+
+            }
+            if (!list_fields.hasOwnProperty(prop) || prop == 'id' || prop == 'Facebook') continue
+            if ( /*common.indexOf(prop) === -1   || */( !config['column_table'][prop]['active'] && config['column_table'][prop]['editable'] ) ) continue
+            tbody += '<td  data-model="' + prop + '" data-type="' + list_fields[prop]['id'] + '">' + list_fields[prop]['value'] + '</td>';
+            }
+        }
+
+        /*
+        for (var prop in list_fields) {
+
+
+            if (prop == 'Facebook'  &&  common_[prop]['active']   ) {
+                if (list_fields[prop]['value']) {
+                    tbody += '<td><a class="facebook" href="' + list_fields[prop]['value'] + '">facebook</a></td>'
+                } else {
+                    tbody += '<td data-model="' + prop + '">&nbsp;</td>'
                 }
 
             }
@@ -135,6 +177,9 @@ function createUserInfoBySearch(data, search) {
             tbody += '<td  data-model="' + prop + '" data-type="' + list_fields[prop]['id'] + '">' + list_fields[prop]['value'] + '</td>';
 
         }
+  */
+
+
         tbody += '<td><a href="#" class="subordinate" data-id="' + id_parent_subordinate + '">подчиненные</a></td>';
         tbody += '<td><a href="' + config.DOCUMENT_ROOT + '/account/' + id_parent_subordinate + '" class="questionnaire" data-id="' + id_parent_subordinate + '">анкета</a></td>'
 
@@ -269,7 +314,9 @@ function getCurrentSetting(){
      for(var p in titles){
          if (!titles.hasOwnProperty(p)) continue;
         var ischeck = titles[p]['active'] ? 'check' : ''
-        html += '<li draggable>'+
+       var isdraggable = titles[p]['editable'] ? 'draggable' : 'disable'
+       //var isdraggable = 'draggable'
+        html += '<li '+ isdraggable  + ' >'+
            '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
          '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
          '</li>'
@@ -300,7 +347,12 @@ function getCurrentSetting(){
      Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
         //Баг кліка
            el.addEventListener('click', function(){
-                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+
+                    if( !this.parentElement.hasAttribute('disable') ){
+
+                        this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+                    }
+                
            });
          })
 
@@ -313,7 +365,7 @@ var data = [];
 var iteration = 1 
 Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
      var item = {}
-     item['id'] = el.getAttribute('id');
+     item['id'] = parseInt( el.getAttribute('id') );
      item['number'] = iteration++;
      item['active'] = el.classList.contains('check') ? true : false
      data.push(item)
@@ -322,12 +374,14 @@ Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), func
 
 
 var json = JSON.stringify(data);
-console.log(json)
+//console.log(json)
 
  ajaxRequest(config.DOCUMENT_ROOT + 'api/update_columns', json, function(JSONobj) {
-        //init(); 
 
-        createUser()
+     //   console.log(JSON.stringify(data))
+        config['column_table'] = JSONobj['column_table'];
+     //   console.log(JSON.stringify(config['column_table']))
+        createUser();
                     }, 'POST', true, {
         'Content-Type': 'application/json'
         });
