@@ -13,7 +13,7 @@ $(function(){
     });
 
      document.getElementById('sort_save').addEventListener('click',function(){
-        createUser()
+        //createUser()
         updateSettings();
      })
 });
@@ -122,11 +122,11 @@ function createUserInfoBySearch(data, search) {
         for (var prop in list_fields) {
 
 
-            if (prop == 'Facebook') {
+            if (prop == 'Facebook'  &&  common_[prop]['active'] /*|| !common_['facebook']['editable']*/   ) {
                 if (list_fields[prop]['value']) {
                     tbody += '<td><a class="facebook" href="' + list_fields[prop]['value'] + '">facebook</a></td>'
                 } else {
-                    tbody += '<td>&nbsp;</td>'
+                    tbody += '<td data-model="' + prop + '">&nbsp;</td>'
                 }
 
             }
@@ -269,7 +269,9 @@ function getCurrentSetting(){
      for(var p in titles){
          if (!titles.hasOwnProperty(p)) continue;
         var ischeck = titles[p]['active'] ? 'check' : ''
-        html += '<li draggable>'+
+       var isdraggable = titles[p]['editable'] ? 'draggable' : 'disable'
+       //var isdraggable = 'draggable'
+        html += '<li '+ isdraggable  + ' >'+
            '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
          '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
          '</li>'
@@ -300,7 +302,12 @@ function getCurrentSetting(){
      Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
         //Баг кліка
            el.addEventListener('click', function(){
-                 this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+
+                    if( !this.parentElement.hasAttribute('disable') ){
+
+                        this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+                    }
+                
            });
          })
 
@@ -326,8 +333,9 @@ console.log(json)
 
  ajaxRequest(config.DOCUMENT_ROOT + 'api/update_columns', json, function(JSONobj) {
         //init(); 
-
-        createUser()
+        //window.reload();
+        //createUser();
+        //console.log(JSONobj) //Вернуть нові дані
                     }, 'POST', true, {
         'Content-Type': 'application/json'
         });
