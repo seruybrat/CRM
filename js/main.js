@@ -12,13 +12,11 @@ $("#nav-sidebar li ").click(function(e) {
 });
 
 
-
 $("#pag li ").click(function(e) {
   e.preventDefault();
   $("#pag li").removeClass('active');
   $(this).addClass('active');
 });
-
 
 
 $("#move-sidebar").click(function(){

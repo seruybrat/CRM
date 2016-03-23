@@ -48,7 +48,16 @@ $(document).ready(function(){
             window.done_from_date = '';
             window.done_to_date = '';
             sortDoneDeals(done_from_date,done_to_date);
-        });   
+        });
+
+    document.getElementById('close').addEventListener('click', function() {
+        document.getElementById('popup').style.display = '';
+    });
+
+    document.getElementById('complete').addEventListener('click', function() {
+        var attr = this.getAttribute('data-id');
+        updateDeals(attr);        
+    });  
 })
 
 var done_from_date = '',
@@ -123,15 +132,18 @@ function getUndoneDeals() {
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
-                    html += '<div class="rows-wrap"><div class="rows"><div class="col"><p><span>'+fields[names[1]].value +'</span></p></div><div class="col"><p>Последняя сделка:<span> ' + fields[names[3]].value + '</span></p><p>Ответственный:<span> '+ fields[names[2]].value +'</span></p><p>Сумма:<span> ' + fields[names[4]].value + ' ₴</span></p></div></div><button data-id=' + fields[names[0]].value + '>Завершить</button></div>';
+                    html += '<div class="rows-wrap"><div class="rows"><div class="col"><p><span>'+fields[names[1]].value +'</span></p></div><div class="col"><p>Последняя сделка:<span> ' + fields[names[3]].value + '</span></p><p>Ответственный:<span> '+ fields[names[2]].value +'</span></p><p>Сумма:<span> ' + fields[names[4]].value + ' ₴</span></p></div></div><button data-id=' + fields[names[0]].value + ' data-name="' + fields[names[1]].value + '" data-date=' + fields[names[3]].value + ' data-responsible="' + fields[names[2]].value + '" data-value=' + fields[names[4]].value + '>Завершить</button></div>';
                 document.getElementById('incomplete').innerHTML = html;
             }
             var but = document.querySelectorAll(".rows-wrap button");
             for (var j = 0; j < but.length; j++) {
                 but[j].addEventListener('click', function(){
-                    var attr = this.getAttribute('data-id');
-                    console.log(attr)
-                    updateDeals(attr);
+                    document.getElementById('complete').setAttribute('data-id',this.getAttribute('data-id'));
+                    document.getElementById('client-name').innerHTML = this.getAttribute('data-name');
+                    document.getElementById('deal-date').innerHTML = this.getAttribute('data-date');
+                    document.getElementById('responsible-name').innerHTML = this.getAttribute('data-responsible');
+                    document.getElementById('deal-value').innerHTML = this.getAttribute('data-value') + ' ₴';
+                    document.getElementById('popup').style.display = 'block';                    
                 })
             }
         }); 
@@ -151,6 +163,7 @@ function updateDeals(deal) {
     var json = JSON.stringify(data);
     ajaxRequest(config.DOCUMENT_ROOT + 'api/update_deal', json, function(JSONobj) {
             init(); 
+            document.getElementById('popup').style.display = '';
         }, 'POST', true, {
             'Content-Type': 'application/json'
         });
@@ -196,14 +209,14 @@ function makeTabs () {
             tabsContent[i].style.display = 'block';
             tabs.children[i].classList.add('current');
             if (document.querySelectorAll('a[href="#overdue"]')[0].parentElement.classList.contains('current')) {
-                document.getElementById('period_done').style.display = 'none';
+                //document.getElementById('period_done').style.display = 'none';
                 document.getElementById('period_expired').style.display = 'block';
             } else if (document.querySelectorAll('a[href="#completed"]')[0].parentElement.classList.contains('current')) {
                 document.getElementById('period_done').style.display = 'block';
-                document.getElementById('period_expired').style.display = 'none';
+                document.getElementById('period_expired').style.display = '';
             } else {
-                document.getElementById('period_done').style.display = 'none';
-                document.getElementById('period_expired').style.display = 'none';
+                document.getElementById('period_done').style.display = '';
+                document.getElementById('period_expired').style.display = '';
             }
         }
 }
