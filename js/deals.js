@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+    //partnerlist 
+    getPartnersList();
+
+
+
+
     $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
 
 	$("#done_datepicker_from").datepicker({
@@ -72,6 +78,8 @@ function getExpiredDeals(time) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?expired=2', json, function(data) {
             var count = data.count,
                 data = data.results,
+                page = 1,                
+                pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
                 document.getElementById('overdue').innerHTML = 'Сделок нет';
@@ -79,6 +87,14 @@ function getExpiredDeals(time) {
                 return;
             } 
             document.getElementById('overdue-count').innerHTML = count;
+        var container = ".expired-pagination",
+            target = ".expired-pagination .pag li",
+            arrow = ".expired-pagination .arrow",
+            active = ".expired-pagination .pag li.active",
+            dblArrow = ".expired-pagination .double_arrow";
+        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
+
+
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -88,9 +104,7 @@ function getExpiredDeals(time) {
             var but = document.querySelectorAll(".rows-wrap button");
             for (var j = 0; j < but.length; j++) {
                 but[j].addEventListener('click', function(){
-                    var attr = this.getAttribute('data-id');
-                    console.log(attr)
-                    updateDeals(attr);
+                    getDataForPopup(this.getAttribute('data-id'),this.getAttribute('data-name'),this.getAttribute('data-date'),this.getAttribute('data-responsible'),this.getAttribute('data-value') + ' ₴')                    
                 })
             }    
         }); 
@@ -99,8 +113,11 @@ function getExpiredDeals(time) {
 function getDoneDeals(time) {
     var json = time || null;
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=2', json, function(data) {
+            config.pagination_count = 2;
             var count = data.count,
-                data = data.results,
+                data = data.results,                
+                page = time['page'] || 1,                
+                pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
                 document.getElementById('completed').innerHTML = 'Сделок нету';
@@ -108,6 +125,13 @@ function getDoneDeals(time) {
                 return;
             }
             document.getElementById('completed-count').innerHTML = count;
+            
+        var container = ".done-pagination",
+            target = ".done-pagination .pag li",
+            arrow = ".done-pagination .arrow",
+            active = ".done-pagination .pag li.active",
+            dblArrow = ".done-pagination .double_arrow";
+            makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -118,10 +142,13 @@ function getDoneDeals(time) {
         }); 
 }
 
-function getUndoneDeals() {
-    ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=3', null, function(data) {
+function getUndoneDeals(data) {
+    var json = data || null;
+    ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=3', json, function(data) {
             var count = data.count,
                 data = data.results,
+                page = data['page'] || 1,                
+                pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
                 document.getElementById('incomplete').innerHTML = 'Сделок нету';
@@ -129,6 +156,13 @@ function getUndoneDeals() {
                 return;
             }
             document.getElementById('incomplete-count').innerHTML = count;
+        var container = ".undone-pagination",
+            target = ".undone-pagination .pag li",
+            arrow = ".undone-pagination .arrow",
+            active = ".undone-pagination .pag li.active",
+            dblArrow = ".undone-pagination .double_arrow";
+        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
+
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -138,21 +172,102 @@ function getUndoneDeals() {
             var but = document.querySelectorAll(".rows-wrap button");
             for (var j = 0; j < but.length; j++) {
                 but[j].addEventListener('click', function(){
-                    document.getElementById('complete').setAttribute('data-id',this.getAttribute('data-id'));
-                    document.getElementById('client-name').innerHTML = this.getAttribute('data-name');
-                    document.getElementById('deal-date').innerHTML = this.getAttribute('data-date');
-                    document.getElementById('responsible-name').innerHTML = this.getAttribute('data-responsible');
-                    document.getElementById('deal-value').innerHTML = this.getAttribute('data-value') + ' ₴';
-                    document.getElementById('popup').style.display = 'block';                    
+                    getDataForPopup(this.getAttribute('data-id'),this.getAttribute('data-name'),this.getAttribute('data-date'),this.getAttribute('data-responsible'),this.getAttribute('data-value') + ' ₴')                    
                 })
             }
         }); 
 }
 
+function makePagination(page,container,target,arrow,active,dblArrow,pages,length,count) {
+            var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">';
+            if (pages > 1) {
+                    for (var k = 1; k <= pages; k++) {
+                        if (k == page) {
+                            pagination += '<li class="active">' + k + '</li>'
+                        } else {
+                            pagination += '<li>' + k + '</li>'
+                        }
+                    }
+                } else {
+                    pagination += '<li class="active">' + 1 + '</li>';
+                }
+        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+    Array.prototype.forEach.call(document.querySelectorAll(container), function(el) {
+            el.innerHTML = pagination;
+            el.style.display = 'block';
+        });
+        
+        Array.prototype.forEach.call(document.querySelectorAll(target), function(el) {
+        el.addEventListener('click', function() {
+                setClickToPagination(this);
+            });
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(arrow), function(el) {
+            el.addEventListener('click', function() {                
+                arrowClick(this,active,pages);                
+            })
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(dblArrow), function(el) {
+            el.addEventListener('click', function() {
+                dblArrowClick(this,pages);
+            })
+        });
+}
+
+function dblArrowClick(parent,pages) {
+    var data = {};
+    if(  parent.parentElement.classList.contains('prev')  ) {                
+        data['page'] = 1;
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        getDoneDeals(data);
+    } else {                    
+        data['page'] = pages;
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        getDoneDeals(data);
+    }
+}
+
+function arrowClick(parent,target,pages) {
+    var page;
+    var data = {};
+    if(  parent.parentElement.classList.contains('prev')  ){
+        page = parseInt( document.querySelector(target).innerHTML ) > 1 ? parseInt( document.querySelector(target).innerHTML ) -1 : 1
+        data['page'] = page;
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        getDoneDeals(data);
+    } else {                    
+        page = parseInt( document.querySelector(target).innerHTML ) !=  pages ? parseInt( document.querySelector(target).innerHTML )  + 1 : pages
+        data["to_date"] = done_to_date;
+        data["from_date"] = done_from_date;
+        data['page'] = page;
+        getDoneDeals(data);
+    }
+}
+
+function setClickToPagination(target) {
+    var data = {};
+    data['page'] = target.innerHTML;
+    getDoneDeals(data);
+}
+
+function getDataForPopup(id,name,date,responsible,value) {
+    document.getElementById('complete').setAttribute('data-id',id);
+    document.getElementById('client-name').innerHTML = name;
+    document.getElementById('deal-date').innerHTML = date;
+    document.getElementById('responsible-name').innerHTML = responsible;
+    document.getElementById('deal-value').innerHTML = value;
+    document.getElementById('popup').style.display = 'block';
+}
+
 function init() {
-    getExpiredDeals();
-    getDoneDeals();
-    getUndoneDeals();
+    var json = {};
+    json["page"] = '1';
+    getExpiredDeals(json);
+    getDoneDeals(json);
+    getUndoneDeals(json);
 }
 
 function updateDeals(deal) {
@@ -208,15 +323,54 @@ function makeTabs () {
             }
             tabsContent[i].style.display = 'block';
             tabs.children[i].classList.add('current');
+            var done = document.getElementById('period_done'),
+                expired = document.getElementById('period_expired');
             if (document.querySelectorAll('a[href="#overdue"]')[0].parentElement.classList.contains('current')) {
-                //document.getElementById('period_done').style.display = 'none';
-                document.getElementById('period_expired').style.display = 'block';
+                done.style.display = 'none';
+                expired.style.display = 'block';
             } else if (document.querySelectorAll('a[href="#completed"]')[0].parentElement.classList.contains('current')) {
-                document.getElementById('period_done').style.display = 'block';
-                document.getElementById('period_expired').style.display = '';
+                done.style.display = 'block';
+                expired.style.display = '';
             } else {
-                document.getElementById('period_done').style.display = '';
-                document.getElementById('period_expired').style.display = '';
+                done.style.display = '';
+                expired.style.display = '';
             }
         }
+}
+
+
+
+
+function getPartnersList(param){
+    var param = param || {}
+     var path = config.DOCUMENT_ROOT + '/api/partnerships/?'
+    
+        
+    ajaxRequest(path, param, function(data) {
+
+        var results = data.results;
+        var common_fields = data.common_table;
+        var  html = ''
+        var thead = '<table><thead>'
+        for(var i = 0;i<results.length;i++){
+            html += '<tr>'
+            
+            var field = results[i].fields;
+                for(var j in field){
+
+                    if(  !common_fields[j] && (!config['column_table'][j] || !config['column_table'][j]['active'] )  ) continue 
+
+                    if(!i){
+                       thead += '<th data-model="'+ field[j]['verbose']  +'">'+j+'</th>'
+                    }    
+                    html += '<td data-model="'+ j  +'">' + field[j].value  +'</td>'
+                
+                }
+            html += '</tr>'
+            thead += '</thead><tbody></tbody></table' 
+        }
+        document.getElementById('partnersips_list').innerHTML = thead
+
+        document.querySelector("#partnersips_list tbody").innerHTML = html;
+    })
 }

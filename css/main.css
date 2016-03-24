@@ -1008,6 +1008,9 @@ table tr:first-child td {
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
+#sort-form li[disable]{
+	background-color: black;
+}
 .over{
   background: green
 }
@@ -1123,4 +1126,8 @@ table tr:first-child td {
 
 .period a:hover {
     background: #44c1f2;
+}
+
+.tabs-cont .pagination:first-child .element-select {
+	display:none;
 }
