@@ -67,6 +67,7 @@ $(function() {
 
             if(document.getElementById('partnersips_list')){
               getPartnersList();
+              getCurrentSetting();
             }
 
 
@@ -88,3 +89,76 @@ jQuery(function($) {
     
 });
 
+function getCurrentSetting(){
+     var titles = config['column_table']
+     var html = ''
+     for(var p in titles){
+         if (!titles.hasOwnProperty(p)) continue;
+        var ischeck = titles[p]['active'] ? 'check' : ''
+       var isdraggable = titles[p]['editable'] ? 'draggable' : 'disable'
+        html += '<li '+ isdraggable  + ' >'+
+           '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
+         '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
+         '</li>'
+     }
+
+
+     document.getElementById('sort-form').innerHTML = html;
+    
+    var cols = document.querySelectorAll('[draggable]');
+    Array.prototype.forEach.call(cols, function(col) {
+    
+      col.addEventListener('drop', handleDrop, false);
+      col.addEventListener('dragstart', handleDragStart, false);
+      col.addEventListener('dragenter', handleDragEnter, false);
+      col.addEventListener('dragover', handleDragOver, false);
+      col.addEventListener('dragleave', handleDragLeave, false);
+ });
+      
+
+
+
+     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
+        //Баг кліка
+           el.addEventListener('click', function(){
+
+                    if( !this.parentElement.hasAttribute('disable') ){
+
+                        this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+                    }
+                
+           });
+         })
+
+}
+
+function  updateSettings(callback){
+
+
+var data = [];
+var iteration = 1 
+Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
+     var item = {}
+     item['id'] = parseInt( el.getAttribute('id') );
+     item['number'] = iteration++;
+     item['active'] = el.classList.contains('check') ? true : false
+     data.push(item)
+})
+
+
+
+var json = JSON.stringify(data);
+
+
+ ajaxRequest(config.DOCUMENT_ROOT + 'api/update_columns', json, function(JSONobj) {
+
+        config['column_table'] = JSONobj['column_table'];
+
+        callback();
+        
+                    }, 'POST', true, {
+        'Content-Type': 'application/json'
+        });
+        
+
+}

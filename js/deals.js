@@ -13,6 +13,9 @@ $('input[name="fullsearch"]').keyup(function() {
 
     });
 
+    document.getElementById('sort_save').addEventListener('click',function(){
+        updateSettings(getPartnersList);
+     })
 
     $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
 
@@ -504,3 +507,6 @@ var search = document.getElementsByName('fullsearch')[0].value;
 
     })
 }
+
+
+

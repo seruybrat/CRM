@@ -67,7 +67,8 @@
 
 						<div class="top-buttons-wrap">
 						  <ul class="top-buttons">
-						  	<li><button>Экспортировать</button></li>	
+						  	<li><button>Экспортировать</button></li>
+						  	<li><button id="sort-on">Изменить таблицу</button></li>	
 						  </ul>
 
 					  </div>
@@ -265,6 +266,32 @@
 			</div><!--End spisok -->
 		</div><!-- End tab-content-->
 		
+
+		<div class="table-sorting"><!--table-sorting -->
+							<div class="form-wrap">
+								<div class="top-text">
+									<h2>Вы можете добавить столбцы и изменить их порядок</h2>
+								</div>
+								<div class="input-wrap">
+									<ul id="sort-form"></ul>
+								</div>
+								<div class="dropbox-wrap">
+									<span>Показывать</span>
+									<select name="" id="">
+										<option value="">15</option>
+										<option value="">30</option>
+										<option value="">45</option>
+									</select>
+									<span>строк</span>
+								</div>
+								<div class="butt-wrap">
+									<button id="sort-off">Отменить</button>
+									<button id="sort_save">Сохранить</button>
+								</div>
+
+							</div>
+		</div><!--End table-sorting -->
+
 		<div id="popup" class="pop-up-splash">
 			<div class="splash-screen">
 				<div class="top-text">
@@ -305,6 +332,6 @@
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
 <script src="js/deals.js"></script>
-
+<script src="js/dnd_lib.js"></script>
 </body>
 </html>
