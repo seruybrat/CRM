@@ -3,7 +3,15 @@ $(document).ready(function(){
     //partnerlist 
     getPartnersList();
 
+$('input[name="fullsearch"]').keyup(function() {
 
+        delay(function() {
+            getPartnersList()
+        }, 1500);
+
+
+
+    });
 
 
     $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
@@ -340,12 +348,14 @@ function makeTabs () {
 
 
 
-
 function getPartnersList(param){
     var param = param || {}
      var path = config.DOCUMENT_ROOT + '/api/partnerships/?'
     
-        
+var search = document.getElementsByName('fullsearch')[0].value;
+    if(search ){
+        param['search'] = search;
+    }
     ajaxRequest(path, param, function(data) {
 
         var results = data.results;
@@ -361,7 +371,7 @@ function getPartnersList(param){
                     if(  !common_fields[j] && (!config['column_table'][j] || !config['column_table'][j]['active'] )  ) continue 
 
                     if(!i){
-                       thead += '<th data-model="'+ field[j]['verbose']  +'">'+j+'</th>'
+                       thead += '<th data-order="'+ field[j]['verbose']  +'">'+j+'</th>'
                     }    
                     html += '<td data-model="'+ j  +'">' + field[j].value  +'</td>'
                 
@@ -372,5 +382,6 @@ function getPartnersList(param){
         document.getElementById('partnersips_list').innerHTML = thead
 
         document.querySelector("#partnersips_list tbody").innerHTML = html;
+
     })
 }
