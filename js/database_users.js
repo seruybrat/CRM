@@ -12,6 +12,7 @@ $(function(){
 
      document.getElementById('sort_save').addEventListener('click',function(){
         updateSettings(createUser);
+       $(".table-sorting").animate({right: '-300px'}, 10, 'linear')
      })
 });
 
