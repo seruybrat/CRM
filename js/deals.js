@@ -1,10 +1,21 @@
 $(document).ready(function(){
 
     //partnerlist 
-    getPartnersList();
+    //getPartnersList();
+
+$('input[name="fullsearch"]').keyup(function() {
+
+        delay(function() {
+            getPartnersList()
+        }, 1500);
 
 
 
+    });
+
+    document.getElementById('sort_save').addEventListener('click',function(){
+        updateSettings(getPartnersList);
+     })
 
     $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
 
@@ -78,7 +89,7 @@ function getExpiredDeals(time) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?expired=2', json, function(data) {
             var count = data.count,
                 data = data.results,
-                page = 1,                
+                page = time['page'] || 1,                
                 pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
@@ -87,14 +98,12 @@ function getExpiredDeals(time) {
                 return;
             } 
             document.getElementById('overdue-count').innerHTML = count;
-        var container = ".expired-pagination",
-            target = ".expired-pagination .pag li",
-            arrow = ".expired-pagination .arrow",
-            active = ".expired-pagination .pag li.active",
-            dblArrow = ".expired-pagination .double_arrow";
-        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
-
-
+            var container = ".expired-pagination",
+                target = ".expired-pagination .pag li",
+                arrow = ".expired-pagination .arrow",
+                active = ".expired-pagination .pag li.active",
+                dblArrow = ".expired-pagination .double_arrow";
+            makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count);
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -161,7 +170,7 @@ function getUndoneDeals(data) {
             arrow = ".undone-pagination .arrow",
             active = ".undone-pagination .pag li.active",
             dblArrow = ".undone-pagination .double_arrow";
-        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
+            makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
 
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
@@ -179,19 +188,28 @@ function getUndoneDeals(data) {
 }
 
 function makePagination(page,container,target,arrow,active,dblArrow,pages,length,count) {
-            var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">';
+            var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap">';
+            
+            if(  page > 1 ){
+                 pagination += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+            }
+
             if (pages > 1) {
-                    for (var k = 1; k <= pages; k++) {
+                pagination += '<ul class="pag">';
+                    for (var k = page - 5; k < page + 5; k++) {
                         if (k == page) {
                             pagination += '<li class="active">' + k + '</li>'
                         } else {
-                            pagination += '<li>' + k + '</li>'
+                            if(  k > 0  && k < pages + 1  ){
+                                pagination += '<li>' + k + '</li>';
+                            }
                         }
                     }
-                } else {
-                    pagination += '<li class="active">' + 1 + '</li>';
-                }
-        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+                    pagination += '</ul>';
+                } 
+           if( page < pages ){     
+                pagination += '<div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+            }
     Array.prototype.forEach.call(document.querySelectorAll(container), function(el) {
             el.innerHTML = pagination;
             el.style.display = 'block';
@@ -340,15 +358,18 @@ function makeTabs () {
 
 
 
-
 function getPartnersList(param){
     var param = param || {}
      var path = config.DOCUMENT_ROOT + '/api/partnerships/?'
     
-        
+var search = document.getElementsByName('fullsearch')[0].value;
+    if(search ){
+        param['search'] = search;
+    }
     ajaxRequest(path, param, function(data) {
 
         var results = data.results;
+        var count = data.count;
         var common_fields = data.common_table;
         var  html = ''
         var thead = '<table><thead>'
@@ -361,7 +382,7 @@ function getPartnersList(param){
                     if(  !common_fields[j] && (!config['column_table'][j] || !config['column_table'][j]['active'] )  ) continue 
 
                     if(!i){
-                       thead += '<th data-model="'+ field[j]['verbose']  +'">'+j+'</th>'
+                       thead += '<th data-order="'+ field[j]['verbose']  +'">'+j+'</th>'
                     }    
                     html += '<td data-model="'+ j  +'">' + field[j].value  +'</td>'
                 
@@ -369,8 +390,104 @@ function getPartnersList(param){
             html += '</tr>'
             thead += '</thead><tbody></tbody></table' 
         }
+
+    var page = parseInt(param['page']) || 1;
+        //paginations
+
+    var pages = Math.ceil(count / config.pagination_count);
+
+    var paginations = ''
+
+    if(  page > 1 ){
+         paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+    }
+
+    if (pages > 1) {
+        paginations += '<ul class="pag">'
+        for (var j = page -5 ; j < page + 5; j++) {
+            if (j == page) {
+                paginations += '<li class="active">' + j + '</li>'
+            } else {
+                if(  j > 0  && j < pages + 1  ){
+                     paginations += '<li>' + j + '</li>'
+                }
+               
+            }
+
+        }
+        paginations += '</ul>'
+    }
+
+    if( page < pages ){
+        paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+    }
+
+
+
         document.getElementById('partnersips_list').innerHTML = thead
 
         document.querySelector("#partnersips_list tbody").innerHTML = html;
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
+        el.innerHTML = paginations
+    })
+
+
+
+        Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
+                el.addEventListener('click', function() {
+
+                    var data = {};
+                    data['page'] = el.innerHTML;
+                     getPartnersList(data);
+
+
+                });
+            });
+           
+
+
+
+    /* Navigation*/
+
+    Array.prototype.forEach.call(document.querySelectorAll(".arrow"), function(el) {
+        el.addEventListener('click', function() {
+            var page 
+             var data = {};
+            if(  this.parentElement.classList.contains('prev')  ){
+            page = parseInt( document.querySelector(".pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".pag li.active").innerHTML ) -1 : 1
+            data['page'] = page
+            getPartnersList(data);
+            }else{
+                
+                page = parseInt( document.querySelector(".pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".pag li.active").innerHTML )  + 1 : pages
+                  data['page'] = page
+            getPartnersList(data);
+            }
+
+        })
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
+        el.addEventListener('click', function() {
+            var data = {};
+            if(  this.parentElement.classList.contains('prev')  ){
+            
+            data['page'] = 1
+            getPartnersList(data);
+            }else{
+                
+            data['page'] = pages
+            getPartnersList(data);
+            }
+
+
+        })
+    });
+
+
+
     })
 }
+
+
+

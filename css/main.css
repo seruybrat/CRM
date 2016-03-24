@@ -384,10 +384,10 @@ height: 48px;
 	background:url('../img/sprite-buttons.png') no-repeat;
 	background-position: 0px 0px;
 }
-.top-buttons li:nth-child(2) button::before{
+.top-buttons button.exp::before{
 	background-position: 0px -20px;
 }
-.top-buttons li:nth-child(3) button::before{
+.top-buttons button#sort-on::before{
 	background-position: 0px -43px;
 }
 .tabs {
@@ -664,7 +664,7 @@ thead tr:first-child {
 }
 th {
 	font-family: "UbuntuMedium",sans-serif;
-	font-size: 1.1em;
+	font-size: 1.3em;
 	padding: 5px 25px;
   border: 1px solid #E2E2E2;
   text-align: left;
@@ -699,9 +699,9 @@ th.up::after {
 }
 td {
 	font-family:"Ubuntu", sans-serif;
-	border-left: 1px solid #E2E2E2;
+	border: 1px solid #E2E2E2;
   color: #656d78;
-  font-size: 1em;
+  font-size: 1.2em;
   vertical-align: middle;
   padding: 9px 12px;
   max-width: 270px;
@@ -721,13 +721,6 @@ table tr, table tr {
 table tr:nth-child(odd),
 table tr:nth-child(odd) {
   background: #fafbfc;
-}
-table tr:first-child td:first-child, 
-table tr:first-child td:first-child {
-	 border-left: none;
-}
-tr:last-child {
-	border-bottom: 1px solid #E2E2E2;
 }
 table tr td:first-child, 
 table tr td:first-child {
@@ -853,23 +846,12 @@ table tr:first-child td {
 .form-wrap button:last-child {
 	margin-left: 4px;
 }
-
-.table{
-	font-family: "UbuntuBold",sans-serif;
-	font-size: 1.15em;
-	padding: 5px 25px;
-
-	color: #656d78;
-	position: relative;
-}
-
 #summit_buttons, #summit_table p {
 	font-family: "UbuntuLight" , sans-serif;
     font-size: 1.4em;
     margin-left:10px;
     cursor:pointer;
 }
-
 #summit_buttons p {
 	font-size: 1.8em;
 }
@@ -1095,7 +1077,7 @@ table tr:first-child td {
 }
 .event-hover h3{
 	display: block;
-	color: lightblue;
+	color: #3caeda;
 	border-bottom: 2px solid gray;
 	font-size: 1.8em;
 	padding: 15px;
@@ -1111,6 +1093,18 @@ table tr:first-child td {
 .event-hover button {
 	padding-left: 20px;
 	margin-top: 40px
+}
+.event-1 {
+	background-image: url('../img/ev1.jpg');
+	background-size: cover;
+}
+.event-2 {
+	background-image: url('../img/ev2.jpg');
+	background-size: cover;
+}
+.event-3 {
+	background-image: url('../img/ev3.jpg');
+	background-size: cover;
 }
 .period a {
     display: inline-block;
