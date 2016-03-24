@@ -341,15 +341,16 @@ function makeTabs () {
 
 
 
-function getPartnersList(){
-     var path = config.DOCUMENT_ROOT + '/api/partnerships/'
-   
-    ajaxRequest(path, null, function(data) {
+function getPartnersList(param){
+    var param = param || {}
+     var path = config.DOCUMENT_ROOT + '/api/partnerships/?'
+    
+        
+    ajaxRequest(path, param, function(data) {
 
         var results = data.results;
         var common_fields = data.common_table;
-        var html = '<table><tr><td>Партнер</td><td>Ответственный</td><td>Сумма сделки</td><td>К-тво завершенных сделок</td><td>К-тво просроченных сделок</td></tr>'
-        html = ''
+        var  html = ''
         var thead = '<table><thead>'
         for(var i = 0;i<results.length;i++){
             html += '<tr>'
@@ -360,7 +361,7 @@ function getPartnersList(){
                     if(  !common_fields[j] && (!config['column_table'][j] || !config['column_table'][j]['active'] )  ) continue 
 
                     if(!i){
-                       thead += '<th>'+j+'</th>'
+                       thead += '<th data-model="'+ field[j]['verbose']  +'">'+j+'</th>'
                     }    
                     html += '<td data-model="'+ j  +'">' + field[j].value  +'</td>'
                 
@@ -368,7 +369,6 @@ function getPartnersList(){
             html += '</tr>'
             thead += '</thead><tbody></tbody></table' 
         }
-       // html += '<table>'
         document.getElementById('partnersips_list').innerHTML = thead
 
         document.querySelector("#partnersips_list tbody").innerHTML = html;
