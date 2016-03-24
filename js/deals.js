@@ -86,7 +86,7 @@ function getExpiredDeals(time) {
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?expired=2', json, function(data) {
             var count = data.count,
                 data = data.results,
-                page = 1,                
+                page = time['page'] || 1,                
                 pages = Math.ceil(count / config.pagination_count),
                 html = '';
             if (data.length == 0) {
@@ -185,27 +185,6 @@ function getUndoneDeals(data) {
 }
 
 function makePagination(page,container,target,arrow,active,dblArrow,pages,length,count) {
-
-
-            /*if (pages > 1) {
-                paginations += '<ul class="pag">'
-                for (var j = page -5 ; j < page + 5; j++) {
-                    if (j == page) {
-                        paginations += '<li class="active">' + j + '</li>'
-                    } else {
-                        if(  j > 0  && j < pages + 1  ){
-                             paginations += '<li>' + j + '</li>'
-                        }
-                       
-                    }
-
-                }
-                paginations += '</ul>'
-            }
-
-            
-                paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
-            }*/
             var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap">';
             
             if(  page > 1 ){
@@ -214,17 +193,19 @@ function makePagination(page,container,target,arrow,active,dblArrow,pages,length
 
             if (pages > 1) {
                 pagination += '<ul class="pag">';
-                    for (var k = 1; k <= page; k++) {
+                    for (var k = page - 5; k < page + 5; k++) {
                         if (k == page) {
                             pagination += '<li class="active">' + k + '</li>'
                         } else {
-                            pagination += '<li>' + k + '</li>'
+                            if(  k > 0  && k < pages + 1  ){
+                                pagination += '<li>' + k + '</li>';
+                            }
                         }
                     }
                     pagination += '</ul>';
                 } 
            if( page < pages ){     
-                pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+                pagination += '<div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
             }
     Array.prototype.forEach.call(document.querySelectorAll(container), function(el) {
             el.innerHTML = pagination;
