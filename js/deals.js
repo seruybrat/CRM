@@ -122,7 +122,7 @@ function getExpiredDeals(time) {
 function getDoneDeals(time) {
     var json = time || null;
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=2', json, function(data) {
-            config.pagination_count = 2;
+            //config.pagination_count = 2;
             var count = data.count,
                 data = data.results,                
                 page = time['page'] || 1,                
@@ -318,42 +318,42 @@ function sortExpiredDeals(from,to) {
 }
 
 function makeTabs () {
-    	var pos = 0,
-        tabs = document.getElementById('tabs'),
-        tabsContent = document.getElementsByClassName('tabs-cont');
+    var pos = 0,
+    tabs = document.getElementById('tabs'),
+    tabsContent = document.getElementsByClassName('tabs-cont');
         
-        for (var i = 0; i < tabs.children.length; i++) {
-            tabs.children[i].setAttribute('data-page', pos);
-            pos++;
-        }   
+    for (var i = 0; i < tabs.children.length; i++) {
+        tabs.children[i].setAttribute('data-page', pos);
+        pos++;
+    }   
         
-        showPage(0);
+    showPage(0);
         
-    	tabs.onclick = function(event) {
-            event.preventDefault();
-            return showPage(parseInt(event.target.parentElement.getAttribute("data-page")));
-        };
+    tabs.onclick = function(event) {
+        event.preventDefault();
+        return showPage(parseInt(event.target.parentElement.getAttribute("data-page")));
+    };
         
-        function showPage(i) {
-            for (var k = 0; k < tabsContent.length; k++) {
-                tabsContent[k].style.display = 'none';
-                tabs.children[k].classList.remove('current');
-            }
-            tabsContent[i].style.display = 'block';
-            tabs.children[i].classList.add('current');
-            var done = document.getElementById('period_done'),
-                expired = document.getElementById('period_expired');
-            if (document.querySelectorAll('a[href="#overdue"]')[0].parentElement.classList.contains('current')) {
-                done.style.display = 'none';
-                expired.style.display = 'block';
-            } else if (document.querySelectorAll('a[href="#completed"]')[0].parentElement.classList.contains('current')) {
-                done.style.display = 'block';
-                expired.style.display = '';
-            } else {
-                done.style.display = '';
-                expired.style.display = '';
-            }
+    function showPage(i) {
+        for (var k = 0; k < tabsContent.length; k++) {
+            tabsContent[k].style.display = 'none';
+            tabs.children[k].classList.remove('current');
         }
+        tabsContent[i].style.display = 'block';
+        tabs.children[i].classList.add('current');
+        var done = document.getElementById('period_done'),
+            expired = document.getElementById('period_expired');
+        if (document.querySelectorAll('a[href="#overdue"]')[0].parentElement.classList.contains('current')) {
+            done.style.display = 'none';
+            expired.style.display = 'block';
+        } else if (document.querySelectorAll('a[href="#completed"]')[0].parentElement.classList.contains('current')) {
+            done.style.display = 'block';
+            expired.style.display = '';
+        } else {
+            done.style.display = '';
+            expired.style.display = '';
+        }
+    }
 }
 
 
