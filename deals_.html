@@ -83,7 +83,7 @@
 			 <div class="top-pag">
 
 				<div class="tab-status">
-					<ul id="tabs">
+					<ul>
 						<li>
 							<a href="#incomplete" >Незавершённые (<span id="incomplete-count"></span>)</a>
 						</li>
@@ -97,32 +97,184 @@
 					</ul>
 				</div>
 
-				<div id="period_expired" class="period">
-					<p>Период с <input type="text" id="expired_datepicker_from"> по <input type="text" id="expired_datepicker_to"><a id="show-all-expired" href="javascript:void(0);">Показать все</a></p>
-					
+				<div class="period">
+					<p>Период с <input type="text" id="datepicker_from"> по <input type="text" id="datepicker_to"></p>
 				</div>
-				<div id="period_done" class=" period">
-					<p>Период с <input type="text" id="done_datepicker_from"> по <input type="text" id="done_datepicker_to"><a id="show-all-done" href="javascript:void(0);">Показать все</a></p>
+				<div class="pagination"><!--pagination -->
+					<div class="pag-wrap">
+						<div class="prev">
+							<span class="double_arrow"></span>
+							<span class="arrow"></span>
+						</div>
+								<ul class="pag">
+									<li class="active">1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>6</li> 
+								</ul>
+							<div class="next">
 
-				</div>
+								<span class="arrow"></span>
+								<span class="double_arrow"></span>
+							</div>
+						</div>
+					</div><!--End pagination -->
 				</div>
 				
-			<div class="tabs-cont">	
-				<div class="pagination undone-pagination"></div>
-				<div id="incomplete"></div>			
-				<div class="pagination undone-pagination full-width"></div>
+			<div id="incomplete" class="tabs-cont">
+				<!--div class="rows-wrap">
+					<div class="rows">
+						<div class="col">
+							<p><span>Пономарёв Даниил Ильич</span></p>
+						</div>
+						<div class="col">
+							<p>Последняя сделка:<span>20.02.2016</span></p>
+							<p>Ответственный:<span>Каравашкин Вадим</span></p>
+							<p>Сумма:<span>500 ₴</span></p>
+						</div>
+					</div>
+					<button>Завершить</button>
+				</div>
+				<div class="rows-wrap">
+					<div class="rows">
+						<div class="col">
+							<p><span>Пономарёв Даниил Ильич</span></p>
+						</div>
+						<div class="col">
+							<p>Последняя сделка:<span>20.02.2016</span></p>
+							<p>Ответственный:<span>Каравашкин Вадим</span></p>
+							<p>Сумма:<span>500 ₴</span></p>
+						</div>
+					</div>
+					<button>Завершить</button>
+				</div-->
+				<div class="pagination full-width"><!--pagination -->
+					<div class="element-select">
+							<p>Показано <span>10</span> из <span>500</span></p>
+						</div>
+					<div class="pag-wrap">
+						<div class="prev">
+							<span class="double_arrow"></span>
+							<span class="arrow"></span>
+						</div>
+							<ul class="pag">
+								<li class="active">1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li> 
+							</ul>
+						<div class="next">
+							<span class="arrow"></span>
+							<span class="double_arrow"></span>
+						</div>
+					</div>
+				</div><!--End pagination -->
 			</div>
 
-			<div class="tabs-cont">
-				<div class="pagination expired-pagination"></div>
-				<div id="overdue"></div>
-				<div class="pagination expired-pagination full-width"></div>
+			<div id="overdue" class="tabs-cont">
+				<!--div class="rows-wrap">
+					<div class="rows">
+						<div class="col">
+							<p><span>Пайков Даниил Ильич</span></p>
+						</div>
+						<div class="col">
+							<p>Последняя сделка:<span>20.02.2016</span></p>
+							<p>Ответственный:<span>Каравашкин Вадим</span></p>
+							<p>Сумма:<span>500 ₴</span></p>
+						</div>
+					</div>
+					<button>Завершить</button>
+				</div>
+				<div class="rows-wrap">
+					<div class="rows">
+						<div class="col">
+							<p><span>Пайков Даниил Ильич</span></p>
+						</div>
+						<div class="col">
+							<p>Последняя сделка:<span>20.02.2016</span></p>
+							<p>Ответственный:<span>Каравашкин Вадим</span></p>
+							<p>Сумма:<span>500 ₴</span></p>
+						</div>
+					</div>
+					<button>Завершить</button>
+				</div-->
+				<div class="pagination full-width"><!--pagination -->
+					<div class="element-select">
+						<p>Показано <span>10</span> из <span>500</span></p>
+					</div>
+					<div class="pag-wrap">
+						<div class="prev">
+							<span class="double_arrow"></span>
+							<span class="arrow"></span>
+						</div>
+								<ul class="pag">
+									<li class="active">1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>6</li> 
+								</ul>
+							<div class="next">
+								<span class="arrow"></span>
+								<span class="double_arrow"></span>
+							</div>
+						</div>
+				</div><!--End pagination -->
 			</div>
 
-			<div class="tabs-cont">
-				<div class="pagination done-pagination"></div>
-				<div id="completed" ></div>
-				<div class="pagination done-pagination full-width"></div>
+			<div id="completed" class="tabs-cont">
+				<!--div class="rows-wrap">
+					<div class="rows">
+						<div class="col">
+							<p><span>Пайков Даниил Ильич</span></p>
+						</div>
+						<div class="col">
+							<p>Последняя сделка:<span>20.02.2016</span></p>
+							<p>Ответственный:<span>Каравашкин Вадим</span></p>
+							<p>Сумма:<span>500 ₴</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="rows-wrap">
+					<div class="rows">
+						<div class="col">
+							<p><span>Пайков Даниил Ильич</span></p>
+						</div>
+						<div class="col">
+							<p>Последняя сделка:<span>20.02.2016</span></p>
+							<p>Ответственный:<span>Каравашкин Вадим</span></p>
+							<p>Сумма:<span>500 ₴</span></p>
+						</div>
+					</div>
+				</div-->
+				<div class="pagination full-width"><!--pagination -->
+					<div class="element-select">
+							<p>Показано <span>10</span> из <span>500</span></p>
+						</div>
+					<div class="pag-wrap">
+						<div class="prev">
+							<span class="double_arrow"></span>
+							<span class="arrow"></span>
+						</div>
+							<ul class="pag">
+								<li class="active">1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li> 
+							</ul>
+						<div class="next">
+							<span class="arrow"></span>
+							<span class="double_arrow"></span>
+						</div>
+					</div>
+				</div><!--End pagination -->
 			</div>
 			
 
@@ -154,9 +306,9 @@
 				</div><!--End pagination -->
 			
 			
-				<div class="table-wrap clearfix" ><!--Table -->
-					<div class="table" id= "partnersips_list">
-						<!--<table class="tab1">
+				<div class="table-wrap"><!--Table -->
+					<div class="table">
+						<table class="tab1">
 
 							<thead><tr>
 								<th>Фамилия</th>
@@ -235,7 +387,7 @@
 								
 							</tbody>
 
-						</table>  -->
+						</table>
 					</div>
 				</div><!--End Table-wrap -->
 
@@ -265,7 +417,7 @@
 			</div><!--End spisok -->
 		</div><!-- End tab-content-->
 		
-		<div id="popup" class="pop-up-splash">
+		<div class="pop-up-splash">
 			<div class="splash-screen">
 				<div class="top-text">
 					<h3>Завершить сделку</h3>
@@ -277,21 +429,21 @@
 						<p>Ответственный:</p>
 					</div>
 					<div class="right-side">
-						<p id="client-name">Завершить сделку</p>
-						<p id="deal-date">15.02.2015</p>
-						<p id="responsible-name">Каравашкин Вадим</p>
+						<p>Завершить сделку</p>
+						<p>15.02.2015</p>
+						<p>Каравашкин Вадим</p>
 					</div>
 				</div>
 				<div class="summa-wrap">
 					<div class="summa">
 						<p>Сумма:</p>
-						<span id="deal-value">500 ₴</span>
+						<span>500 ₴</span>
 					</div>
 				</div>
 				<textarea name="" id="">Добавить коментарий</textarea>
-				<div class="splash-bauttons">
-					<button id="close">Отменить</button>
-					<button id="complete">Завершить</button>
+				<div class="splash-battons">
+					<button>Отменить</button>
+					<button>Завершить</button>
 				</div>
 			</div>
 		</div><!--End Pop-up-splash-->
