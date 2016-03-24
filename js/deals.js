@@ -87,14 +87,12 @@ function getExpiredDeals(time) {
                 return;
             } 
             document.getElementById('overdue-count').innerHTML = count;
-        var container = ".expired-pagination",
-            target = ".expired-pagination .pag li",
-            arrow = ".expired-pagination .arrow",
-            active = ".expired-pagination .pag li.active",
-            dblArrow = ".expired-pagination .double_arrow";
-        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
-
-
+            var container = ".expired-pagination",
+                target = ".expired-pagination .pag li",
+                arrow = ".expired-pagination .arrow",
+                active = ".expired-pagination .pag li.active",
+                dblArrow = ".expired-pagination .double_arrow";
+            makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count);
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
                     names = Object.keys(fields);
@@ -161,7 +159,7 @@ function getUndoneDeals(data) {
             arrow = ".undone-pagination .arrow",
             active = ".undone-pagination .pag li.active",
             dblArrow = ".undone-pagination .double_arrow";
-        makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
+            makePagination(page,container,target,arrow,active,dblArrow,pages,data.length,count)
 
             for (var i = 0; i < data.length; i++) {
                 var fields = data[i].fields,
@@ -179,19 +177,47 @@ function getUndoneDeals(data) {
 }
 
 function makePagination(page,container,target,arrow,active,dblArrow,pages,length,count) {
-            var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap"><div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div><ul class="pag">';
+
+
+            /*if (pages > 1) {
+                paginations += '<ul class="pag">'
+                for (var j = page -5 ; j < page + 5; j++) {
+                    if (j == page) {
+                        paginations += '<li class="active">' + j + '</li>'
+                    } else {
+                        if(  j > 0  && j < pages + 1  ){
+                             paginations += '<li>' + j + '</li>'
+                        }
+                       
+                    }
+
+                }
+                paginations += '</ul>'
+            }
+
+            
+                paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+            }*/
+            var pagination = '<div class="element-select"><p>Показано <span>'+ length +'</span> из <span>'+ count +'</span></p></div><div class="pag-wrap">';
+            
+            if(  page > 1 ){
+                 pagination += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+            }
+
             if (pages > 1) {
-                    for (var k = 1; k <= pages; k++) {
+                pagination += '<ul class="pag">';
+                    for (var k = 1; k <= page; k++) {
                         if (k == page) {
                             pagination += '<li class="active">' + k + '</li>'
                         } else {
                             pagination += '<li>' + k + '</li>'
                         }
                     }
-                } else {
-                    pagination += '<li class="active">' + 1 + '</li>';
-                }
-        pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+                    pagination += '</ul>';
+                } 
+           if( page < pages ){     
+                pagination += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div></div>';
+            }
     Array.prototype.forEach.call(document.querySelectorAll(container), function(el) {
             el.innerHTML = pagination;
             el.style.display = 'block';
