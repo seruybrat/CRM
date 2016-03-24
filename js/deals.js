@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     //partnerlist 
-    getPartnersList();
+    //getPartnersList();
 
 $('input[name="fullsearch"]').keyup(function() {
 
@@ -385,6 +385,7 @@ var search = document.getElementsByName('fullsearch')[0].value;
     ajaxRequest(path, param, function(data) {
 
         var results = data.results;
+        var count = data.count;
         var common_fields = data.common_table;
         var  html = ''
         var thead = '<table><thead>'
@@ -405,9 +406,101 @@ var search = document.getElementsByName('fullsearch')[0].value;
             html += '</tr>'
             thead += '</thead><tbody></tbody></table' 
         }
+
+    var page = parseInt(param['page']) || 1;
+        //paginations
+
+    var pages = Math.ceil(count / config.pagination_count);
+
+    var paginations = ''
+
+    if(  page > 1 ){
+         paginations += '<div class="prev"><span class="double_arrow"></span><span class="arrow"></span></div>';
+    }
+
+    if (pages > 1) {
+        paginations += '<ul class="pag">'
+        for (var j = page -5 ; j < page + 5; j++) {
+            if (j == page) {
+                paginations += '<li class="active">' + j + '</li>'
+            } else {
+                if(  j > 0  && j < pages + 1  ){
+                     paginations += '<li>' + j + '</li>'
+                }
+               
+            }
+
+        }
+        paginations += '</ul>'
+    }
+
+    if( page < pages ){
+        paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>' 
+    }
+
+
+
         document.getElementById('partnersips_list').innerHTML = thead
 
         document.querySelector("#partnersips_list tbody").innerHTML = html;
+    Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
+        el.innerHTML = paginations
+    })
+
+
+
+        Array.prototype.forEach.call(document.querySelectorAll(" .pag li"), function(el) {
+                el.addEventListener('click', function() {
+
+                    var data = {};
+                    data['page'] = el.innerHTML;
+                     getPartnersList(data);
+
+
+                });
+            });
+           
+
+
+
+    /* Navigation*/
+
+    Array.prototype.forEach.call(document.querySelectorAll(".arrow"), function(el) {
+        el.addEventListener('click', function() {
+            var page 
+             var data = {};
+            if(  this.parentElement.classList.contains('prev')  ){
+            page = parseInt( document.querySelector(".pag li.active").innerHTML ) > 1 ? parseInt( document.querySelector(".pag li.active").innerHTML ) -1 : 1
+            data['page'] = page
+            getPartnersList(data);
+            }else{
+                
+                page = parseInt( document.querySelector(".pag li.active").innerHTML ) !=  pages ? parseInt( document.querySelector(".pag li.active").innerHTML )  + 1 : pages
+                  data['page'] = page
+            getPartnersList(data);
+            }
+
+        })
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll(".double_arrow"), function(el) {
+        el.addEventListener('click', function() {
+            var data = {};
+            if(  this.parentElement.classList.contains('prev')  ){
+            
+            data['page'] = 1
+            getPartnersList(data);
+            }else{
+                
+            data['page'] = pages
+            getPartnersList(data);
+            }
+
+
+        })
+    });
+
+
 
     })
 }

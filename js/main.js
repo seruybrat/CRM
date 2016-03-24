@@ -1,7 +1,7 @@
 var config = {
     //'DOCUMENT_ROOT':'http://vocrm.org/',
     'DOCUMENT_ROOT': 'http://5.101.119.32:8008/',
-    'pagination_count': 50, //Количество записей при пагинации
+    'pagination_count': 3, //Количество записей при пагинации
     'pagination_mini_count': 10,
     'column_table' : null
 }
@@ -63,6 +63,10 @@ $(function() {
             if(document.getElementById('database_users')){
                 createUser();
                 getCurrentSetting();
+            }
+
+            if(document.getElementById('partnersips_list')){
+              getPartnersList();
             }
 
 
