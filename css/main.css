@@ -1,19 +1,9 @@
 body {
 	font-family: "Ubuntu",sans-serif;
 	font-size: 75%;
-  	height:100%;
-  	color: #656d78;
+  height:100%;
+  color: #656d78;
 
-}
-.clearfix:after {
-content: ".";
-display: block;
-height: 0;
-clear: both;
-visibility: hidden;
-}
-.clearfix{
-	clear:both;
 }
 a:-webkit-any-link,
 a:visited {
@@ -83,6 +73,16 @@ select::-ms-expand {
 	margin: 0 auto;
 	position: relative;
 	overflow: hidden;
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix{
+	clear:both;
 }
 /* -----------------Sidebar------------------------ */
 
@@ -452,6 +452,7 @@ height: 48px;
 	text-decoration: none;
 	-webkit-transition: all .3s ease;
 	transition: all .3s ease;
+	color: #656d78;
 }
 .period {
 	display: none;
@@ -496,6 +497,11 @@ height: 48px;
 	padding: 10px;
 	overflow: hidden;
 	background-color: #f2f5fa;
+	-webkitt-transition:all .3s ease;
+	transition:all .3s ease;
+}
+.rows:hover {
+	background-color: #e6e9ee;
 }
 .rows .col:first-child {
 	float: left;
@@ -520,7 +526,7 @@ height: 48px;
 	width: 300px;
 }
 .col:last-child p:last-child{
-	width: 88px;
+	width: 140px;
 }
 .rows p span {
 	font-family:"UbuntuMedium", sans-serif;
