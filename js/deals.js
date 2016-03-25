@@ -122,18 +122,18 @@ function getExpiredDeals(time) {
 function getDoneDeals(time) {
     var json = time || null;
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=2', json, function(data) {
-        // config.pagination_count = 2;
-        var count = data.count,
-            data = data.results,
-            page = time['page'] || 1,
-            pages = Math.ceil(count / config.pagination_count),
-            html = '';
-        if (data.length == 0) {
-            document.getElementById('completed').innerHTML = 'Сделок нету';
-            document.getElementById('completed-count').innerHTML = '0';
-            return;
-        }
-        document.getElementById('completed-count').innerHTML = count;
+
+            var count = data.count,
+                data = data.results,                
+                page = time['page'] || 1,                
+                pages = Math.ceil(count / config.pagination_count),
+                html = '';
+            if (data.length == 0) {
+                document.getElementById('completed').innerHTML = 'Сделок нету';
+                document.getElementById('completed-count').innerHTML = '0';
+                return;
+            }
+            document.getElementById('completed-count').innerHTML = count;
 
         var container = ".done-pagination",
             target = ".done-pagination .pag li",
@@ -317,16 +317,17 @@ function sortExpiredDeals(from, to) {
     getExpiredDeals(json);
 }
 
-function makeTabs() {
-    var pos = 0,
-        tabs = document.getElementById('tabs'),
-        tabsContent = document.getElementsByClassName('tabs-cont');
 
+function makeTabs () {
+    var pos = 0,
+    tabs = document.getElementById('tabs'),
+    tabsContent = document.getElementsByClassName('tabs-cont');
+        
     for (var i = 0; i < tabs.children.length; i++) {
         tabs.children[i].setAttribute('data-page', pos);
         pos++;
-    }
-
+    }   
+        
     showPage(0);
 
     tabs.onclick = function(event) {
