@@ -119,18 +119,12 @@ function getCurrentSetting(){
 
 
 
-     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
-        //Баг кліка
-           el.addEventListener('click', function(){
+  live('click',"#sort-form label",function(el){
+       if( !this.parentElement.hasAttribute('disable') ){
 
-                    if( !this.parentElement.hasAttribute('disable') ){
-
-                        this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
-                    }
-                
-           });
-         })
-
+                          this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+        }
+  })
 }
 
 function  updateSettings(callback){
