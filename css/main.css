@@ -578,7 +578,7 @@ height: 48px;
 	font-family: "UbuntuBold", sans-serif;
 	font-size: 1.1em;
 	width: 16px;
-	height: 16px;
+	height: 15px;
 	text-align: center;
 	padding-top: 2px;
 	cursor: pointer;
@@ -656,6 +656,9 @@ height: 48px;
 .table {
 	width: 100%;
 	overflow-x:scroll;
+}
+.table:empty{
+	display: none
 }
 table {
   border-collapse: collapse;

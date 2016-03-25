@@ -15,6 +15,7 @@ $('input[name="fullsearch"]').keyup(function() {
 
     document.getElementById('sort_save').addEventListener('click',function(){
         updateSettings(getPartnersList);
+        $(".table-sorting").animate({right: '-300px'}, 10, 'linear')
      })
 
     $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
@@ -122,7 +123,7 @@ function getExpiredDeals(time) {
 function getDoneDeals(time) {
     var json = time || null;
     ajaxRequest(config.DOCUMENT_ROOT + 'api/deals/?done=2', json, function(data) {
-            config.pagination_count = 2;
+           // config.pagination_count = 2;
             var count = data.count,
                 data = data.results,                
                 page = time['page'] || 1,                
@@ -392,7 +393,6 @@ var search = document.getElementsByName('fullsearch')[0].value;
         }
 
     var page = parseInt(param['page']) || 1;
-        //paginations
 
     var pages = Math.ceil(count / config.pagination_count);
 
