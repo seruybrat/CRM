@@ -366,6 +366,7 @@ var search = document.getElementsByName('fullsearch')[0].value;
     if(search ){
         param['search'] = search;
     }
+    document.getElementsByClassName('preloader')[0].style.display = 'block'
     ajaxRequest(path, param, function(data) {
 
         var results = data.results;
@@ -426,6 +427,7 @@ var search = document.getElementsByName('fullsearch')[0].value;
         document.getElementById('partnersips_list').innerHTML = thead
 
         document.querySelector("#partnersips_list tbody").innerHTML = html;
+        document.getElementsByClassName('preloader')[0].style.display = 'none'
     Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
         el.innerHTML = paginations
     })
@@ -437,6 +439,7 @@ var search = document.getElementsByName('fullsearch')[0].value;
 
                     var data = {};
                     data['page'] = el.innerHTML;
+
                      getPartnersList(data);
 
 
