@@ -285,13 +285,14 @@ select::-ms-expand {
 }
 .top .search {
 	height: 42px;
-	width: 80%;
-	margin:0 auto;
-	border-radius: 3px;
-	background-color: #fff;
-	padding-left: 55px;
-	position: relative;
-	overflow: hidden;
+  width: 50%;
+  border-radius: 3px;
+  background-color: #fff;
+  padding-left: 55px;
+  position: relative;
+  overflow: hidden;
+  float: right;
+  margin-right: 20px;
 }
 .top .search:before {
 	display: block;
@@ -333,12 +334,12 @@ select::-ms-expand {
 	background: url('../img/massage.png') no-repeat;
 }
 .top li:nth-child(1) {
-	width: 54%;
+	width: 34%;
 	border-left: none;
 	padding-left: 3%;
 }
 .top li:nth-child(2) {
-	width: 28.8%;
+	width: 48.8%;
 	border-left: none;
 }
 .top li:nth-child(3) {
@@ -440,6 +441,7 @@ height: 48px;
 .tabs-nav li.current a,
 .tabs-nav li:hover a {
 	color: #3caeda;
+	border-bottom: 1px dotted #3caeda;
 }
 #sdelki {
 	overflow: hidden;
@@ -536,7 +538,7 @@ height: 48px;
 	display: block;
 	padding: 5px;
 	padding-left: 12px;
-	font-size: 1em;
+	font-size: 1.1em;
 }
 .rows .col:last-child p {
 	border-left:1px solid #cdd0d4;
@@ -551,7 +553,11 @@ height: 48px;
 	width: 140px;
 }
 .rows p span {
-	font-family:"UbuntuMedium", sans-serif;
+	font-family:"UbuntuBold", sans-serif;
+}
+.rows p:first-child:hover span {
+	color: #3caeda;
+	border-bottom: 1px dotted #3caeda;
 }
 .rows-wrap button {
 	width: 130px;
@@ -564,6 +570,7 @@ height: 48px;
 	background-color: #44c1f2;
 }
 .rows-wrap button::before,
+button#complete::before,
 .splash-battons button:last-child::before{
 	display: block;
 	content: '';
@@ -623,6 +630,10 @@ height: 48px;
 }
 .tabs-names li.active {
 	background-color: #fff;
+}
+.tabs-names li:hover h5,
+.tabs-names li.active h5 {
+	color: #3caeda;
 }
 .tabs-names li::after {
 	content: '';
@@ -1051,6 +1062,14 @@ table tr:first-child td {
 	border-radius: 3px;
 	background-color: #f2f5fa;
 }
+.change-summ {
+  width: 9px;
+  height: 12px;
+  background: url('../img/events.png') no-repeat;
+  background-position: -38px 0px;
+  cursor: pointer;
+  border: none;
+}
 .pop-up-splash textarea {
 	display: block;
 	width: 88%;
@@ -1066,6 +1085,9 @@ table tr:first-child td {
 .splash-bauttons button:first-child {
 	padding-left: 25px;
 	margin-right: 10px;
+}
+button#complete {
+	position: relative;
 }
 
 /*drag drop*/
@@ -1275,6 +1297,7 @@ span.y:hover {
 	width: 250px;
 }
 
+
 /*corousel*/
 #corousel_wrap{
 	width: 500px;
@@ -1310,3 +1333,42 @@ span.y:hover {
 	color:#3caeda;
 }
 */
+
+/********************Summits*******************************/
+.summits-wrap	{
+	overflow: hidden;
+	margin-top: 50px;
+}
+.summits-wrap > div{
+	width: 240px;
+	height: 236px;
+	float: left;
+	margin-left: 40px;
+	border: 2px solid #cdd0d4;
+	-webkit-transition: all .4s ease;
+	transition: all .4s ease;
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+
+}
+.summits-wrap > div img {
+	width: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	margin:auto;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: all .6s ease;
+	transition: all .6s ease;
+}
+.summits-wrap > div:hover{
+	border: 2px solid #229fff;
+}
+.summits-wrap > div:hover img{
+	transform: scale(0.8);
+}
+

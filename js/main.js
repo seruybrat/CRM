@@ -6,6 +6,15 @@ var config = {
     'column_table' : null
 }
 
+$('.top input').focus(function() {
+    $('.top .search').animate({width:"100%"});
+  });
+
+$('.top input').blur(function() {
+  $('.top .search').animate({width:"50%"});
+});
+
+
 $("#nav-sidebar li ").click(function(e) {
   $("#nav-sidebar li").removeClass('active');
   $(this).addClass('active');
