@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="css/fonts.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
 </head>
 <body>
 
@@ -60,8 +61,8 @@
 					<div class="top-panel">
 						<div class="tabs-slider">
 							<ul class="tabs-nav">
-								<li><a href="#sdelki" >Посещаемость</a></li>
-								<li><a href="#spisok" >Журнал</a></li>
+								<li><a href="#visiting" >Посещаемость</a></li>
+								<li><a href="#journal" >Журнал</a></li>
 							</ul>
 						</div>
 
@@ -77,13 +78,31 @@
 
 
 			
-		<div class="tab-content">
+		<div id="corousel_wrap" >
 
-			<div id="visiting" class="tab-toggle">
+
+						<div class="owl-carousel">
+						    <div class="item"><h4>1 – 7 марта (11:00)</h4></div>
+						    <div class="item"><h4>8 – 15 марта (11:00)</h4></div>
+						    <div class="item"><h4>8 – 15 марта (14:00)</h4></div>
+							<div class="item"><h4>1 – 7 марта (11:00)</h4></div>
+						    <div class="item"><h4>8 – 15 марта (11:00)</h4></div>
+						    <div class="item"><h4>8 – 15 марта (14:00)</h4></div>
+					</div>
+		</div>
+
+				<div class="period period2">
+					<p>Период с <input type="text" id="done_datepicker_from" > по <input type="text" id="done_datepicker_to" ></p>
+					
+				</div>		
+
+
+<div class="tab-content" >
+			<div id="visiting" class="tab-toggle clearfix">
 
 			 <div class="top-pag">
 
-				<div class="tab-status">
+			<!--	<div class="tab-status">
 					<ul id="tabs-slider">
 						
 						<li><span class="arrow"></span></li>
@@ -105,7 +124,7 @@
 					<p>Период с <input type="text" id="expired_datepicker_from"> по <input type="text" id="expired_datepicker_to"><a id="show-all-expired" href="javascript:void(0);">Показать все</a></p>
 					
 				</div>
-
+   -->
 				<div class="pagination" ><!--pagination -->
 					<div class="pag-wrap">
 						<div class="prev">
@@ -140,7 +159,7 @@
 						</div>
 					</div>
 					<div class="table">
-						<div class="table" id= "partnersips_list">
+						<div id>
 							<!--<table class="tab1">
 
 								<thead><tr>
@@ -251,10 +270,10 @@
 			</div><!--End visiting-->
 
 
-			<div id="journal" class="tab-toggle">
+			<div id="journal" class="tab-toggle clearfix">
 			 <div class="top-pag">
 
-				<div class="tab-status">
+				<!--<div class="tab-status">
 					<ul id="tabs-slider">
 						
 						<li><span class="arrow"></span></li>
@@ -276,7 +295,7 @@
 					<p>Период с <input type="text" > по <input type="text" ><a  href="javascript:void(0);">Показать все</a></p>
 					
 				</div>
-
+            -->
 				<div class="pagination" ><!--pagination -->
 					<div class="pag-wrap">
 						<div class="prev">
@@ -393,9 +412,10 @@
 
 <script src="libs/jquery-1.12.1.min.js"></script>
 <script src="libs/jquery-ui.min.js"></script>
+<script src="libs/owl.carousel.min.js"></script>
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
-<script src="js/deals.js"></script>
-<script src="js/dnd_lib.js"></script>
+<script src="js/events.js"></script>
+
 </body>
 </html>

@@ -41,7 +41,7 @@ $("#sort-off").click(function () {
 
 
 
-$('.tabs .tabs-nav li a').click(function(e) {
+$('.tabs-nav li a').click(function(e) {
 	e.preventDefault();
 	$('.tabs .tabs-nav li.current').removeClass('current');
 	$(this).parent().addClass('current');

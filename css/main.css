@@ -1253,3 +1253,10 @@ span.y:hover {
 #journal .col:last-child p:nth-child(2) {
 	width: 250px;
 }
+
+/*corousel*/
+#corousel_wrap{
+	width: 500px;
+	margin-top: 30px;
+	float: left;
+}
