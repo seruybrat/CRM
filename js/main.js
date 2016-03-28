@@ -1,7 +1,7 @@
 var config = {
     //'DOCUMENT_ROOT':'http://vocrm.org/',
     'DOCUMENT_ROOT': 'http://5.101.119.32:8008/',
-    'pagination_count':30, //Количество записей при пагинации
+    'pagination_count': 30, //Количество записей при пагинации
     'pagination_mini_count': 10,
     'column_table' : null
 }
@@ -119,18 +119,12 @@ function getCurrentSetting(){
 
 
 
-     Array.prototype.forEach.call(document.querySelectorAll("#sort-form label"), function(el) {
-        //Баг кліка
-           el.addEventListener('click', function(){
+  live('click',"#sort-form label",function(el){
+       if( !this.parentElement.hasAttribute('disable') ){
 
-                    if( !this.parentElement.hasAttribute('disable') ){
-
-                        this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
-                    }
-                
-           });
-         })
-
+                          this.classList.contains('check') ? this.classList.remove('check') : this.classList.add('check');
+        }
+  })
 }
 
 function  updateSettings(callback){
