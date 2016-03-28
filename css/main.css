@@ -281,13 +281,14 @@ select::-ms-expand {
 }
 .top .search {
 	height: 42px;
-	width: 80%;
-	margin:0 auto;
-	border-radius: 3px;
-	background-color: #fff;
-	padding-left: 55px;
-	position: relative;
-	overflow: hidden;
+  width: 50%;
+  border-radius: 3px;
+  background-color: #fff;
+  padding-left: 55px;
+  position: relative;
+  overflow: hidden;
+  float: right;
+  margin-right: 20px;
 }
 .top .search:before {
 	display: block;
@@ -329,12 +330,12 @@ select::-ms-expand {
 	background: url('../img/massage.png') no-repeat;
 }
 .top li:nth-child(1) {
-	width: 54%;
+	width: 34%;
 	border-left: none;
 	padding-left: 3%;
 }
 .top li:nth-child(2) {
-	width: 28.8%;
+	width: 48.8%;
 	border-left: none;
 }
 .top li:nth-child(3) {
@@ -562,6 +563,7 @@ height: 48px;
 	background-color: #44c1f2;
 }
 .rows-wrap button::before,
+button#complete::before,
 .splash-battons button:last-child::before{
 	display: block;
 	content: '';
@@ -1046,6 +1048,14 @@ table tr:first-child td {
 	border-radius: 3px;
 	background-color: #f2f5fa;
 }
+.change-summ {
+  width: 9px;
+  height: 12px;
+  background: url('../img/events.png') no-repeat;
+  background-position: -38px 0px;
+  cursor: pointer;
+  border: none;
+}
 .pop-up-splash textarea {
 	display: block;
 	width: 88%;
@@ -1061,6 +1071,9 @@ table tr:first-child td {
 .splash-bauttons button:first-child {
 	padding-left: 25px;
 	margin-right: 10px;
+}
+button#complete {
+	position: relative;
 }
 
 /*drag drop*/
@@ -1273,7 +1286,7 @@ span.y:hover {
 }
 .summits-wrap > div{
 	width: 240px;
-	height: 240px;
+	height: 236px;
 	float: left;
 	margin-left: 40px;
 	border: 2px solid #cdd0d4;
@@ -1281,36 +1294,26 @@ span.y:hover {
 	transition: all .4s ease;
 	position: relative;
 	cursor: pointer;
+	overflow: hidden;
+
 }
-.summit-2 .chapter {
-	height: 40px;
-	text-align: center;
-	text-transform: uppercase;
-}
-.summit-2 .chapter,
-.summit-1 img {
+.summits-wrap > div img {
+	width: 100%;
 	position: absolute;
 	top:0;
 	left:0;
 	right: 0;
 	bottom: 0;
 	margin:auto;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: all .6s ease;
+	transition: all .6s ease;
 }
 .summits-wrap > div:hover{
-	background-color: #808080;
 	border: 2px solid #229fff;
 }
-.summits-wrap > div:hover h4,
-.summits-wrap > div:hover h5 {
-	color: #fff;
-}
-.chapter h4 {
-	font-family: Arial , sans-serif;
-	font-size: 1.6em;
-	color:#808080;
-}
-.chapter h5 {
-	font-size: 2.4em;
-	font-weight: bold;
+.summits-wrap > div:hover img{
+	transform: scale(0.8);
 }
 
