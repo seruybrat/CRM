@@ -207,6 +207,10 @@ select::-ms-expand {
 	-webkit-transition: all .7s ease;
 	transition: all .7s ease;
 }
+
+#sort-form li[disable]::before{
+	display: none
+}
 #sidebar ul li:not(:last-child).active:before,
 #sidebar ul li:hover:before {
 	top:0;
@@ -454,6 +458,9 @@ height: 48px;
 	transition: all .3s ease;
 	color: #656d78;
 }
+.tab-status li a:hover{
+	border-bottom:1px solid ;
+}
 .period {
 	display: none;
 	float: left;
@@ -583,6 +590,9 @@ height: 48px;
 	padding-top: 2px;
 	cursor: pointer;
 	border: 4px solid #fff;
+}
+.pag li:hover{
+	color:#3caeda;
 }
 .pag li.active {
 	background: #3caeda;
@@ -824,6 +834,10 @@ table tr:first-child td {
 #sort-form label.check:before {
 	background-position: -23px 0px;
 }
+#sort-form [disable] label.check:before{
+	/*display: none;*/
+}
+
 #sort-form input[type=checkbox] {
 	display: none;
 }
@@ -1081,6 +1095,7 @@ table tr:first-child td {
 	-webkit-transition:all .5s ease;
 	transition:all .5s ease;
 	text-align: center;
+	cursor:pointer;
 }
 .event-hover h3{
 	display: block;
@@ -1116,17 +1131,19 @@ table tr:first-child td {
 .period a {
     display: inline-block;
     float: right;
-    padding: 5px;
+   /* padding: 5px;*/
     text-decoration: none;
     text-align: center;
     width: 130px;
-    background: #3caeda;
-    color: #fff;
+   /* background: #3caeda;
+    color: #fff;*/
     margin-left: 10px;
 }
 
 .period a:hover {
-    background: #44c1f2;
+   /* background: #44c1f2;*/
+   color:#3caeda;
+   text-decoration: underline;
 }
 
 .tabs-cont .pagination:first-child .element-select {

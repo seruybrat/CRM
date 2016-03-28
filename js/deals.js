@@ -396,7 +396,7 @@ function getPartnersList(param) {
         }
         if (pages > 1) {
             paginations += '<ul class="pag">'
-            for (var j = page - 5; j < page + 5; j++) {
+            for (var j = page - 3; j < page + 3; j++) {
                 if (j == page) {
                     paginations += '<li class="active">' + j + '</li>'
                 } else {
@@ -412,8 +412,16 @@ function getPartnersList(param) {
             paginations += '</ul><div class="next"><span class="arrow"></span><span class="double_arrow"></span></div>'
         }
 
-        document.getElementById('partnersips_list').innerHTML = thead
-        document.querySelector("#partnersips_list tbody").innerHTML = html;
+        if(results.length){
+            document.getElementById('partnersips_list').innerHTML = thead
+            document.querySelector("#partnersips_list tbody").innerHTML = html;
+            document.querySelector(".query-none p").innerHTML = '';
+        }else{
+            document.getElementById('partnersips_list').innerHTML = ''
+            document.querySelector(".query-none p").innerHTML = 'По запросу не найдено участников';
+        }
+
+
         document.getElementsByClassName('preloader')[0].style.display = 'none'
         Array.prototype.forEach.call(document.querySelectorAll(" .pag-wrap"), function(el) {
             el.innerHTML = paginations
