@@ -6,7 +6,7 @@
 
 	<meta charset="UTF-8">
 
-	<title>Deals</title>
+	<title>Nightpray</title>
 	<meta name="description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -45,7 +45,7 @@
 				  <ul class="top"><!-- Top -->
 				  	<li>
 				  		<div class="top-text">
-								<h1>Партнёрство</h1>
+								<h1><span>СОБЫТИЯ |</span> Ночная молитва</h1>
 			    		</div>
 				  	</li>
 				    <li>
@@ -58,16 +58,16 @@
 				  </ul><!--End Top -->
 					
 					<div class="top-panel">
-						<div class="tabs">
+						<div class="tabs-slider">
 							<ul class="tabs-nav">
-								<li><a href="#sdelki" >Сделки</a></li>
-								<li><a href="#spisok" >Список партнёров</a></li>
+								<li><a href="#sdelki" >Посещаемость</a></li>
+								<li><a href="#spisok" >Журнал</a></li>
 							</ul>
 						</div>
 
-						<div class="top-buttons-wrap">
-						  <ul class="top-buttons">
-						  	<li><button>Экспортировать</button></li>
+						<div class="top-buttons-wrap ">
+						  <ul class="top-buttons ">
+						  	<li><button class="none">Экспортировать</button></li>
 						  	<li><button id="sort-on">Изменить таблицу</button></li>	
 						  </ul>
 
@@ -79,59 +79,34 @@
 			
 		<div class="tab-content">
 
-			<div id="sdelki" class="tab-toggle">
+			<div id="visiting" class="tab-toggle">
 
 			 <div class="top-pag">
 
 				<div class="tab-status">
-					<ul id="tabs">
+					<ul id="tabs-slider">
+						
+						<li><span class="arrow"></span></li>
 						<li>
-							<a href="#incomplete" >Незавершённые  (<span id="incomplete-count"></span>)</a>
+							<a href="#date-1" >1 – 7 марта (11:00)</a>
 						</li>
 						<li>
-							<a href="#overdue" >Просроченные(<span id="overdue-count"></span>)</a>
+							<a href="#date-2" >8 – 15 марта (11:00)</a>
 						</li>
 						<li>
-							<a href="#completed" >Завершённые(<span id="completed-count"></span>)</a>
+							<a href="#date-3" >8 – 15 марта (14:00)</a>
 						</li>
+						<li><span class="arrow"></span></li>
 
 					</ul>
 				</div>
 
-				<div id="period_expired" class="period">
+				<div id="period_expired" class="period period2">
 					<p>Период с <input type="text" id="expired_datepicker_from"> по <input type="text" id="expired_datepicker_to"><a id="show-all-expired" href="javascript:void(0);">Показать все</a></p>
 					
 				</div>
-				<div id="period_done" class=" period">
-					<p>Период с <input type="text" id="done_datepicker_from"> по <input type="text" id="done_datepicker_to"><a id="show-all-done" href="javascript:void(0);">Показать все</a></p>
 
-				</div>
-				</div>
-				
-			<div class="tabs-cont">	
-				<div class="pagination undone-pagination"></div>
-				<div id="incomplete"></div>			
-				<div class="pagination undone-pagination full-width"></div>
-			</div>
-
-			<div class="tabs-cont">
-				<div class="pagination expired-pagination"></div>
-				<div id="overdue"></div>
-				<div class="pagination expired-pagination full-width"></div>
-			</div>
-
-			<div class="tabs-cont">
-				<div class="pagination done-pagination"></div>
-				<div id="completed" ></div>
-				<div class="pagination done-pagination full-width"></div>
-			</div>
-			
-
-			</div><!--End sdelki -->
-
-
-			<div id="spisok" class="tab-toggle">
-				<div class="pagination"><!--pagination -->
+				<div class="pagination" ><!--pagination -->
 					<div class="pag-wrap">
 						<div class="prev">
 							<span class="double_arrow"></span>
@@ -153,8 +128,7 @@
 						
 					</div>
 				</div><!--End pagination -->
-			
-			
+			</div>
 				<div class="table-wrap clearfix" ><!--Table -->
 					<div class="query-none">
 							<p></p>
@@ -274,7 +248,86 @@
 						</div>
 					</div>
 				</div><!--End pagination -->
-			</div><!--End spisok -->
+			</div><!--End visiting-->
+
+
+			<div id="journal" class="tab-toggle">
+			 <div class="top-pag">
+
+				<div class="tab-status">
+					<ul id="tabs-slider">
+						
+						<li><span class="arrow"></span></li>
+						<li>
+							<a href="#date-1" >1 – 7 марта (11:00)</a>
+						</li>
+						<li>
+							<a href="#date-2" >8 – 15 марта (11:00)</a>
+						</li>
+						<li>
+							<a href="#date-3" >8 – 15 марта (14:00)</a>
+						</li>
+						<li><span class="arrow"></span></li>
+
+					</ul>
+				</div>
+
+				<div class="period period2">
+					<p>Период с <input type="text" > по <input type="text" ><a  href="javascript:void(0);">Показать все</a></p>
+					
+				</div>
+
+				<div class="pagination" ><!--pagination -->
+					<div class="pag-wrap">
+						<div class="prev">
+							<span class="double_arrow"></span>
+							<span class="arrow"></span>
+						</div>
+								<ul class="pag">
+									<li class="active">1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>6</li> 
+								</ul>
+						<div class="next">
+
+							<span class="arrow"></span>
+							<span class="double_arrow"></span>
+						</div>
+						
+					</div>
+				</div><!--End pagination -->
+			</div>
+
+
+			<div class="tabs-names">
+				<ul>
+					<li>Олейник Виктория</li>
+					<li>Захарова Анжела</li>
+				</ul>
+			</div>
+				
+			<div class="rows-wrap">
+				<div class="rows">
+					<div class="col">
+						<p><span>Ядро Семантическое</span></p>
+						</div>
+						<div class="col">
+							<p>Пришло:<span> 20</span>человек</p>
+							<p>Сумма:<input type="text" value="500 ₴"></p>
+							<span class="change"></span>
+							<span class="x"></span>
+							<span class="y"></span>
+					</div>
+					</div>
+				<button >Подчинённые</button>
+			</div>
+			
+			
+				
+			</div><!--End journal -->
 		</div><!-- End tab-content-->
 		
 
