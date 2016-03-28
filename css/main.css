@@ -436,6 +436,7 @@ height: 48px;
 .tabs-nav li.current a,
 .tabs-nav li:hover a {
 	color: #3caeda;
+	border-bottom: 1px dotted #3caeda;
 }
 #sdelki {
 	overflow: hidden;
@@ -529,7 +530,7 @@ height: 48px;
 	display: block;
 	padding: 5px;
 	padding-left: 12px;
-	font-size: 1em;
+	font-size: 1.1em;
 }
 .rows .col:last-child p {
 	border-left:1px solid #cdd0d4;
@@ -544,7 +545,11 @@ height: 48px;
 	width: 140px;
 }
 .rows p span {
-	font-family:"UbuntuMedium", sans-serif;
+	font-family:"UbuntuBold", sans-serif;
+}
+.rows p:first-child:hover span {
+	color: #3caeda;
+	border-bottom: 1px dotted #3caeda;
 }
 .rows-wrap button {
 	width: 130px;
@@ -616,6 +621,10 @@ height: 48px;
 }
 .tabs-names li.active {
 	background-color: #fff;
+}
+.tabs-names li:hover h5,
+.tabs-names li.active h5 {
+	color: #3caeda;
 }
 .tabs-names li::after {
 	content: '';
@@ -1257,3 +1266,51 @@ span.y:hover {
 #journal .col:last-child p:nth-child(2) {
 	width: 250px;
 }
+/********************Summits*******************************/
+.summits-wrap	{
+	overflow: hidden;
+	margin-top: 50px;
+}
+.summits-wrap > div{
+	width: 240px;
+	height: 240px;
+	float: left;
+	margin-left: 40px;
+	border: 2px solid #cdd0d4;
+	-webkit-transition: all .4s ease;
+	transition: all .4s ease;
+	position: relative;
+	cursor: pointer;
+}
+.summit-2 .chapter {
+	height: 40px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.summit-2 .chapter,
+.summit-1 img {
+	position: absolute;
+	top:0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	margin:auto;
+}
+.summits-wrap > div:hover{
+	background-color: #808080;
+	border: 2px solid #229fff;
+}
+.summits-wrap > div:hover h4,
+.summits-wrap > div:hover h5 {
+	color: #fff;
+}
+.chapter h4 {
+	font-family: Arial , sans-serif;
+	font-size: 1.6em;
+	color:#808080;
+}
+.chapter h5 {
+	font-size: 2.4em;
+	font-weight: bold;
+}
+
