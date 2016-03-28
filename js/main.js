@@ -43,7 +43,7 @@ $("#sort-off").click(function () {
 
 $('.tabs-nav li a').click(function(e) {
 	e.preventDefault();
-	$('.tabs .tabs-nav li.current').removeClass('current');
+	$('.tabs-nav li.current').removeClass('current');
 	$(this).parent().addClass('current');
 	$('.tab-content .tab-toggle:not(:hidden)').hide();
 	$(this.hash).show();
@@ -72,6 +72,9 @@ $(function() {
             }
 
 
+            if(document.getElementById('event_wrap')){
+              getCurrentSetting();
+            }
           })
   })
 
@@ -148,8 +151,10 @@ var json = JSON.stringify(data);
  ajaxRequest(config.DOCUMENT_ROOT + 'api/update_columns', json, function(JSONobj) {
 
         config['column_table'] = JSONobj['column_table'];
-
-        callback();
+if(callback){
+    callback();
+}
+      
         
                     }, 'POST', true, {
         'Content-Type': 'application/json'

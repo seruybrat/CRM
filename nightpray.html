@@ -40,7 +40,7 @@
 			
 		</div><!--End sidebar -->
 
-		<div class="main-wrap">
+		<div class="main-wrap" id="event_wrap">
 			<div class="header">
 
 				  <ul class="top"><!-- Top -->
@@ -80,14 +80,15 @@
 			
 		<div id="corousel_wrap" >
 
-
+				<a href="#" class="prev_item"></a>
+				<a href="#" class="next_item"></a>
 						<div class="owl-carousel">
-						    <div class="item"><h4>1 – 7 марта (11:00)</h4></div>
-						    <div class="item"><h4>8 – 15 марта (11:00)</h4></div>
-						    <div class="item"><h4>8 – 15 марта (14:00)</h4></div>
-							<div class="item"><h4>1 – 7 марта (11:00)</h4></div>
-						    <div class="item"><h4>8 – 15 марта (11:00)</h4></div>
-						    <div class="item"><h4>8 – 15 марта (14:00)</h4></div>
+						    <div class="item"><h4><a data-event-id href="#">1 – 7 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a data-event-id href="#">8 – 15 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a data-event-id href="#">8 – 15 марта (14:00)</a></h4></div>
+							<div class="item"><h4><a data-event-id href="#">1 – 7 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a  data-event-id  href="#">8 – 15 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a data-event-id href="#">8 – 15 марта (14:00)</a></h4></div>
 					</div>
 		</div>
 
@@ -158,90 +159,7 @@
 							<div><span>C</span><span>R</span><span>M</span></div>
 						</div>
 					</div>
-					<div class="table">
-						<div id>
-							<!--<table class="tab1">
-
-								<thead><tr>
-									<th>Фамилия</th>
-									<th>Имя</th>
-									<th>Отчество</th>
-									<th>Email</th>
-									<th>Дата рождения</th>
-									<th>Телефон</th>
-									<th>Страна</th>
-									<th>Область</th>
-									<th>Район</th>
-									<th>Адрес</th>
-									<th>Иерархия</th>
-									<th>Отдел</th>
-									<th>Skype</th>
-									<th>Facebook</th>
-									<th>Отдел церкви</th><th></th><th></th>
-								</tr></thead>
-								<tbody>
-									<tr>
-									<td>Романюк</td>
-									<td >Владимир</td>
-									<td >Иванович</td>
-									<td ></td>
-									<td >1962-03-29</td>
-									<td ></td>
-									<td>Украина</td>
-									<td >Запорожская</td>
-									<td ></td>
-									<td >Ул. Свердлова 31</td>
-									<td >Прихожанин</td>
-									<td >Дочерняя церковь</td>
-									<td ></td><td>&nbsp;</td>
-									<td ></td>
-									<td><a href="#" >подчиненные</a></td>
-									<td><a href="#" >анкета</a></td>
-									</tr>
-
-									<tr>
-									<td>Романюк</td>
-									<td >Владимир</td>
-									<td >Иванович</td>
-									<td ></td>
-									<td >1962-03-29</td>
-									<td ></td>
-									<td>Украина</td>
-									<td >Запорожская</td>
-									<td ></td>
-									<td >Ул. Свердлова 31</td>
-									<td >Прихожанин</td>
-									<td >Дочерняя церковь</td>
-									<td ></td><td>&nbsp;</td>
-									<td ></td>
-									<td><a href="#" >подчиненные</a></td>
-									<td><a href="#" >анкета</a></td>
-									</tr>
-
-									<tr>
-									<td>Романюк</td>
-									<td >Владимир</td>
-									<td >Иванович</td>
-									<td ></td>
-									<td >1962-03-29</td>
-									<td ></td>
-									<td>Украина</td>
-									<td >Запорожская</td>
-									<td ></td>
-									<td >Ул. Свердлова 31</td>
-									<td >Прихожанин</td>
-									<td >Дочерняя церковь</td>
-									<td ></td><td>&nbsp;</td>
-									<td ></td>
-									<td><a href="#" >подчиненные</a></td>
-									<td><a href="#" >анкета</a></td>
-									</tr>
-									
-								</tbody>
-
-							</table>  -->
-						</div>
-					</div>
+					<div class="table" id="event_id_wrap"></div>
 				</div><!--End Table-wrap -->
 
 			<div class="pagination full-width"><!--pagination -->
@@ -359,13 +277,14 @@
 									<ul id="sort-form"></ul>
 								</div>
 								<div class="dropbox-wrap">
-									<span>Показывать</span>
+									<!--<span>Показывать</span>
 									<select name="" id="">
 										<option value="">15</option>
 										<option value="">30</option>
 										<option value="">45</option>
 									</select>
 									<span>строк</span>
+									-->
 								</div>
 								<div class="butt-wrap">
 									<button id="sort-off">Отменить</button>
@@ -415,7 +334,8 @@
 <script src="libs/owl.carousel.min.js"></script>
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
-<script src="js/events.js"></script>
+<script src="js/dnd_lib.js"></script>
+<script src="js/event_visits.js"></script>
 
 </body>
 </html>
