@@ -503,7 +503,7 @@ select::-ms-expand {
 }
 .period input:hover,
 .period input:focus {
-	background:none;
+	cursor: pointer;
 }
 .period input:first-child {
 	margin-left: 5px;
