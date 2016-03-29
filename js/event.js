@@ -22,8 +22,7 @@ function getEventsList(){
 
 		 Array.prototype.forEach.call(document.querySelectorAll('button[data-id]'), function(el) {
 		        el.addEventListener('click', function() {
-		         var id =   this.getAttribute('data-id')  
-		         document.location.href = '../nightpray.html?id=' + id 
+
 		        })
     	});
 	 })
