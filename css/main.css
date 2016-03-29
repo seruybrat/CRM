@@ -753,7 +753,7 @@ button#complete::before,
 }
 .table {
 	width: 100%;
-	overflow-x:scroll;
+	height:100%;
 }
 .table:empty{
 	display: none
@@ -882,15 +882,19 @@ table tr:first-child td {
 /* ------------------table-sorting------------------------------ */
 .table-sorting {
 	width: 240px;
-	min-height: 100vh;
 	background-color: #434a54;
 	position: fixed;
 	top:77px;
 	right:-300px;
+	bottom: 0;
 	padding: 20px;
 	z-index: 999999;
 	-webkit-transition: all .3s ease;
 	transition: all .3s ease;
+}
+.form-wrap {
+	height: 100%;
+	overflow-y:auto;
 }
 .bgsort{
 	position: fixed;
