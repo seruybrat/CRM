@@ -339,17 +339,20 @@ select::-ms-expand {
 .top li:nth-child(3) {
 	height: 48px;
 }
-.header .top li img {
-	display: block;
+.header .top li .userimg {
 	width: 44px;
+	height: 44px;
 	margin: 0 auto;
-	height: auto;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 	border: 2px solid #3caeda;
+	overflow: hidden;
 	-webkit-box-shadow: 0px 0px 5px 2px rgba(145,203,228,1);
 	-moz-box-shadow: 0px 0px 5px 2px rgba(145,203,228,1);
 	box-shadow: 0px 0px 5px 2px rgba(145,203,228,1);
+}
+.userimg img {
+	height: 100%;
 }
 /* ---------------Tabs------------------ */
 .top-panel {
