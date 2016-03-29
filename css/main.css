@@ -3,7 +3,6 @@ body {
 	font-size: 75%;
   height:100%;
   color: #656d78;
-
 }
 a:-webkit-any-link,
 a:visited {
@@ -85,7 +84,6 @@ select::-ms-expand {
 	clear:both;
 }
 /* -----------------Sidebar------------------------ */
-
 #sidebar {
 	width: 240px;
 	height: 100%;
@@ -230,8 +228,6 @@ select::-ms-expand {
 	transition: width 0.3s ;
 	overflow: hidden;
 }
-
-
 #sidebar.toggle-sidebar {
 	width: 90px;
 }
@@ -249,9 +245,7 @@ select::-ms-expand {
 #sidebar.toggle-sidebar ~ .main-wrap {
 	padding-left: 90px;
 }
-
 /* ------------------Header------------------------------ */
-
 .main-wrap {
 	padding-left: 240px;
 	-webkit-transition: all .3s;
@@ -467,15 +461,25 @@ select::-ms-expand {
 	transition: all .3s ease;
 	color: #656d78;
 }
-.tab-status li a:hover{
-	border-bottom:1px solid ;
-}
 .period {
 	display: none;
 	float: left;
-	/*padding: 6px;*/
 	border-left:1px solid #cdd0d4;
-	margin-top: 24px;
+	margin-top: 30px;
+	padding-left: 10px;
+}
+.period a {
+  display: inline-block;
+  float: right;
+  text-decoration: none;
+  text-align: center;
+  padding: 4px 0px;
+  margin-left: 20px;
+  font-family: "UbuntuBold";
+  color: #3caeda;
+}
+.period a:hover {
+  border-bottom: 1px dotted #3caeda;
 }
 .period2 {
 	display: inline-block;
@@ -651,7 +655,6 @@ button#complete::before,
   z-index: 2;
 }
 /* ------------------Pagination------------------------------ */
-
 .pagination {
 	padding: 30px 40px 30px 0px;
 	float: right;
@@ -857,7 +860,23 @@ table tr:first-child td {
 	0% {left:-2px;}
 	100% {left:300px;}
 }
-
+#overdue {
+	padding: 46px 10px;
+  font-size: 1.4em;
+  color: #949aa2;
+  -webkit-animation: colorchange 1s infinite;
+  animation: colorchange 1s infinite;
+}
+@-webkit-keyframes colorchange{
+	0% {color: #949aa2;}
+	50% {color: #404245;}
+	100% {color: #949aa2;}
+}
+@keyframes colorchange{
+	0% {color: #949aa2;}
+	50% {color: #404245;}
+	100% {color: #949aa2;}
+}
 /* ------------------table-sorting------------------------------ */
 .table-sorting {
 	width: 240px;
@@ -932,7 +951,6 @@ table tr:first-child td {
 #sort-form [disable] label.check:before{
 	/*display: none;*/
 }
-
 #sort-form input[type=checkbox] {
 	display: none;
 }
@@ -964,15 +982,14 @@ table tr:first-child td {
 }
 #summit_buttons, #summit_table p {
 	font-family: "UbuntuLight" , sans-serif;
-    font-size: 1.4em;
-    margin-left:10px;
-    cursor:pointer;
+  font-size: 1.4em;
+  margin-left:10px;
+  cursor:pointer;
 }
 #summit_buttons p {
 	font-size: 1.8em;
 }
-
-/*popup*/
+/***********************popup***************************************/
 .pop_cont{
 	font-size: 150%;
   position: fixed;
@@ -1112,16 +1129,13 @@ span#deal-value {
 button#complete {
 	position: relative;
 }
-
-/*drag drop*/
-
+/******************************drag drop*********************/
 .drag{
   background: red;
   height:50px;
   margin: 10px 0;
   cursor: move 
 }
-
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -1137,7 +1151,7 @@ button#complete {
 .over{
   background: green
 }
-/*****************Preloader********************/
+/***********************Preloader************************/
 .preloader {
 	position: absolute;
 	top:100px;
@@ -1165,8 +1179,7 @@ button#complete {
 .table-opacity {
 	opacity: 0.4;
 }
-
-/*********************Events**********************/
+/*****************************Events***************************/
 .events-wrap {
 	width: 95%;
 	margin: 0 auto;
@@ -1234,7 +1247,11 @@ button#complete {
 }
 .event-hover button {
 	padding-left: 20px;
-	margin-top: 40px
+	margin-top: 40px;
+	background-color: #3caeda;
+}
+.event-hover button:hover {
+	background-color: #1094c7;
 }
 .event-1 {
 	background-image: url('../img/ev1.jpg');
@@ -1248,28 +1265,9 @@ button#complete {
 	background-image: url('../img/ev3.jpg');
 	background-size: cover;
 }
-.period a {
-    display: inline-block;
-    float: right;
-   /* padding: 5px;*/
-    text-decoration: none;
-    text-align: center;
-    width: 130px;
-   /* background: #3caeda;
-    color: #fff;*/
-    margin-left: 10px;
-}
-
-.period a:hover {
-   /* background: #44c1f2;*/
-   color:#3caeda;
-   text-decoration: underline;
-}
-
 .tabs-cont .pagination:first-child .element-select {
 	display:none;
 }
-/*********************Events***********************/
 span.change,
 span.x,
 span.y {
@@ -1319,9 +1317,7 @@ span.y:hover {
 #journal .col:last-child p:nth-child(2) {
 	width: 250px;
 }
-
-
-/*corousel*/
+/*************************************corousel***********************/
 #corousel_wrap{
 	width: 500px;
 	margin:0 30px;
@@ -1345,19 +1341,17 @@ span.y:hover {
 }
 #corousel_wrap .next_item{
 	right: -20px;left: auto;
-	    background-position: -27px 0px;
+	background-position: -27px 0px;
 }
 #corousel_wrap .active_item[data-event-id]{
 	color:#3caeda;
 }
-
 /*
 #corousel_wrap .owl-item.active:first-child  > #corousel_wrap .owl-item.active{
 	color:#3caeda;
 }
 */
-
-/********************Summits*******************************/
+/*****************************Summits*******************************/
 .summits-wrap	{
 	overflow: hidden;
 	margin-top: 50px;
@@ -1373,7 +1367,6 @@ span.y:hover {
 	position: relative;
 	cursor: pointer;
 	overflow: hidden;
-
 }
 .summits-wrap > div img {
 	width: 100%;
@@ -1394,4 +1387,3 @@ span.y:hover {
 .summits-wrap > div:hover img{
 	transform: scale(0.8);
 }
-
