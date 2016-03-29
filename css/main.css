@@ -205,10 +205,6 @@ select::-ms-expand {
 	-webkit-transition: all .7s ease;
 	transition: all .7s ease;
 }
-
-#sort-form li[disable]::before{
-	display: none
-}
 #sidebar ul li:not(:last-child).active:before,
 #sidebar ul li:hover:before {
 	top:0;
@@ -478,7 +474,7 @@ select::-ms-expand {
   text-align: center;
   padding: 4px 0px;
   margin-left: 20px;
-  font-family: "UbuntuBold";
+  font-family: "UbuntuMedium", sans-serif;
   color: #3caeda;
 }
 .period a:hover {
@@ -839,6 +835,9 @@ table tr:first-child td,
 table tr:first-child td {
   border-left: 1px solid #E2E2E2;
 }
+#partnersips_list th::after {
+	display: none;
+}
 .query-none {
 	position: relative;
 	padding: 20px;
@@ -865,7 +864,7 @@ table tr:first-child td {
 }
 #overdue {
 	padding: 46px 10px;
-  font-size: 1.4em;
+  font-size: 1.2em;
   color: #949aa2;
   -webkit-animation: colorchange 1s infinite;
   animation: colorchange 1s infinite;
@@ -885,7 +884,7 @@ table tr:first-child td {
 	width: 240px;
 	min-height: 100vh;
 	background-color: #434a54;
-	position: absolute;
+	position: fixed;
 	top:77px;
 	right:-300px;
 	padding: 20px;
@@ -917,7 +916,10 @@ table tr:first-child td {
 	-webkit-transition: all .3s ease;
 	transition: all .3s ease;
 }
-#sort-form li:hover {
+#sort-form li[disable]::before{
+	display: none;
+}
+#sort-form li:not([disable]):hover {
 	background-color: #4f555e;
 }
 #sort-form li::before {
@@ -975,7 +977,8 @@ table tr:first-child td {
 	font-size: 1.2em;
 }
 .butt-wrap {
-	text-align: center; 
+	text-align: center;
+	margin-top: 20px;
 }
 .form-wrap button {
 	padding: 10px 15px;
@@ -1149,7 +1152,16 @@ button#complete {
   -webkit-user-drag: element;
 }
 #sort-form li[disable]{
-	background-color: black;
+	position: relative;
+}
+.disable-opacity {
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 3px;
 }
 .over{
   background: green

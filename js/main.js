@@ -51,7 +51,6 @@ $("#sort-off").click(function () {
  });
 
 
-
 $('.tabs-nav li a').click(function(e) {
 	e.preventDefault();
 	$('.tabs-nav li.current').removeClass('current');
@@ -62,6 +61,7 @@ $('.tabs-nav li a').click(function(e) {
 });
 
 $(".tabs-nav li a:first").click();
+
 
 
 
@@ -113,8 +113,13 @@ function getCurrentSetting(){
        var isdraggable = titles[p]['editable'] ? 'draggable' : 'disable'
         html += '<li '+ isdraggable  + ' >'+
            '<input id="'+  titles[p]['title']   +'" type="checkbox">'+
-         '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'+
-         '</li>'
+         '<label for="'+  titles[p]['title']   +'"  class="'+  ischeck +'" id= "' +  titles[p]['id']  +'">'+  p +'</label>'
+        if(isdraggable == 'disable'){
+          html+='<div class="disable-opacity"></div>'
+        }
+        html+= '</li>'
+         //$("#sort-form li[disable]").append(" <div class='disable-opacity'></div>");
+
      }
 
 
