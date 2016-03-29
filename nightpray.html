@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="css/fonts.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
 </head>
 <body>
 
@@ -39,7 +40,7 @@
 			
 		</div><!--End sidebar -->
 
-		<div class="main-wrap">
+		<div class="main-wrap" id="event_wrap">
 			<div class="header">
 
 				  <ul class="top"><!-- Top -->
@@ -60,8 +61,8 @@
 					<div class="top-panel">
 						<div class="tabs-slider">
 							<ul class="tabs-nav">
-								<li><a href="#sdelki" >Посещаемость</a></li>
-								<li><a href="#spisok" >Журнал</a></li>
+								<li><a href="#visiting" >Посещаемость</a></li>
+								<li><a href="#journal" >Журнал</a></li>
 							</ul>
 						</div>
 
@@ -77,13 +78,32 @@
 
 
 			
-		<div class="tab-content">
+		<div id="corousel_wrap" >
 
-			<div id="visiting" class="tab-toggle">
+				<a href="#" class="prev_item"></a>
+				<a href="#" class="next_item"></a>
+						<div class="owl-carousel">
+						    <div class="item"><h4><a data-event-id href="#">1 – 7 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a data-event-id href="#">8 – 15 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a data-event-id href="#">8 – 15 марта (14:00)</a></h4></div>
+							<div class="item"><h4><a data-event-id href="#">1 – 7 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a  data-event-id  href="#">8 – 15 марта (11:00)</a></h4></div>
+						    <div class="item"><h4><a data-event-id href="#">8 – 15 марта (14:00)</a></h4></div>
+					</div>
+		</div>
+
+				<div class="period period2">
+					<p>Период с <input type="text" id="done_datepicker_from" > по <input type="text" id="done_datepicker_to" ></p>
+					
+				</div>		
+
+
+<div class="tab-content" >
+			<div id="visiting" class="tab-toggle clearfix">
 
 			 <div class="top-pag">
 
-				<div class="tab-status">
+			<!--	<div class="tab-status">
 					<ul id="tabs-slider">
 						
 						<li><span class="arrow"></span></li>
@@ -105,7 +125,7 @@
 					<p>Период с <input type="text" id="expired_datepicker_from"> по <input type="text" id="expired_datepicker_to"><a id="show-all-expired" href="javascript:void(0);">Показать все</a></p>
 					
 				</div>
-
+   -->
 				<div class="pagination" ><!--pagination -->
 					<div class="pag-wrap">
 						<div class="prev">
@@ -139,90 +159,7 @@
 							<div><span>C</span><span>R</span><span>M</span></div>
 						</div>
 					</div>
-					<div class="table">
-						<div class="table" id= "partnersips_list">
-							<!--<table class="tab1">
-
-								<thead><tr>
-									<th>Фамилия</th>
-									<th>Имя</th>
-									<th>Отчество</th>
-									<th>Email</th>
-									<th>Дата рождения</th>
-									<th>Телефон</th>
-									<th>Страна</th>
-									<th>Область</th>
-									<th>Район</th>
-									<th>Адрес</th>
-									<th>Иерархия</th>
-									<th>Отдел</th>
-									<th>Skype</th>
-									<th>Facebook</th>
-									<th>Отдел церкви</th><th></th><th></th>
-								</tr></thead>
-								<tbody>
-									<tr>
-									<td>Романюк</td>
-									<td >Владимир</td>
-									<td >Иванович</td>
-									<td ></td>
-									<td >1962-03-29</td>
-									<td ></td>
-									<td>Украина</td>
-									<td >Запорожская</td>
-									<td ></td>
-									<td >Ул. Свердлова 31</td>
-									<td >Прихожанин</td>
-									<td >Дочерняя церковь</td>
-									<td ></td><td>&nbsp;</td>
-									<td ></td>
-									<td><a href="#" >подчиненные</a></td>
-									<td><a href="#" >анкета</a></td>
-									</tr>
-
-									<tr>
-									<td>Романюк</td>
-									<td >Владимир</td>
-									<td >Иванович</td>
-									<td ></td>
-									<td >1962-03-29</td>
-									<td ></td>
-									<td>Украина</td>
-									<td >Запорожская</td>
-									<td ></td>
-									<td >Ул. Свердлова 31</td>
-									<td >Прихожанин</td>
-									<td >Дочерняя церковь</td>
-									<td ></td><td>&nbsp;</td>
-									<td ></td>
-									<td><a href="#" >подчиненные</a></td>
-									<td><a href="#" >анкета</a></td>
-									</tr>
-
-									<tr>
-									<td>Романюк</td>
-									<td >Владимир</td>
-									<td >Иванович</td>
-									<td ></td>
-									<td >1962-03-29</td>
-									<td ></td>
-									<td>Украина</td>
-									<td >Запорожская</td>
-									<td ></td>
-									<td >Ул. Свердлова 31</td>
-									<td >Прихожанин</td>
-									<td >Дочерняя церковь</td>
-									<td ></td><td>&nbsp;</td>
-									<td ></td>
-									<td><a href="#" >подчиненные</a></td>
-									<td><a href="#" >анкета</a></td>
-									</tr>
-									
-								</tbody>
-
-							</table>  -->
-						</div>
-					</div>
+					<div class="table" id="event_id_wrap"></div>
 				</div><!--End Table-wrap -->
 
 			<div class="pagination full-width"><!--pagination -->
@@ -251,10 +188,10 @@
 			</div><!--End visiting-->
 
 
-			<div id="journal" class="tab-toggle">
+			<div id="journal" class="tab-toggle clearfix">
 			 <div class="top-pag">
 
-				<div class="tab-status">
+				<!--<div class="tab-status">
 					<ul id="tabs-slider">
 						
 						<li><span class="arrow"></span></li>
@@ -276,7 +213,7 @@
 					<p>Период с <input type="text" > по <input type="text" ><a  href="javascript:void(0);">Показать все</a></p>
 					
 				</div>
-
+            -->
 				<div class="pagination" ><!--pagination -->
 					<div class="pag-wrap">
 						<div class="prev">
@@ -340,13 +277,14 @@
 									<ul id="sort-form"></ul>
 								</div>
 								<div class="dropbox-wrap">
-									<span>Показывать</span>
+									<!--<span>Показывать</span>
 									<select name="" id="">
 										<option value="">15</option>
 										<option value="">30</option>
 										<option value="">45</option>
 									</select>
 									<span>строк</span>
+									-->
 								</div>
 								<div class="butt-wrap">
 									<button id="sort-off">Отменить</button>
@@ -393,9 +331,11 @@
 
 <script src="libs/jquery-1.12.1.min.js"></script>
 <script src="libs/jquery-ui.min.js"></script>
+<script src="libs/owl.carousel.min.js"></script>
 <script src="js/lib.js"></script>
 <script src="js/main.js"></script>
-<script src="js/deals.js"></script>
 <script src="js/dnd_lib.js"></script>
+<script src="js/event_visits.js"></script>
+
 </body>
 </html>

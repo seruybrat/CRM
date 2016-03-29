@@ -207,6 +207,10 @@ select::-ms-expand {
 	-webkit-transition: all .7s ease;
 	transition: all .7s ease;
 }
+
+#sort-form li[disable]::before{
+	display: none
+}
 #sidebar ul li:not(:last-child).active:before,
 #sidebar ul li:hover:before {
 	top:0;
@@ -463,10 +467,13 @@ select::-ms-expand {
 	transition: all .3s ease;
 	color: #656d78;
 }
+.tab-status li a:hover{
+	border-bottom:1px solid ;
+}
 .period {
 	display: none;
 	float: left;
-	padding: 6px;
+	/*padding: 6px;*/
 	border-left:1px solid #cdd0d4;
 	margin-top: 24px;
 }
@@ -669,6 +676,9 @@ button#complete::before,
 	padding-top: 2px;
 	cursor: pointer;
 	border: 4px solid #fff;
+}
+.pag li:hover{
+	color:#3caeda;
 }
 .pag li.active {
 	background: #3caeda;
@@ -919,6 +929,10 @@ table tr:first-child td {
 #sort-form label.check:before {
 	background-position: -23px 0px;
 }
+#sort-form [disable] label.check:before{
+	/*display: none;*/
+}
+
 #sort-form input[type=checkbox] {
 	display: none;
 }
@@ -1201,6 +1215,7 @@ button#complete {
 	-webkit-transition:all .5s ease;
 	transition:all .5s ease;
 	text-align: center;
+	cursor:pointer;
 }
 .event-hover h3{
 	display: block;
@@ -1236,17 +1251,19 @@ button#complete {
 .period a {
     display: inline-block;
     float: right;
-    padding: 5px;
+   /* padding: 5px;*/
     text-decoration: none;
     text-align: center;
     width: 130px;
-    background: #3caeda;
-    color: #fff;
+   /* background: #3caeda;
+    color: #fff;*/
     margin-left: 10px;
 }
 
 .period a:hover {
-    background: #44c1f2;
+   /* background: #44c1f2;*/
+   color:#3caeda;
+   text-decoration: underline;
 }
 
 .tabs-cont .pagination:first-child .element-select {
@@ -1302,6 +1319,44 @@ span.y:hover {
 #journal .col:last-child p:nth-child(2) {
 	width: 250px;
 }
+
+
+/*corousel*/
+#corousel_wrap{
+	width: 500px;
+	margin:0 30px;
+	margin-top: 30px;
+	float: left;
+	position: relative;
+}
+#corousel_wrap [data-event-id]{
+	text-decoration: none
+}
+#corousel_wrap [data-event-id]:hover{
+	color:#3caeda;
+}
+#corousel_wrap .prev_item,#corousel_wrap .next_item{
+	position: absolute;top:0;left:-20px;width: 15px;
+	height: 15px;
+	background: url('../img/sprite-pag.png') no-repeat;
+	display: block;
+	background-position: -41px 0px;
+
+}
+#corousel_wrap .next_item{
+	right: -20px;left: auto;
+	    background-position: -27px 0px;
+}
+#corousel_wrap .active_item[data-event-id]{
+	color:#3caeda;
+}
+
+/*
+#corousel_wrap .owl-item.active:first-child  > #corousel_wrap .owl-item.active{
+	color:#3caeda;
+}
+*/
+
 /********************Summits*******************************/
 .summits-wrap	{
 	overflow: hidden;
