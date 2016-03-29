@@ -7,7 +7,7 @@ var config = {
 }
 
 $('.top input').focus(function() {
-    $('.top .search').animate({width:"100%"});
+    $('.top .search').animate({width:"80%"});
   });
 
 $('.top input').blur(function() {
@@ -41,11 +41,13 @@ $("#move-sidebar").click(function(){
 
 
 $("#sort-on").click(function () {
-      $(".table-sorting").animate({right: '0px'}, 10, 'linear')
+      $(".table-sorting").animate({right: '0px'}, 10, 'linear');
+      $(".page-width").append(" <div class='bgsort'></div>");
  });
  
 $("#sort-off").click(function () {
-      $(".table-sorting").animate({right: '-300px'}, 10, 'linear')
+      $(".table-sorting").animate({right: '-300px'}, 10, 'linear');
+      $(".bgsort").remove();
  });
 
 

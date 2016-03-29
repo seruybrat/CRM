@@ -11,7 +11,7 @@ a:visited {
 }
 h1 {
 	font-family: "UbuntuLight" , sans-serif;
-	font-size:2.6em ;
+	font-size:2.1em ;
 	text-transform:uppercase;
 	color:#434a54;
 	text-align: left;
@@ -281,7 +281,7 @@ select::-ms-expand {
 }
 .top .search {
 	height: 42px;
-  width: 50%;
+  width: 40%;
   border-radius: 3px;
   background-color: #fff;
   padding-left: 55px;
@@ -330,16 +330,16 @@ select::-ms-expand {
 	background: url('../img/massage.png') no-repeat;
 }
 .top li:nth-child(1) {
-	width: 34%;
+	width: 42%;
 	border-left: none;
 	padding-left: 3%;
 }
 .top li:nth-child(2) {
-	width: 48.8%;
+	width: 40.8%;
 	border-left: none;
 }
 .top li:nth-child(3) {
-height: 48px;
+	height: 48px;
 }
 .header .top li img {
 	display: block;
@@ -508,7 +508,6 @@ height: 48px;
 	width: 85%;
 	float: left;
 	border:1px solid #cdd0d4;
-	border-bottom: 2px solid #cdd0d4;
 	border-radius: 5px;
 	padding: 10px;
 	overflow: hidden;
@@ -517,7 +516,8 @@ height: 48px;
 	transition:all .3s ease;
 }
 .rows:hover {
-	background-color: #e6e9ee;
+	background-color: #fbfcfd;
+	border-bottom: 1px solid #999fa7;
 }
 .rows .col:first-child {
 	float: left;
@@ -861,6 +861,15 @@ table tr:first-child td {
 	-webkit-transition: all .3s ease;
 	transition: all .3s ease;
 }
+.bgsort{
+	position: fixed;
+	top:0;
+	left: 0;
+	right:0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 9;
+}
 .table-sorting .top-text {
 	margin-bottom: 10px;
 }
@@ -993,9 +1002,17 @@ table tr:first-child td {
 }
 .splash-screen {
 	width: 35%;
-	margin: 15% auto;
-	background-color: #fff;
-	border-radius: 3px;
+	max-width: 560px;
+	min-width: 466px;
+  background-color: #fff;
+  border-radius: 3px;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto auto;
+  height: 410px;
 }
 .pop-up-splash .top-text {
 	border-top-left-radius: 3px;
@@ -1044,6 +1061,8 @@ table tr:first-child td {
 .summa span{
 	display: inline-block;
 	padding: 5px;
+}
+span#deal-value {
 	border: 1px solid #cdd0d4;
 	border-radius: 3px;
 	background-color: #f2f5fa;
@@ -1054,7 +1073,11 @@ table tr:first-child td {
   background: url('../img/events.png') no-repeat;
   background-position: -38px 0px;
   cursor: pointer;
-  border: none;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.change-summ:hover {
+	background-position: -56px 0px;
 }
 .pop-up-splash textarea {
 	display: block;
