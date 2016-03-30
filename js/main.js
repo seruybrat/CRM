@@ -57,14 +57,12 @@ $('.tabs-nav li a').click(function(e) {
 	$(this).parent().addClass('current');
 	$('.tab-content .tab-toggle:not(:hidden)').hide();
 	$(this.hash).show();
-	
 });
 
 $(".tabs-nav li a:first").click();
 
 jQuery('.scrollbar-inner').scrollbar();
 jQuery('.scrollbar-macosx').scrollbar();
-
 
 $(function() {
     
