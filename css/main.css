@@ -523,6 +523,7 @@ select::-ms-expand {
 	margin: 10px 25px 0 10px;
 	overflow: hidden;
 	width: 95%;
+	cursor: pointer;
 }
 .rows {
 	width: 85%;
@@ -579,6 +580,7 @@ select::-ms-expand {
 	margin-top: 3px;
 	float: right;
 }
+.rows-wrap:hover button,
 .rows-wrap button:hover {
 	background-color: #44c1f2;
 }
