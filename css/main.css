@@ -334,6 +334,7 @@ select::-ms-expand {
 }
 .top li:nth-child(3) {
 	height: 48px;
+	cursor: pointer;
 }
 .header .top li .userimg {
 	width: 44px;
@@ -346,9 +347,18 @@ select::-ms-expand {
 	-webkit-box-shadow: 0px 0px 5px 2px rgba(145,203,228,1);
 	-moz-box-shadow: 0px 0px 5px 2px rgba(145,203,228,1);
 	box-shadow: 0px 0px 5px 2px rgba(145,203,228,1);
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.header .top li .userimg:hover {
+	border: 2px solid #b3d7e8;
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(67,176,219,1);
+	-moz-box-shadow: 0px 0px 5px 2px rgba(67,176,219,1);
+	box-shadow: 0px 0px 5px 2px rgba(67,176,219,1);
 }
 .userimg img {
 	height: 100%;
+	cursor: pointer;
 }
 /* ---------------Tabs------------------ */
 .top-panel {
@@ -747,7 +757,6 @@ button#complete::before,
 }
 /* ------------------Table------------------------------ */
 .table-wrap {
-	margin-right: 40px;
 	min-height: 400px;
 	position: relative;
 }
@@ -769,7 +778,7 @@ thead tr:first-child {
 }
 th {
 	font-family: "UbuntuMedium",sans-serif;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	padding: 5px 25px;
   border: 1px solid #E2E2E2;
   text-align: left;
@@ -806,7 +815,7 @@ td {
 	font-family:"Ubuntu", sans-serif;
 	border: 1px solid #E2E2E2;
   color: #656d78;
-  font-size: 1.2em;
+  font-size: 1.1em;
   vertical-align: middle;
   padding: 9px 12px;
   max-width: 270px;
@@ -821,17 +830,14 @@ td a:hover {
 	transition: all .3s ease;
 }
 table tr, table tr {
-	background-color: rgba(148, 142, 142, 0.15);
+	background-color: #fff;
 }
-table tr:nth-child(odd),
-table tr:nth-child(odd) {
+table tr:nth-child(even) {
   background: #fafbfc;
 }
-table tr td:first-child, 
 table tr td:first-child {
 	padding-left: 18px;
 }
-table tr:first-child td,
 table tr:first-child td {
   border-left: 1px solid #E2E2E2;
 }
