@@ -273,7 +273,7 @@ select::-ms-expand {
 .top .top-text h1 span {
 	color: #abbdd6;
 }
-.top .search {
+.search {
 	height: 42px;
   width: 40%;
   border-radius: 3px;
@@ -284,7 +284,7 @@ select::-ms-expand {
   float: right;
   margin-right: 20px;
 }
-.top .search:before {
+.search:before {
 	display: block;
 	content: '';
 	position: absolute;
@@ -294,7 +294,7 @@ select::-ms-expand {
 	left: 15px;
 	background:url('../img/search-ico.png');
 }
-.top input {
+.search input {
 	width: 100%;
 	border: none;
 	padding-top: 12px;
@@ -1031,7 +1031,9 @@ table tr:first-child td {
   right: 10px;
   cursor: pointer;
 }
-.pop-up-splash {
+.choose-user-wrap,
+.pop-up-splash,
+.add-user-wrap {
 	display: none;
 	position: fixed;
 	top:0;
@@ -1041,8 +1043,52 @@ table tr:first-child td {
 	background-color: rgba(0,0,0,0.8);
 	z-index: 99;
 }
+.choose-user-wrap .search {
+	border: 1px solid #cdd0d4;
+	border-radius: 3px;
+	width: 80%;
+	float: none;
+	margin:25px auto;
+}
+.choose-user-wrap .splash-screen.active {
+	height: 500px;
+}
+.choose-user-wrap .splash-screen.active .scrollwrap{
+	height: 100%;
+}
+.choose-user-wrap .rows-wrap {
+	margin:20px auto;
+	width: 93%;
+}
+.choose-user-wrap .rows {
+	width: 80%;
+}
+.choose-user-wrap .col:last-child p {
+	width: 200px;
+}
+.choose-user-wrap .rows .col:last-child span{
+	font-family:"UbuntuLight", sans-serif;
+	font-size: 1.2em;
+}
+.choose-user-wrap button {
+	padding:10px;
+	width: 90px;
+	margin-right: 20px;
+}
+.choose-user-wrap .rows {
+	border: none;
+	background-color: #fff;
+}
+.choose-user-wrap button::before {
+	display: none;
+}
+.choose-user-wrap .splash-screen {
+	overflow: hidden;
+	height: 150px;
+	max-width: 760px;
+	min-width: 760px;
+}
 .splash-screen {
-	width: 35%;
 	max-width: 560px;
 	min-width: 466px;
   background-color: #fff;
@@ -1052,15 +1098,38 @@ table tr:first-child td {
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto auto;
+  margin: auto;
   height: 410px;
 }
-.pop-up-splash .top-text {
+.splash-screen .top-text {
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	border-bottom: 1px solid #cdd0d4;
 	padding: 20px;
 	background-color: #e6e9ee;
+	position: relative;
+}
+.splash-screen .top-text::after {
+	content: 'X';
+	position: absolute;
+	top:20px;
+	right: 20px;
+	font-size: 2em;
+	font-family: "UbuntuLight", sans-serif;
+	color: #888f98;
+	cursor: pointer;
+}
+.add-user-wrap .splash-screen {
+	height: 180px;
+	max-width: 365px;
+}
+.add-user-wrap .splash-buttons {
+	text-align: center;
+	margin: 40px auto;
+}
+.add-user-wrap button {
+	text-align: center;
+	background-color: #3caeda;
 }
 .user-info {
 	margin-top: 15px;
@@ -1132,6 +1201,7 @@ span#deal-value {
 	padding: 30px;
 	text-align: right;
 }
+.add-user-wrap button,
 .splash-bauttons button:first-child {
 	padding-left: 25px;
 	margin-right: 10px;
